@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ArrowUpRight, Check, MessageCircle, Plus } from "lucide-react";
+import { ArrowUpRight, Plus } from "lucide-react";
 
 const questions = [
   {
@@ -56,7 +56,7 @@ const questions = [
     category: "Admissions",
     question: "Does the course include certification or placement?",
     answer:
-      "Certification prep, freelancing and agency pricing are part of Basics Social Media Marketing. A course certificate, external exam fees and placement support have not been confirmed here. Ask the team what is included before enrolling; this page does not promise a certificate or a job.",
+      "The curriculum includes certification prep, freelancing and agency pricing. Please confirm certificate eligibility, any external exam fees and career support directly with the team before enrolling. No placement guarantee is advertised.",
   },
 ];
 const categories = [
@@ -87,31 +87,14 @@ export default function FAQs({ whatsapp }) {
       aria-labelledby="faq-heading"
     >
       <div className="faq-sidebar">
-        <div className="eyebrow">A LITTLE MORE CLARITY</div>
-        <h2 id="faq-heading">
-          Big decisions.
-          <br />
-          <span className="serif">Clear answers.</span>
-        </h2>
-        <p>
-          Everything you need to know before
-          <br className="desktop-break" /> your next chapter begins.
-        </p>
+        <div className="eyebrow">A FEW COMMON QUESTIONS</div>
+        <h2 id="faq-heading">Before you get started.</h2>
+        <p>Clear answers about the course, schedule and joining.</p>
         <div className="faq-help-card">
-          <span className="faq-help-icon">
-            <MessageCircle size={22} />
-          </span>
-          <h3>Let’s make it personal.</h3>
-          <p>
-            Questions about your goals, the next batch or joining the course?
-            Talk to the Stalite team.
-          </p>
+          <p>Can’t find your answer?</p>
           <a href={whatsapp} target="_blank" rel="noreferrer">
-            Ask us on WhatsApp <ArrowUpRight size={17} />
+            Ask us on WhatsApp <ArrowUpRight size={16} />
           </a>
-          <span className="faq-help-note">
-            <Check size={12} /> A conversation, not a commitment.
-          </span>
         </div>
       </div>
       <div className="faq-content">
@@ -169,7 +152,7 @@ export default function FAQs({ whatsapp }) {
           })}
         </div>
         <div className="faq-bottom-note">
-          No hidden details. Need something clarified?{" "}
+          Prefer email?{" "}
           <a href="mailto:stalitemedia@gmail.com">
             Email the team <ArrowUpRight size={13} />
           </a>

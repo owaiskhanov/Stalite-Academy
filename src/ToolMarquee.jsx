@@ -25,16 +25,10 @@ export default function ToolMarquee() {
         <div className="tools-heading-row">
           <div>
             <div className="eyebrow">GET FAMILIAR WITH</div>
-            <h2 id="tools-heading">
-              The tools that <span className="serif">matter.</span>
-            </h2>
+            <h2 id="tools-heading">Tools you’ll get to know.</h2>
           </div>
           <div className="tools-heading-end">
-            <p>
-              From social feeds to your first web app.
-              <br />
-              Meet the platforms on your learning roadmap.
-            </p>
+            <p>Familiar platforms. Practical skills.</p>
             <button
               className="marquee-control"
               onClick={() => setPaused(!paused)}
@@ -56,7 +50,7 @@ export default function ToolMarquee() {
                   copy === 0 ? "Marketing and development platforms" : undefined
                 }
               >
-                {tools.map(([name, slug, description]) => (
+                {tools.map(([name, slug]) => (
                   <li className="tool-tile" key={slug}>
                     <span className="tool-logo">
                       <img
@@ -68,7 +62,6 @@ export default function ToolMarquee() {
                     </span>
                     <div>
                       <strong>{name}</strong>
-                      <span>{description}</span>
                     </div>
                   </li>
                 ))}

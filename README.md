@@ -23,15 +23,15 @@ Deploy the generated `dist` directory as a static website.
 ## Content and interactions
 
 - Preserves the supplied Basics and Advanced structure, with three modules per phase, 12 lectures per phase, and 150 minutes per lecture.
-- White and sky-blue visual theme with responsive layouts.
-- Curriculum level tabs, expandable modules, categorised FAQ accordions and mobile navigation.
+- Minimal white and sky-blue visual theme with a useful course overview, plain-language CTAs and responsive layouts.
+- Keyboard-accessible curriculum level tabs, expandable modules, categorised FAQ accordions and mobile navigation with Escape-to-close support.
 - Seamless 13-platform logo marquee using locally hosted SVGs, a pause control, hover pause and reduced-motion support. Logo attribution is documented in `public/logos/README.md`.
 - Downloadable full curriculum in `public/stalite-academy-curriculum.txt`.
 - Enquiry CTAs open WhatsApp with a pre-filled course message. No enquiry data is stored by this page.
 - Phone, email and office address sourced from https://www.stalite.in/contact on 25 October 2026.
 - Fees, batch dates and class format are not invented and are directed to the admissions contact.
 - Header and footer use the user-supplied Stalite logo at `https://www.stalite.in/logo.png`. The browser loads this original image directly; sandbox network restrictions prevent downloading a local copy.
-- Inter provides clean, block-style main typography; Caveat provides modern handwritten cursive accents. Both fonts are bundled locally using Fontsource, with system-font fallbacks.
+- Inter provides clean, block-style main typography; Playwrite US Modern provides restrained contemporary cursive accents. Both fonts are bundled locally using Fontsource, with system-font fallbacks.
 
 ## Deployment context
 
