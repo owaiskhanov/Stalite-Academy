@@ -1,0 +1,14 @@
+# Stalite Academy robots.txt
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Disallow common junk - keep crawlers focused on real content
+Disallow: /api/
+Disallow: /*?*
+
+# Sitemap - update this URL if you attach a custom domain in Vercel
+# Primary Vercel deployment
+Sitemap: https://stalite-academy.vercel.app/sitemap.xml
+# Organization site
+Sitemap: https://www.stalite.in/sitemap.xml

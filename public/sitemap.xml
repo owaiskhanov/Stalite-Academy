@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <!-- Primary landing page - single-page app with anchored sections -->
+  <url>
+    <loc>https://stalite-academy.vercel.app/</loc>
+    <lastmod>2026-10-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://osarasctypsjozjdslpd.supabase.co/storage/v1/object/public/Academy/Joyful%20Student%20Selfie%20Under%20Blue%20Skies.png</image:loc>
+      <image:caption>Stalite Academy students smiling together under a clear blue sky</image:caption>
+      <image:title>Stalite Academy - Digital Marketing and AI Course</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://osarasctypsjozjdslpd.supabase.co/storage/v1/object/public/Academy/Cheerful%20Skyward%20Group%20Selfie.png</image:loc>
+      <image:caption>Stalite Academy students taking a cheerful group selfie</image:caption>
+      <image:title>Stalite Academy - Weekend Course by Stalite Media</image:title>
+    </image:image>
+  </url>
+  <!-- Downloadable syllabus resources -->
+  <url>
+    <loc>https://stalite-academy.vercel.app/stalite-academy-syllabus.pdf</loc>
+    <lastmod>2026-10-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://stalite-academy.vercel.app/stalite-academy-curriculum.txt</loc>
+    <lastmod>2026-10-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+</urlset>
