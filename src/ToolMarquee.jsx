@@ -12,6 +12,7 @@ const tools = [
   ["Google Cloud", "googlecloud", "Back-end development"],
   ["Firebase", "firebase", "Back end & databases"],
   ["Supabase", "supabase", "Databases"],
+  ["GitHub", "github", "Code & collaboration"],
   ["WhatsApp", "whatsapp", "Meta account connections"],
   ["X", "x", "Social media marketing"],
 ];
@@ -52,7 +53,7 @@ export default function ToolMarquee() {
                 key={copy}
                 aria-hidden={copy === 1 ? true : undefined}
                 aria-label={
-                  copy === 0 ? "Platforms covered in the course" : undefined
+                  copy === 0 ? "Marketing and development platforms" : undefined
                 }
               >
                 {tools.map(([name, slug, description]) => (
@@ -76,8 +77,8 @@ export default function ToolMarquee() {
           </div>
         </div>
         <p className="tools-disclaimer">
-          Platforms covered across our curriculum. Logos belong to their
-          respective owners; no affiliation or endorsement implied.
+          Marketing and development tools. Logos belong to their respective
+          owners; no affiliation or endorsement implied.
         </p>
       </div>
     </section>

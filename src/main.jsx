@@ -22,11 +22,11 @@ import {
   Target,
   Zap,
 } from "lucide-react";
-import "@fontsource/dm-sans/400.css";
-import "@fontsource/dm-sans/500.css";
-import "@fontsource/dm-sans/600.css";
-import "@fontsource/dm-sans/700.css";
-import "@fontsource/libre-caslon-display/400.css";
+import "@fontsource/inter/latin-400.css";
+import "@fontsource/inter/latin-500.css";
+import "@fontsource/inter/latin-600.css";
+import "@fontsource/inter/latin-700.css";
+import "@fontsource/caveat/latin-500.css";
 import "./styles.css";
 import ToolMarquee from "./ToolMarquee";
 import FAQs from "./FAQs";
@@ -111,13 +111,14 @@ function Brand({ footer = false }) {
       href="#"
       aria-label="Stalite Academy home"
     >
-      <span className="brand-symbol" aria-hidden="true">
-        ✳
-      </span>
-      <span>
-        stalite<span className="brand-period">.</span>
-        <small>ACADEMY</small>
-      </span>
+      <img
+        className="brand-image"
+        src="https://www.stalite.in/logo.png"
+        alt="Stalite Media"
+        width="140"
+        height="48"
+      />
+      <span className="brand-academy">ACADEMY</span>
     </a>
   );
 }
