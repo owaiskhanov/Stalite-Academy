@@ -12,10 +12,10 @@
   --line: #e4edf2;
   /* Header height, shared so the hero can slide underneath it. */
   --header-h: 82px;
-  /* Hero photography, hosted in Supabase Storage (Academy bucket).
-     Desktop and mobile use different crops so faces stay in frame. */
-  --hero-photo-desktop: url("https://osarasctypsjozjdslpd.supabase.co/storage/v1/object/public/Academy/Joyful%20Student%20Selfie%20Under%20Blue%20Skies.png");
-  --hero-photo-mobile: url("https://osarasctypsjozjdslpd.supabase.co/storage/v1/object/public/Academy/Cheerful%20Skyward%20Group%20Selfie.png");
+  /* Hero photography, served as resized WebP from Supabase Storage (Academy
+     bucket). Desktop and mobile use different crops so faces stay in frame. */
+  --hero-photo-desktop: url("https://osarasctypsjozjdslpd.supabase.co/storage/v1/render/image/public/Academy/Joyful%20Student%20Selfie%20Under%20Blue%20Skies.png?width=2000&quality=78&format=webp");
+  --hero-photo-mobile: url("https://osarasctypsjozjdslpd.supabase.co/storage/v1/render/image/public/Academy/Cheerful%20Skyward%20Group%20Selfie.png?width=900&quality=78&format=webp");
 }
 * {
   box-sizing: border-box;
