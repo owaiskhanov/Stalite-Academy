@@ -24,6 +24,7 @@ import "./styles.css";
 import ToolMarquee from "./ToolMarquee";
 import FAQs from "./FAQs";
 import Curriculum from "./Curriculum";
+import CourseCard from "./CourseCard";
 
 const whatsapp =
   "https://wa.me/919860685430?text=" +
@@ -34,6 +35,60 @@ const subjects = [
   [Megaphone, "Social media", "Create content. Build a presence."],
   [BarChart3, "Performance & search", "Understand ads, SEO and AISO."],
   [Code2, "AI-powered development", "Build websites and web apps."],
+];
+
+/**
+ * The three modules of the 3-month programme, shaped for CourseCard.
+ * Titles and descriptions mirror src/curriculum.js. Ratings, review counts
+ * and durations are sample figures — swap them for real data before launch.
+ */
+const courses = [
+  {
+    title: "Social Media Marketing",
+    description:
+      "Profiles, content calendars and growth across every major platform.",
+    image: "/courses/social-media.webp",
+    imageAlt: "3D illustration of a megaphone with floating social icons",
+    tags: ["Popular", "Online"],
+    rating: 4.8,
+    reviews: 1467,
+    duration: "20h",
+    certificate: true,
+    instructor: "Stalite Media",
+    instructorRole: "Instructor",
+    variant: "mint",
+    ctaHref: whatsapp,
+  },
+  {
+    title: "Performance Marketing & Search",
+    description: "Meta Ads, Google Ads, SEO and AISO for 2026 and beyond.",
+    image: "/courses/performance-search.webp",
+    imageAlt: "3D illustration of a bar chart, magnifying glass and target",
+    tags: ["Online"],
+    rating: 4.7,
+    reviews: 932,
+    duration: "20h",
+    certificate: true,
+    instructor: "Stalite Media",
+    instructorRole: "Instructor",
+    variant: "peach",
+    ctaHref: whatsapp,
+  },
+  {
+    title: "AI Powered Web Development",
+    description: "Prompt AI tools to build websites, back ends and dashboards.",
+    image: "/courses/ai-development.webp",
+    imageAlt: "3D illustration of a robot head beside code windows",
+    tags: ["New", "Online"],
+    rating: 4.9,
+    reviews: 684,
+    duration: "20h",
+    certificate: true,
+    instructor: "Stalite Media",
+    instructorRole: "Instructor",
+    variant: "lavender",
+    ctaHref: whatsapp,
+  },
 ];
 
 function Brand({ footer = false }) {
@@ -186,6 +241,17 @@ function App() {
             <a className="program-link" href="#curriculum">
               Explore the full curriculum <ArrowRight size={16} />
             </a>
+          </div>
+        </section>
+        <section className="courses-section container" id="courses" aria-labelledby="courses-heading">
+          <div className="eyebrow">THE THREE MODULES</div>
+          <h2 id="courses-heading">
+            Pick where you <span className="serif">want to start.</span>
+          </h2>
+          <div className="courses-grid">
+            {courses.map((course) => (
+              <CourseCard key={course.title} {...course} />
+            ))}
           </div>
         </section>
         <ToolMarquee />
