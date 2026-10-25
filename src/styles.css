@@ -286,6 +286,10 @@ h2 {
   letter-spacing: -0.04em;
   line-height: 1.7;
 }
+.hero-actions {
+  /* The hero CTA is mobile-only; see the max-width: 600px block. */
+  display: none;
+}
 .hero-scroll {
   display: flex;
   align-items: center;
@@ -998,16 +1002,17 @@ h2 {
     width: calc(100% - 40px);
   }
   .header {
-    height: 72px;
+    height: 76px;
   }
   .nav {
     gap: 8px;
   }
   .nav-cta {
     margin-left: auto;
-    margin-right: 5px;
+    margin-right: 2px;
     font-size: 10px;
-    padding: 10px 12px;
+    gap: 8px;
+    padding: 10px 11px;
     min-height: 37px;
   }
   .mobile-toggle {
@@ -1019,7 +1024,7 @@ h2 {
   .nav-links {
     display: none;
     position: absolute;
-    top: 71px;
+    top: 75px;
     left: 0;
     right: 0;
     border-bottom: 1px solid var(--line);
@@ -1034,30 +1039,36 @@ h2 {
     gap: 24px;
     font-size: 13px;
   }
+  /* Logo and ACADEMY stay on one row and scale up together, so the divider
+     lines up with the mark instead of dangling under a stacked layout. */
   .nav .brand {
-    flex-direction: column;
-    gap: 1px;
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
   }
   .nav .brand-image {
-    width: 95px;
-    height: 30px;
+    width: clamp(116px, 33vw, 146px);
+    height: auto;
+    aspect-ratio: 132 / 42;
   }
   .nav .brand-fallback {
-    font-size: 25px;
+    font-size: clamp(26px, 7.4vw, 33px);
     line-height: 1;
   }
   .nav .brand-academy {
-    border: 0;
-    padding-left: 2px;
-    font-size: 6px;
-    letter-spacing: 2px;
+    border-left: 1px solid #cfdde6;
+    padding-left: 10px;
+    font-size: clamp(8px, 2.3vw, 10px);
+    letter-spacing: 1.5px;
+    line-height: 1.2;
   }
   .hero {
-    /* Same logic as desktop: full-screen photo, minimal copy pinned to the top. */
+    /* Same logic as desktop: full-screen photo. Mobile centres the copy. */
     min-height: 100vh;
     min-height: 100svh;
-    padding-block: 82px 28px;
+    align-items: center;
+    text-align: center;
+    padding-block: 96px 28px;
   }
   /* Mobile swaps to the skyward group crop; no scrim, no white panel. */
   .hero-section::after {
@@ -1065,15 +1076,34 @@ h2 {
     background-position: center 26%;
   }
   .hero .eyebrow {
-    font-size: 8px;
-    letter-spacing: 1.2px;
+    justify-content: center;
+    font-size: clamp(9px, 2.5vw, 11px);
+    letter-spacing: 1.6px;
+    line-height: 1.7;
+    max-width: 30ch;
+    margin-inline: auto;
   }
   .hero h1 {
-    /* Stays on one line on phones by scaling down with the viewport. */
-    font-size: clamp(13px, 4.35vw, 21px);
-    line-height: 1.3;
-    margin-top: 12px;
-    letter-spacing: -0.03em;
+    /* Centred, larger, and allowed to wrap naturally at this size. */
+    font-size: clamp(28px, 8.4vw, 42px);
+    line-height: 1.22;
+    margin-top: 16px;
+    letter-spacing: -0.04em;
+    white-space: normal;
+    text-wrap: balance;
+    max-width: 15ch;
+    margin-inline: auto;
+  }
+  .hero-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 28px;
+  }
+  .hero-actions > .button {
+    padding: 15px 22px;
+    gap: 16px;
+    min-height: 48px;
+    font-size: 12px;
   }
   .hero-scroll {
     width: 38px;

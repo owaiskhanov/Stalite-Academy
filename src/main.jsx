@@ -134,6 +134,17 @@ function App() {
               <h1 id="course-heading">
                 Digital marketing. AI, <span className="serif">made simple.</span>
               </h1>
+              {/* Hidden on desktop; mobile centres the hero and shows this CTA. */}
+              <div className="hero-actions">
+                <a
+                  className="button button-primary"
+                  href={whatsapp}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Ask about the next batch <ArrowUpRight size={17} />
+                </a>
+              </div>
             </div>
             <a className="hero-scroll" href="#program" aria-label="Jump to course overview">
               <ChevronDown size={20} />
