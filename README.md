@@ -30,8 +30,8 @@ Deploy the generated `dist` directory as a static website.
 - Enquiry CTAs open WhatsApp with a pre-filled course message. No enquiry data is stored by this page.
 - Phone, email and office address sourced from https://www.stalite.in/contact on 25 October 2026.
 - Fees, batch dates and class format are not invented and are directed to the admissions contact.
-- Header and footer use the user-supplied Stalite logo at `https://www.stalite.in/logo.png`. Their Academy label sits close to the mark across desktop and mobile layouts. The browser loads the original logo directly; sandbox network restrictions prevent downloading a local copy.
-- A locally bundled Stalite sparkle favicon is provided as SVG, ICO and Apple touch icon. Open Graph and X/Twitter share cards reuse the desktop hero photograph.
+- Header and footer use the user-supplied Stalite logo at `https://www.stalite.in/logo.png`. Their Academy label is intentionally pulled close to the mark across desktop and mobile layouts. The browser loads the original logo directly; sandbox network restrictions prevent downloading a local copy.
+- A locally bundled Stalite sparkle favicon is provided as SVG, ICO and Apple touch icon. Open Graph, WhatsApp and X/Twitter share cards use the same hero photograph, resized to a 1200 × 630 WebP through Supabase Image Transformations.
 - Inter provides clean, block-style main typography; Playwrite US Modern provides restrained contemporary cursive accents. Both fonts are bundled locally using Fontsource, with system-font fallbacks.
 
 ## Deployment context
