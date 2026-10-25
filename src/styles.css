@@ -10,6 +10,8 @@
   --blue-dark: #03699e;
   --pale: #f2faff;
   --line: #e4edf2;
+  /* Header height, shared so the hero can slide underneath it. */
+  --header-h: 82px;
   /* Hero photography, hosted in Supabase Storage (Academy bucket).
      Desktop and mobile use different crops so faces stay in frame. */
   --hero-photo-desktop: url("https://osarasctypsjozjdslpd.supabase.co/storage/v1/object/public/Academy/Joyful%20Student%20Selfie%20Under%20Blue%20Skies.png");
@@ -166,7 +168,7 @@ h2 {
   padding: 0;
 }
 .header {
-  height: 82px;
+  height: var(--header-h);
   /* Transparent so the hero photo runs uninterrupted behind the nav. */
   background: transparent;
   border-bottom: 1px solid rgba(228, 237, 242, 0.55);
@@ -230,6 +232,9 @@ h2 {
 .hero-section {
   position: relative;
   isolation: isolate;
+  /* Slides under the transparent header so the photo starts at the very
+     top of the viewport with no white band above it. */
+  margin-top: calc(var(--header-h) * -1);
   min-height: 100vh;
   min-height: 100svh; /* dynamic viewport height, so mobile bars don't crop it */
   display: flex;
@@ -289,24 +294,6 @@ h2 {
 .hero-actions {
   /* The hero CTA is mobile-only; see the max-width: 600px block. */
   display: none;
-}
-.hero-scroll {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 42px;
-  height: 42px;
-  margin-top: auto;
-  color: #5b7f96;
-  background: rgba(255, 255, 255, 0.55);
-  border: 1px solid rgba(255, 255, 255, 0.85);
-  border-radius: 50%;
-  -webkit-backdrop-filter: blur(6px);
-  backdrop-filter: blur(6px);
-}
-.hero-scroll:hover {
-  color: var(--blue-dark);
-  background: #fff;
 }
 /* The course-at-a-glance card, promoted out of the hero into its own band. */
 .program-section {
@@ -843,8 +830,8 @@ h2 {
   .container {
     width: calc(100% - 48px);
   }
-  .header {
-    height: 76px;
+  :root {
+    --header-h: 76px;
   }
   .nav {
     gap: 18px;
@@ -1001,9 +988,6 @@ h2 {
   .container {
     width: calc(100% - 40px);
   }
-  .header {
-    height: 76px;
-  }
   .nav {
     gap: 8px;
   }
@@ -1024,7 +1008,7 @@ h2 {
   .nav-links {
     display: none;
     position: absolute;
-    top: 75px;
+    top: calc(var(--header-h) - 1px);
     left: 0;
     right: 0;
     border-bottom: 1px solid var(--line);
@@ -1104,10 +1088,6 @@ h2 {
     gap: 16px;
     min-height: 48px;
     font-size: 12px;
-  }
-  .hero-scroll {
-    width: 38px;
-    height: 38px;
   }
   .program-section {
     padding-block: 40px;
@@ -1887,6 +1867,12 @@ h2 {
 .courses-section {
   padding-block: 26px 84px;
 }
+/* The section title stands alone now, so it takes the display size. */
+.courses-heading {
+  font-size: clamp(30px, 3.8vw, 44px);
+  letter-spacing: -1.6px;
+  line-height: 1.35;
+}
 .courses-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -2018,6 +2004,8 @@ h2 {
   height: 44px;
   border-radius: 50%;
   object-fit: cover;
+  /* Bias the circular crop towards the face in portrait photos. */
+  object-position: 50% 26%;
   flex-shrink: 0;
   background: #fff;
 }

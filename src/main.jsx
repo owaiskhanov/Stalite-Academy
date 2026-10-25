@@ -13,7 +13,6 @@ import {
   MapPin,
   Mail,
   Phone,
-  ChevronDown,
 } from "lucide-react";
 import "@fontsource/inter/latin-400.css";
 import "@fontsource/inter/latin-500.css";
@@ -28,8 +27,12 @@ import CourseCard from "./CourseCard";
 
 const whatsapp =
   "https://wa.me/919860685430?text=" +
+  encodeURIComponent("Hi Stalite Media, I'd like to discuss growing my brand.");
+/** Same enquiry, pre-filled with the specific course the visitor clicked. */
+const whatsappForCourse = (title) =>
+  "https://wa.me/919860685430?text=" +
   encodeURIComponent(
-    "Hi Stalite Academy! I’m interested in the 3-month Digital Marketing & AI course. Please share the fees, next batch dates and class format.",
+    `Hi Stalite Media, I'd like to discuss growing my brand. I'm interested in the ${title} course.`,
   );
 const subjects = [
   [Megaphone, "Social media", "Create content. Build a presence."],
@@ -39,8 +42,8 @@ const subjects = [
 
 /**
  * The three modules of the 3-month programme, shaped for CourseCard.
- * Titles and descriptions mirror src/curriculum.js. Ratings, review counts
- * and durations are sample figures — swap them for real data before launch.
+ * Titles and descriptions mirror src/curriculum.js. Ratings and durations
+ * are sample figures — swap them for real data before launch.
  */
 const courses = [
   {
@@ -51,13 +54,14 @@ const courses = [
     imageAlt: "3D illustration of a megaphone with floating social icons",
     tags: ["Popular", "Online"],
     rating: 4.8,
-    reviews: 1467,
     duration: "20h",
     certificate: true,
-    instructor: "Stalite Media",
+    instructor: "Shaad Karmally",
     instructorRole: "Instructor",
+    instructorAvatar:
+      "https://osarasctypsjozjdslpd.supabase.co/storage/v1/object/public/Stalite%20Media/Stalite%20Agency/Team/Shaad%201.jpg",
     variant: "mint",
-    ctaHref: whatsapp,
+    ctaHref: whatsappForCourse("Social Media Marketing"),
   },
   {
     title: "Performance Marketing & Search",
@@ -65,14 +69,15 @@ const courses = [
     image: "/courses/performance-search.webp",
     imageAlt: "3D illustration of a bar chart, magnifying glass and target",
     tags: ["Online"],
-    rating: 4.7,
-    reviews: 932,
+    rating: 4.9,
     duration: "20h",
     certificate: true,
-    instructor: "Stalite Media",
+    instructor: "Owais Khan",
     instructorRole: "Instructor",
+    instructorAvatar:
+      "https://osarasctypsjozjdslpd.supabase.co/storage/v1/object/public/Stalite%20Media/Stalite%20Agency/Team/Owais.png",
     variant: "peach",
-    ctaHref: whatsapp,
+    ctaHref: whatsappForCourse("Performance Marketing & Search"),
   },
   {
     title: "AI Powered Web Development",
@@ -80,14 +85,15 @@ const courses = [
     image: "/courses/ai-development.webp",
     imageAlt: "3D illustration of a robot head beside code windows",
     tags: ["New", "Online"],
-    rating: 4.9,
-    reviews: 684,
+    rating: 4.8,
     duration: "20h",
     certificate: true,
-    instructor: "Stalite Media",
+    instructor: "Owais Khan",
     instructorRole: "Instructor",
+    instructorAvatar:
+      "https://osarasctypsjozjdslpd.supabase.co/storage/v1/object/public/Stalite%20Media/Stalite%20Agency/Team/Owais.png",
     variant: "lavender",
-    ctaHref: whatsapp,
+    ctaHref: whatsappForCourse("AI Powered Web Development"),
   },
 ];
 
@@ -201,11 +207,9 @@ function App() {
                 </a>
               </div>
             </div>
-            <a className="hero-scroll" href="#program" aria-label="Jump to course overview">
-              <ChevronDown size={20} />
-            </a>
           </div>
         </section>
+
         <section className="program-section container" id="program" aria-label="Course overview">
           <div className="program-overview">
             <div className="program-duration">
@@ -244,9 +248,8 @@ function App() {
           </div>
         </section>
         <section className="courses-section container" id="courses" aria-labelledby="courses-heading">
-          <div className="eyebrow">THE THREE MODULES</div>
-          <h2 id="courses-heading">
-            Pick where you <span className="serif">want to start.</span>
+          <h2 id="courses-heading" className="courses-heading">
+            The three <span className="serif">modules.</span>
           </h2>
           <div className="courses-grid">
             {courses.map((course) => (
