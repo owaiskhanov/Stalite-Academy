@@ -1,0 +1,56 @@
+STALITE ACADEMY
+A 3-month digital marketing and AI course by Stalite Media
+Classes: Saturdays and Sundays
+Each lecture: 2 hours 30 minutes (150 minutes)
+Total: 24 lectures, 3,600 minutes (60 hours)
+
+BASICS (12 lectures, 1,800 min)
+
+1. Social Media Marketing
+- Google Business Profile: setup, optimisation, citations, posts, reviews
+- Video marketing and YouTube optimisation
+- Mobile marketing and SMS marketing
+- Social media optimisation: profiles, content calendar, engagement, analytics
+- Facebook marketing
+- Instagram marketing: profile, content strategy, influencers, paid ads
+- LinkedIn marketing
+- X (Twitter) marketing
+- Email marketing
+- Affiliate marketing
+- Online reputation management
+- Freelancing, agency pricing, and certification prep
+
+2. Performance Marketing and Search
+- Meta Ads: account creation, connecting WhatsApp and Instagram, types of ads, creating campaigns
+- Google Ads: account creation and campaigns
+- SEO: what it is, how it pulls data, why it matters in 2026 and beyond, keyword research
+
+3. AI Powered Website and Web App Development
+- Web fundamentals and prompting AI tools
+- Building websites with Antigravity
+
+ADVANCED (12 lectures, 1,800 min)
+
+1. Social Media Marketing: no content yet
+
+2. Performance Marketing and Search
+- Meta Ads: campaign types, ad sets (audience and demographics), ad formats (carousel, multi, static, video)
+- Google Ads structure and campaign setup
+- Applying keyword research to a website (live demo), blogs and conversational blogs
+- AISO and why it matters in 2026 and beyond
+- Google Search Console connection and walkthrough
+- Q&A and problem solving
+
+3. AI Powered Website and Web App Development
+- Front end and responsive design with prompting
+- Back end: Google Cloud, Firebase, OAuth, storage
+- Databases: Supabase and Firebase
+- Dashboards and data visualisation
+
+CONTACT STALITE MEDIA
+Phone / WhatsApp: +91 98606 85430
+Email: stalitemedia@gmail.com
+Office No. 305, Reliable Business Centre, Oshiwara, Andheri West,
+Mumbai, Maharashtra 400102
+Website: https://www.stalite.in/
+Please contact the team for fees, batch dates, exact timings and class format.
