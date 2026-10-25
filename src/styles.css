@@ -10,6 +10,17 @@
   --blue-dark: #03699e;
   --pale: #f2faff;
   --line: #e4edf2;
+  /* Hero photography, hosted in Supabase Storage (Academy bucket).
+     Desktop and mobile use different crops so faces stay in frame. */
+  --hero-photo-desktop: url("https://osarasctypsjozjdslpd.supabase.co/storage/v1/object/public/Academy/Joyful%20Student%20Selfie%20Under%20Blue%20Skies.png");
+  --hero-photo-mobile: url("https://osarasctypsjozjdslpd.supabase.co/storage/v1/object/public/Academy/Cheerful%20Skyward%20Group%20Selfie.png");
+  /* Hero grid geometry, kept in one place so the photo layer can be aligned
+     to the right-hand column at every breakpoint. */
+  --hero-container: 1120px;
+  --hero-gutter: 48px;
+  --hero-col-left: 1.32;
+  --hero-col-right: 1;
+  --hero-gap: 72px;
 }
 * {
   box-sizing: border-box;
@@ -221,7 +232,8 @@ h2 {
   background: none;
   padding: 8px;
 }
-/* Quiet, locally hosted paper grain with a soft sky-blue wash. */
+/* Quiet, locally hosted paper grain over a soft sky-blue wash, with the
+   Supabase hero photo composited into the right-hand column on desktop. */
 .hero-section {
   position: relative;
   isolation: isolate;
@@ -229,10 +241,49 @@ h2 {
     radial-gradient(ellipse at 86% 24%, #e4f4ff 0%, transparent 62%),
     linear-gradient(180deg, #ffffff 0%, #f9fcff 75%, #ffffff 100%);
 }
+/* The photo itself. Sits above the base wash, below the grain and the copy. */
+.hero-section::after {
+  content: "";
+  position: absolute;
+  /* Aligned to the hero grid's right-hand column, derived from the same
+     variables that drive the layout so it can never drift out of sync. */
+  inset: 0 0 0
+    max(
+      0px,
+      calc(
+        50% - (var(--hero-container) / 2) +
+          (
+            (
+              (
+                min(100vw, var(--hero-container)) - (var(--hero-gutter) * 2) -
+                  var(--hero-gap)
+              ) * var(--hero-col-left)
+            ) / (var(--hero-col-left) + var(--hero-col-right))
+          ) + var(--hero-gap)
+      )
+    );
+  background-image:
+    /* left-edge blend so the photo meets the white column without a seam */
+    linear-gradient(90deg, #ffffff 0%, rgba(255, 255, 255, 0) 17%),
+    /* vertical blend into the section edges */
+    linear-gradient(180deg, rgba(255, 255, 255, 0.62) 0%, rgba(255, 255, 255, 0) 24%, rgba(255, 255, 255, 0) 66%, rgba(255, 255, 255, 0.72) 100%),
+    var(--hero-photo-desktop);
+  background-size:
+    100% 100%,
+    100% 100%,
+    cover;
+  background-position:
+    0 0,
+    0 0,
+    center 22%;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
 .hero-section::before {
   content: "";
   position: absolute;
   inset: 0;
+  z-index: 1;
   pointer-events: none;
   background: url("/textures/paper-grain.svg") repeat;
   opacity: 0.1;
@@ -240,10 +291,10 @@ h2 {
 }
 .hero {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   display: grid;
-  grid-template-columns: 1.32fr 1fr;
-  gap: 72px;
+  grid-template-columns: var(--hero-col-left) var(--hero-col-right);
+  gap: var(--hero-gap);
   align-items: center;
   padding-block: 77px 68px;
 }
@@ -282,9 +333,13 @@ h2 {
 }
 .program-card {
   padding: 28px;
-  background: var(--pale);
-  border: 1px solid #dceef9;
+  /* Frosted so the hero photo reads through it without hurting contrast. */
+  background: rgba(242, 250, 255, 0.84);
+  -webkit-backdrop-filter: blur(14px) saturate(1.15);
+  backdrop-filter: blur(14px) saturate(1.15);
+  border: 1px solid rgba(220, 238, 249, 0.92);
   border-radius: 12px;
+  box-shadow: 0 18px 44px -30px rgba(23, 46, 64, 0.55);
 }
 .program-card-top {
   display: flex;
@@ -758,6 +813,11 @@ h2 {
   }
 }
 @media (max-width: 1100px) {
+  :root {
+    --hero-gutter: 32px;
+    --hero-col-left: 1.3;
+    --hero-gap: 40px;
+  }
   .container {
     width: calc(100% - 64px);
   }
@@ -797,6 +857,10 @@ h2 {
   }
 }
 @media (max-width: 800px) {
+  :root {
+    --hero-gutter: 24px;
+    --hero-gap: 25px;
+  }
   .container {
     width: calc(100% - 48px);
   }
@@ -1016,6 +1080,27 @@ h2 {
     grid-template-columns: 1fr;
     gap: 30px;
     padding-block: 37px 33px;
+  }
+  /* Mobile swaps to the skyward group crop and lets it run full-bleed. */
+  .hero-section::after {
+    inset: 0;
+    background-image:
+      linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0.1) 36%, rgba(255, 255, 255, 0) 56%, rgba(255, 255, 255, 0.9) 100%),
+      var(--hero-photo-mobile);
+    background-size:
+      100% 100%,
+      cover;
+    background-position:
+      0 0,
+      center 28%;
+    background-repeat: no-repeat;
+  }
+  /* Opaque on mobile: the card sits directly on top of the photo here. */
+  .program-card {
+    background: #f4fbff;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    box-shadow: 0 16px 38px -28px rgba(23, 46, 64, 0.6);
   }
   .hero .eyebrow {
     font-size: 7px;
