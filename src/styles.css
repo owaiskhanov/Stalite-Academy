@@ -22,7 +22,8 @@
 }
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 100px;
+  /* The header scrolls away, so anchors only need a little breathing room. */
+  scroll-padding-top: 24px;
 }
 body {
   margin: 0;
@@ -169,11 +170,10 @@ h2 {
 }
 .header {
   height: var(--header-h);
-  /* Transparent so the hero photo runs uninterrupted behind the nav. */
+  /* Transparent and scrolls away with the page — no sticky positioning. */
   background: transparent;
   border-bottom: 1px solid rgba(228, 237, 242, 0.55);
-  position: sticky;
-  top: 0;
+  position: relative;
   z-index: 30;
 }
 .nav {
