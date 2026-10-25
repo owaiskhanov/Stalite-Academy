@@ -23,16 +23,78 @@ import "./styles.css";
 import ToolMarquee from "./ToolMarquee";
 import FAQs from "./FAQs";
 import Curriculum from "./Curriculum";
+import CourseCard from "./CourseCard";
 
 const whatsapp =
   "https://wa.me/919860685430?text=" +
+  encodeURIComponent("Hi Stalite Media, I'd like to discuss growing my brand.");
+/** Same enquiry, pre-filled with the specific course the visitor clicked. */
+const whatsappForCourse = (title) =>
+  "https://wa.me/919860685430?text=" +
   encodeURIComponent(
-    "Hi Stalite Academy! I’m interested in the 3-month Digital Marketing & AI course. Please share the fees, next batch dates and class format.",
+    `Hi Stalite Media, I'd like to discuss growing my brand. I'm interested in the ${title} course.`,
   );
 const subjects = [
   [Megaphone, "Social media", "Create content. Build a presence."],
   [BarChart3, "Performance & search", "Understand ads, SEO and AISO."],
   [Code2, "AI-powered development", "Build websites and web apps."],
+];
+
+/**
+ * The three modules of the 3-month programme, shaped for CourseCard.
+ * Titles and descriptions mirror src/curriculum.js. Ratings and durations
+ * are sample figures — swap them for real data before launch.
+ */
+const courses = [
+  {
+    title: "Social Media Marketing",
+    description:
+      "Profiles, content calendars and growth across every major platform.",
+    image: "/courses/social-media.webp",
+    imageAlt: "3D illustration of a megaphone with floating social icons",
+    tags: ["Popular", "Online"],
+    rating: 4.8,
+    duration: "20h",
+    certificate: true,
+    instructor: "Shaad Karmally",
+    instructorRole: "Instructor",
+    instructorAvatar:
+      "https://osarasctypsjozjdslpd.supabase.co/storage/v1/object/public/Stalite%20Media/Stalite%20Agency/Team/Shaad%201.jpg",
+    variant: "mint",
+    ctaHref: whatsappForCourse("Social Media Marketing"),
+  },
+  {
+    title: "Performance Marketing & Search",
+    description: "Meta Ads, Google Ads, SEO and AISO for 2026 and beyond.",
+    image: "/courses/performance-search.webp",
+    imageAlt: "3D illustration of a bar chart, magnifying glass and target",
+    tags: ["Online"],
+    rating: 4.9,
+    duration: "20h",
+    certificate: true,
+    instructor: "Owais Khan",
+    instructorRole: "Instructor",
+    instructorAvatar:
+      "https://osarasctypsjozjdslpd.supabase.co/storage/v1/object/public/Stalite%20Media/Stalite%20Agency/Team/Owais.png",
+    variant: "peach",
+    ctaHref: whatsappForCourse("Performance Marketing & Search"),
+  },
+  {
+    title: "AI Powered Web Development",
+    description: "Prompt AI tools to build websites, back ends and dashboards.",
+    image: "/courses/ai-development.webp",
+    imageAlt: "3D illustration of a robot head beside code windows",
+    tags: ["New", "Online"],
+    rating: 4.8,
+    duration: "20h",
+    certificate: true,
+    instructor: "Owais Khan",
+    instructorRole: "Instructor",
+    instructorAvatar:
+      "https://osarasctypsjozjdslpd.supabase.co/storage/v1/object/public/Stalite%20Media/Stalite%20Agency/Team/Owais.png",
+    variant: "lavender",
+    ctaHref: whatsappForCourse("AI Powered Web Development"),
+  },
 ];
 
 function Brand({ footer = false }) {
@@ -131,15 +193,9 @@ function App() {
                 MEDIA
               </div>
               <h1 id="course-heading">
-                Digital marketing.
-                <br />
-                AI, <span className="serif">made simple.</span>
+                Digital marketing. AI, <span className="serif">made simple.</span>
               </h1>
-              <p className="hero-description">
-                Learn to market, run campaigns and build with AI.
-                <br className="desktop-break" /> Start with the basics. Grow
-                into the advanced.
-              </p>
+              {/* Hidden on desktop; mobile centres the hero and shows this CTA. */}
               <div className="hero-actions">
                 <a
                   className="button button-primary"
@@ -149,52 +205,60 @@ function App() {
                 >
                   Ask about the next batch <ArrowUpRight size={17} />
                 </a>
-                <a className="text-link" href="#curriculum">
-                  See what you’ll learn <ArrowRight size={16} />
-                </a>
               </div>
-              <p className="hero-note">
-                For students, creators, professionals and business owners.
-              </p>
             </div>
-            <aside className="program-card" aria-label="Course overview">
+          </div>
+        </section>
+
+        <section className="program-section container" id="program" aria-label="Course overview">
+          <div className="program-overview">
+            <div className="program-duration">
               <div className="program-card-top">
                 <span className="eyebrow">YOUR COURSE AT A GLANCE</span>
                 <span className="program-tag">Basics → Advanced</span>
               </div>
-              <div className="program-duration">
-                <strong>3 months</strong>
-                <span>Built around your weekends.</span>
+              <strong>3 months</strong>
+              <span>Built around your weekends.</span>
+            </div>
+            <div className="program-facts">
+              <span>
+                <CalendarDays size={17} /> Saturdays & Sundays
+              </span>
+              <span>
+                <Clock3 size={17} /> 2 hr 30 min per lecture
+              </span>
+            </div>
+            <div className="program-totals">
+              <div>
+                <strong>24</strong>
+                <span>lectures</span>
               </div>
-              <div className="program-facts">
-                <span>
-                  <CalendarDays size={17} /> Saturdays & Sundays
-                </span>
-                <span>
-                  <Clock3 size={17} /> 2 hr 30 min per lecture
-                </span>
+              <div>
+                <strong>60</strong>
+                <span>learning hours</span>
               </div>
-              <div className="program-totals">
-                <div>
-                  <strong>24</strong>
-                  <span>lectures</span>
-                </div>
-                <div>
-                  <strong>60</strong>
-                  <span>learning hours</span>
-                </div>
-                <div>
-                  <strong>3</strong>
-                  <span>focused modules</span>
-                </div>
+              <div>
+                <strong>3</strong>
+                <span>focused modules</span>
               </div>
-              <a className="program-link" href="#curriculum">
-                Explore the full curriculum <ArrowRight size={16} />
-              </a>
-            </aside>
+            </div>
+            <a className="program-link" href="#curriculum">
+              Explore the full curriculum <ArrowRight size={16} />
+            </a>
+          </div>
+        </section>
+        <section className="courses-section container" id="courses" aria-labelledby="courses-heading">
+          <h2 id="courses-heading" className="courses-heading">
+            The three <span className="serif">modules.</span>
+          </h2>
+          <div className="courses-grid">
+            {courses.map((course) => (
+              <CourseCard key={course.title} {...course} />
+            ))}
           </div>
         </section>
         <ToolMarquee />
+
         <Curriculum />
         <section className="why-section" id="why-stalite">
           <div className="container section-space">
@@ -248,11 +312,14 @@ function App() {
           </a>
         </section>
       </main>
-      <footer className="container footer">
-        <div className="footer-main">
-          <div>
+      <footer className="footer">
+        <div className="container footer-main">
+          <div className="footer-brand">
             <Brand footer />
-            <p>Digital marketing & AI, by Stalite Media.</p>
+            <p>
+              Digital marketing & AI, by Stalite Media. A 3-month weekend
+              course built by the agency that runs the campaigns.
+            </p>
             <a
               className="text-link footer-agency"
               href="https://www.stalite.in/"
@@ -262,13 +329,21 @@ function App() {
               Visit Stalite Media <ArrowUpRight size={14} />
             </a>
           </div>
-          <div className="footer-links">
+          <nav className="footer-col" aria-label="Footer">
             <span className="eyebrow">EXPLORE</span>
             <a href="#course">The course</a>
+            <a href="#courses">The modules</a>
             <a href="#curriculum">Curriculum</a>
             <a href="#faqs">FAQs</a>
+          </nav>
+          <div className="footer-col">
+            <span className="eyebrow">THE PROGRAMME</span>
+            <span>3 months · weekends</span>
+            <span>24 lectures · 60 hours</span>
+            <span>Basics → Advanced</span>
+            <a href="#program">Course at a glance</a>
           </div>
-          <div className="footer-contact">
+          <div className="footer-col footer-contact">
             <span className="eyebrow">GET IN TOUCH</span>
             <a href="tel:+919860685430">
               <Phone size={14} /> +91 98606 85430
@@ -293,8 +368,10 @@ function App() {
           </div>
         </div>
         <div className="footer-bottom">
-          <span>© {new Date().getFullYear()} Stalite Academy.</span>
-          <span>3 months. New possibilities.</span>
+          <div className="container footer-bottom-row">
+            <span>© {new Date().getFullYear()} Stalite Academy.</span>
+            <span>3 months. New possibilities.</span>
+          </div>
         </div>
       </footer>
     </>

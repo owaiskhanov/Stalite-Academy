@@ -10,13 +10,20 @@
   --blue-dark: #03699e;
   --pale: #f2faff;
   --line: #e4edf2;
+  /* Header height, shared so the hero can slide underneath it. */
+  --header-h: 82px;
+  /* Hero photography, hosted in Supabase Storage (Academy bucket).
+     Desktop and mobile use different crops so faces stay in frame. */
+  --hero-photo-desktop: url("https://osarasctypsjozjdslpd.supabase.co/storage/v1/object/public/Academy/Joyful%20Student%20Selfie%20Under%20Blue%20Skies.png");
+  --hero-photo-mobile: url("https://osarasctypsjozjdslpd.supabase.co/storage/v1/object/public/Academy/Cheerful%20Skyward%20Group%20Selfie.png");
 }
 * {
   box-sizing: border-box;
 }
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 100px;
+  /* The header scrolls away, so anchors only need a little breathing room. */
+  scroll-padding-top: 24px;
 }
 body {
   margin: 0;
@@ -162,12 +169,11 @@ h2 {
   padding: 0;
 }
 .header {
-  height: 82px;
-  background: #ffffffed;
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--line);
-  position: sticky;
-  top: 0;
+  height: var(--header-h);
+  /* Transparent and scrolls away with the page — no sticky positioning. */
+  background: transparent;
+  border-bottom: 1px solid rgba(228, 237, 242, 0.55);
+  position: relative;
   z-index: 30;
 }
 .nav {
@@ -221,38 +227,62 @@ h2 {
   background: none;
   padding: 8px;
 }
-/* Quiet, locally hosted paper grain with a soft sky-blue wash. */
+/* Full-bleed Supabase hero photograph. No wash and no white panel behind the
+   copy — the photo carries the whole viewport, with the grain layered above. */
 .hero-section {
   position: relative;
   isolation: isolate;
-  background:
-    radial-gradient(ellipse at 86% 24%, #e4f4ff 0%, transparent 62%),
-    linear-gradient(180deg, #ffffff 0%, #f9fcff 75%, #ffffff 100%);
+  /* Slides under the transparent header so the photo starts at the very
+     top of the viewport with no white band above it. */
+  margin-top: calc(var(--header-h) * -1);
+  min-height: 100vh;
+  min-height: 100svh; /* dynamic viewport height, so mobile bars don't crop it */
+  display: flex;
+  background-color: #f9fcff;
+}
+.hero-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--hero-photo-desktop);
+  background-size: cover;
+  background-position: center 22%;
+  background-repeat: no-repeat;
+  pointer-events: none;
 }
 .hero-section::before {
   content: "";
   position: absolute;
   inset: 0;
+  z-index: 1;
   pointer-events: none;
   background: url("/textures/paper-grain.svg") repeat;
   opacity: 0.1;
-  mask-image: linear-gradient(#000 60%, transparent);
 }
 .hero {
   position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: 1.32fr 1fr;
-  gap: 72px;
-  align-items: center;
-  padding-block: 77px 68px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  /* Copy sits high in the viewport, just clear of the transparent header. */
+  padding-block: 100px 96px;
+}
+.hero-copy {
+  max-width: none;
+  /* Soft halo rather than a panel: keeps ink text legible on sky without
+     putting a white box behind it. Set to `none` to drop it entirely. */
+  text-shadow: 0 1px 26px rgba(255, 255, 255, 0.92);
 }
 .hero h1 {
-  font-size: 51px;
+  /* One line, all ink. Scales with the viewport so it never has to wrap. */
+  font-size: clamp(24px, 4.15vw, 56px);
   font-weight: 500;
-  line-height: 1.3;
-  letter-spacing: -2.2px;
-  margin-top: 23px;
+  line-height: 1.2;
+  letter-spacing: -0.045em;
+  color: var(--ink);
+  white-space: nowrap;
+  margin-top: 18px;
 }
 .hero h1 .serif {
   display: inline-block;
@@ -261,64 +291,56 @@ h2 {
   letter-spacing: -0.04em;
   line-height: 1.7;
 }
-.hero-description {
-  font-size: 14px;
-  line-height: 1.9;
-  margin-top: 22px;
-}
 .hero-actions {
-  display: flex;
-  gap: 23px;
+  /* The hero CTA is mobile-only; see the max-width: 600px block. */
+  display: none;
+}
+/* The course-at-a-glance card, promoted out of the hero into its own band. */
+.program-section {
+  padding-block: 62px;
+}
+.program-overview {
+  display: grid;
+  grid-template-columns: minmax(230px, 1.15fr) minmax(190px, 0.85fr) minmax(250px, 1.2fr) auto;
+  gap: 44px;
   align-items: center;
-  margin-top: 29px;
-}
-.hero-actions .text-link {
-  font-size: 11px;
-}
-.hero-note {
-  margin-top: 19px;
-  font-size: 10px;
-  color: #7b8b97;
-}
-.program-card {
-  padding: 28px;
+  padding: 34px 38px;
   background: var(--pale);
   border: 1px solid #dceef9;
   border-radius: 12px;
 }
 .program-card-top {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 .program-card-top > .eyebrow {
-  font-size: 8px;
-  letter-spacing: 1px;
+  font-size: 9px;
+  letter-spacing: 1.2px;
 }
 .program-tag {
-  font-size: 8px;
+  font-size: 9px;
   color: #5885a0;
   background: #fff;
-  padding: 6px 8px;
+  padding: 6px 9px;
   border: 1px solid #deedf6;
   border-radius: 4px;
   white-space: nowrap;
 }
-.program-duration {
-  margin-block: 29px 23px;
-}
 .program-duration strong {
   display: block;
-  font-size: 35px;
-  letter-spacing: -1.2px;
+  font-size: 44px;
+  letter-spacing: -1.6px;
   font-weight: 500;
+  line-height: 1.2;
+  margin-top: 16px;
 }
 .program-duration > span {
   display: block;
   font-size: 12px;
   color: #698195;
-  margin-top: 7px;
+  margin-top: 6px;
 }
 .program-facts {
   display: flex;
@@ -326,6 +348,8 @@ h2 {
   gap: 13px;
   font-size: 12px;
   color: #4d6b80;
+  padding-left: 44px;
+  border-left: 1px solid #dce9f2;
 }
 .program-facts > span {
   display: flex;
@@ -338,14 +362,13 @@ h2 {
 .program-totals {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  margin-top: 25px;
-  padding-block: 22px;
-  border-block: 1px solid #dce9f2;
   gap: 10px;
+  padding-inline: 44px 0;
+  border-left: 1px solid #dce9f2;
 }
 .program-totals > div {
   border-right: 1px solid #dce9f2;
-  padding-left: 16px;
+  padding-left: 20px;
 }
 .program-totals > div:first-child {
   padding-left: 0;
@@ -354,8 +377,8 @@ h2 {
   border: 0;
 }
 .program-totals strong {
-  font-size: 25px;
-  letter-spacing: -0.7px;
+  font-size: 30px;
+  letter-spacing: -1px;
   font-weight: 500;
   display: block;
 }
@@ -366,12 +389,21 @@ h2 {
   margin-top: 6px;
 }
 .program-link {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  justify-content: space-between;
-  font-size: 11px;
-  color: #437b9b;
-  padding-top: 21px;
+  gap: 9px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--blue-dark);
+  background: #fff;
+  border: 1px solid #cfe6f4;
+  border-radius: 7px;
+  padding: 14px 18px;
+  white-space: nowrap;
+}
+.program-link:hover {
+  background: #e9f6ff;
+  border-color: #a9d8f0;
 }
 .tool-strip {
   border-block: 1px solid var(--line);
@@ -694,99 +726,107 @@ h2 {
   font-size: 11px;
 }
 .footer {
-  padding-top: 54px;
+  margin-top: 90px;
+  border-top: 1px solid var(--line);
 }
 .footer-main {
   display: grid;
-  grid-template-columns: 1.5fr 0.7fr 1.1fr;
-  gap: 45px;
-  padding-bottom: 36px;
+  grid-template-columns: 1.5fr 0.7fr 0.85fr 1.15fr;
+  gap: 48px;
+  padding-block: 54px 46px;
 }
-.footer-main > div > p {
-  font-size: 10px;
-  margin-top: 14px;
+.footer-brand > p {
+  font-size: 11px;
+  line-height: 1.8;
+  margin-top: 16px;
+  max-width: 32ch;
 }
 .footer-agency {
-  margin-top: 10px;
+  margin-top: 14px;
   font-size: 10px;
   color: #4f7a95;
 }
-.footer-links,
-.footer-contact {
+.footer-col {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 13px;
-  padding-top: 5px;
+  gap: 12px;
+  padding-top: 3px;
 }
-.footer-links > .eyebrow,
-.footer-contact > .eyebrow {
+.footer-col > .eyebrow {
   font-size: 8px;
   letter-spacing: 1.2px;
-  margin-bottom: 5px;
+  margin-bottom: 4px;
 }
-.footer-links > a {
+.footer-col > a,
+.footer-col > span {
   font-size: 11px;
   color: #6e8595;
+  line-height: 1.7;
+}
+.footer-col > a:hover {
+  color: var(--blue);
 }
 .footer-contact > a {
   display: flex;
+  align-items: flex-start;
   gap: 9px;
-  font-size: 10px;
-  color: #6e8595;
-  line-height: 1.8;
 }
 .footer-contact svg {
-  margin-top: 2px;
+  margin-top: 3px;
+  width: 13px;
   color: #83a1b4;
 }
 .footer-bottom {
+  border-top: 1px solid var(--line);
+  background: #f8fbfd;
+}
+.footer-bottom-row {
   display: flex;
   justify-content: space-between;
-  gap: 20px;
-  border-top: 1px solid var(--line);
-  padding-block: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  padding-block: 18px;
   font-size: 9px;
   color: #8a9ca8;
-}
-@media (min-width: 1400px) {
-  .hero {
-    gap: 90px;
-  }
-  .hero h1 {
-    font-size: 56px;
-  }
 }
 @media (max-width: 1100px) {
   .container {
     width: calc(100% - 64px);
   }
   .hero {
-    gap: 40px;
-    grid-template-columns: 1.3fr 1fr;
+    padding-block: 88px 88px;
   }
   .hero h1 {
-    font-size: 44px;
+    font-size: clamp(22px, 3.9vw, 38px);
+    letter-spacing: -0.04em;
   }
-  .hero-actions {
-    gap: 16px;
+  /* Card band collapses from four columns to a 2x2 grid. */
+  .program-overview {
+    grid-template-columns: 1fr 1fr;
+    gap: 30px 28px;
+    padding: 28px 28px;
   }
-  .hero-actions > .button {
-    font-size: 11px;
-    padding-inline: 16px;
-    gap: 13px;
+  .program-facts {
+    padding-left: 28px;
   }
-  .hero-actions > .text-link {
-    font-size: 10px;
+  .program-totals {
+    grid-column: 1 / -1;
+    padding-inline: 0;
+    border-left: 0;
+    border-top: 1px solid #dce9f2;
+    padding-top: 26px;
   }
-  .program-card {
-    padding: 23px;
+  .program-link {
+    grid-column: 1 / -1;
+    justify-self: start;
   }
   .program-tag {
-    font-size: 7px;
+    font-size: 8px;
   }
   .program-card-top > .eyebrow {
-    font-size: 7px;
+    font-size: 8px;
   }
 
   .faq-section {
@@ -800,8 +840,8 @@ h2 {
   .container {
     width: calc(100% - 48px);
   }
-  .header {
-    height: 76px;
+  :root {
+    --header-h: 76px;
   }
   .nav {
     gap: 18px;
@@ -831,63 +871,65 @@ h2 {
     padding-inline: 12px;
   }
   .hero {
-    gap: 25px;
-    padding-block: 55px;
+    padding-block: 92px 80px;
   }
   .hero h1 {
-    font-size: 38px;
-    letter-spacing: -1.7px;
+    font-size: clamp(19px, 3.7vw, 30px);
+    letter-spacing: -0.035em;
   }
   .hero .eyebrow {
     font-size: 8px;
     letter-spacing: 1px;
   }
-  .hero-description {
-    font-size: 12px;
+  .program-section {
+    padding-block: 48px;
   }
-  .hero-actions {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 17px;
-    margin-top: 24px;
-  }
-  .hero-note {
-    font-size: 9px;
-  }
-  .program-card {
-    padding: 20px;
+  .program-overview {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding: 26px 24px;
   }
   .program-card-top {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 8px;
-  }
-  .program-duration {
-    margin-top: 19px;
+    align-items: center;
+    flex-direction: row;
+    gap: 10px;
   }
   .program-duration strong {
-    font-size: 29px;
+    font-size: 34px;
   }
   .program-duration > span,
   .program-facts {
-    font-size: 10px;
+    font-size: 11px;
+  }
+  .program-facts {
+    padding-left: 0;
+    border-left: 0;
+    border-top: 1px solid #dce9f2;
+    margin-top: 22px;
+    padding-top: 20px;
   }
   .program-totals {
     gap: 6px;
-    padding-block: 18px;
+    padding-inline: 0;
+    border-left: 0;
+    border-top: 1px solid #dce9f2;
+    margin-top: 22px;
+    padding-top: 20px;
   }
   .program-totals > div {
-    padding-left: 10px;
+    padding-left: 12px;
   }
   .program-totals strong {
-    font-size: 22px;
+    font-size: 24px;
   }
   .program-totals span {
     font-size: 8px;
     line-height: 1.7;
   }
   .program-link {
-    font-size: 10px;
+    justify-self: start;
+    margin-top: 22px;
+    font-size: 11px;
   }
   .section-space {
     padding-block: 58px;
@@ -945,28 +987,27 @@ h2 {
     gap: 12px;
   }
   .footer-main {
-    gap: 25px;
-    grid-template-columns: 1.2fr 0.6fr 1.2fr;
+    grid-template-columns: 1fr 1fr;
+    gap: 34px 24px;
+    padding-block: 44px 38px;
   }
-  .footer-contact > a {
-    font-size: 9px;
+  .footer-brand {
+    grid-column: 1 / -1;
   }
 }
 @media (max-width: 600px) {
   .container {
     width: calc(100% - 40px);
   }
-  .header {
-    height: 72px;
-  }
   .nav {
     gap: 8px;
   }
   .nav-cta {
     margin-left: auto;
-    margin-right: 5px;
+    margin-right: 2px;
     font-size: 10px;
-    padding: 10px 12px;
+    gap: 8px;
+    padding: 10px 11px;
     min-height: 37px;
   }
   .mobile-toggle {
@@ -978,7 +1019,7 @@ h2 {
   .nav-links {
     display: none;
     position: absolute;
-    top: 71px;
+    top: calc(var(--header-h) - 1px);
     left: 0;
     right: 0;
     border-bottom: 1px solid var(--line);
@@ -993,119 +1034,130 @@ h2 {
     gap: 24px;
     font-size: 13px;
   }
+  /* Logo and ACADEMY stay on one row and scale up together, so the divider
+     lines up with the mark instead of dangling under a stacked layout. */
   .nav .brand {
-    flex-direction: column;
-    gap: 1px;
-    align-items: flex-start;
-  }
-  .nav .brand-image {
-    width: 95px;
-    height: 30px;
-  }
-  .nav .brand-fallback {
-    font-size: 25px;
-    line-height: 1;
-  }
-  .nav .brand-academy {
-    border: 0;
-    padding-left: 2px;
-    font-size: 6px;
-    letter-spacing: 2px;
-  }
-  .hero {
-    grid-template-columns: 1fr;
-    gap: 30px;
-    padding-block: 37px 33px;
-  }
-  .hero .eyebrow {
-    font-size: 7px;
-    letter-spacing: 1.1px;
-  }
-  .hero h1 {
-    font-size: clamp(36px, 9.6vw, 46px);
-    line-height: 1.35;
-    margin-top: 21px;
-    letter-spacing: -1.8px;
-  }
-  .hero h1 .serif {
-    font-size: 0.77em;
-  }
-  .hero-description {
-    font-size: 13px;
-    margin-top: 17px;
-    line-height: 1.9;
-  }
-  .desktop-break {
-    display: none;
-  }
-  .hero-actions {
-    flex-direction: row;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 18px;
-    margin-top: 23px;
-  }
-  .hero-actions > .button {
-    padding: 14px 16px;
-    gap: 14px;
-    min-height: 46px;
-    font-size: 11px;
-  }
-  .hero-actions > .text-link {
-    font-size: 10px;
-  }
-  .hero-note {
-    font-size: 9px;
-    line-height: 1.8;
-    margin-top: 16px;
-  }
-  .program-card {
-    padding: 22px 23px;
-  }
-  .program-card-top {
     flex-direction: row;
     align-items: center;
     gap: 10px;
   }
+  .nav .brand-image {
+    width: clamp(116px, 33vw, 146px);
+    height: auto;
+    aspect-ratio: 132 / 42;
+  }
+  .nav .brand-fallback {
+    font-size: clamp(26px, 7.4vw, 33px);
+    line-height: 1;
+  }
+  .nav .brand-academy {
+    border-left: 1px solid #cfdde6;
+    padding-left: 10px;
+    font-size: clamp(8px, 2.3vw, 10px);
+    letter-spacing: 1.5px;
+    line-height: 1.2;
+  }
+  .hero {
+    /* Same logic as desktop: full-screen photo. Mobile centres the copy. */
+    min-height: 100vh;
+    min-height: 100svh;
+    align-items: center;
+    text-align: center;
+    padding-block: 96px 28px;
+  }
+  /* Mobile swaps to the skyward group crop; no scrim, no white panel. */
+  .hero-section::after {
+    background-image: var(--hero-photo-mobile);
+    background-position: center 26%;
+  }
+  .hero .eyebrow {
+    justify-content: center;
+    font-size: clamp(9px, 2.5vw, 11px);
+    letter-spacing: 1.6px;
+    line-height: 1.7;
+    max-width: 30ch;
+    margin-inline: auto;
+  }
+  .hero h1 {
+    /* Centred, larger, and allowed to wrap naturally at this size. */
+    font-size: clamp(28px, 8.4vw, 42px);
+    line-height: 1.22;
+    margin-top: 16px;
+    letter-spacing: -0.04em;
+    white-space: normal;
+    text-wrap: balance;
+    max-width: 15ch;
+    margin-inline: auto;
+  }
+  .hero-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 28px;
+  }
+  .hero-actions > .button {
+    padding: 15px 22px;
+    gap: 16px;
+    min-height: 48px;
+    font-size: 12px;
+  }
+  .program-section {
+    padding-block: 40px;
+  }
+  .program-overview {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding: 24px 22px;
+  }
+  .program-card-top {
+    gap: 10px;
+  }
   .program-card-top > .eyebrow {
-    font-size: 7px;
+    font-size: 8px;
   }
   .program-tag {
-    font-size: 7px;
-  }
-  .program-duration {
-    margin-block: 20px 17px;
+    font-size: 8px;
   }
   .program-duration strong {
-    font-size: 30px;
+    font-size: 36px;
+    margin-top: 14px;
   }
   .program-duration > span {
     font-size: 11px;
   }
   .program-facts {
-    gap: 11px;
-    font-size: 11px;
+    gap: 12px;
+    font-size: 12px;
+    padding-left: 0;
+    border-left: 0;
+    border-top: 1px solid #dce9f2;
+    margin-top: 22px;
+    padding-top: 20px;
   }
   .program-facts svg {
     width: 16px;
   }
   .program-totals {
-    margin-top: 20px;
-    padding-block: 18px;
-    gap: 10px;
+    padding-inline: 0;
+    border-left: 0;
+    border-top: 1px solid #dce9f2;
+    margin-top: 22px;
+    padding-top: 20px;
+    gap: 8px;
   }
   .program-totals strong {
-    font-size: 25px;
+    font-size: 26px;
   }
   .program-totals span {
     font-size: 9px;
   }
   .program-totals > div {
-    padding-left: 16px;
+    padding-left: 14px;
   }
   .program-link {
+    justify-content: center;
+    margin-top: 22px;
+    padding: 14px 18px;
     font-size: 11px;
-    padding-top: 17px;
   }
   .tool-strip {
     padding-block: 22px 16px;
@@ -1285,12 +1337,12 @@ h2 {
     gap: 21px;
   }
   .cta-section h2 {
-    font-size: 26px;
-    line-height: 1.6;
+    /* One line on phones: scale with the viewport instead of wrapping. */
+    font-size: clamp(15px, 4.9vw, 21px);
+    line-height: 1.5;
+    letter-spacing: -0.5px;
     margin-top: 6px;
-    max-width: 260px;
-  }
-  .cta-section .serif {
+    max-width: none;
     white-space: nowrap;
   }
   .cta-section p {
@@ -1303,15 +1355,21 @@ h2 {
     gap: 25px;
   }
   .footer {
-    padding-top: 37px;
+    margin-top: 64px;
   }
   .footer-main {
-    grid-template-columns: 0.75fr 1.25fr;
-    gap: 28px 20px;
-    padding-bottom: 29px;
+    gap: 30px 18px;
+    padding-block: 38px 32px;
   }
-  .footer-main > div:first-child {
-    grid-column: 1/-1;
+  /* Brand and contact span both columns; the two link columns sit side by
+     side so the mobile footer stays a tidy grid, not a long stack. */
+  .footer-brand,
+  .footer-contact {
+    grid-column: 1 / -1;
+  }
+  .footer-brand > p {
+    font-size: 10px;
+    max-width: 42ch;
   }
   .brand-footer .brand-image {
     width: 120px;
@@ -1322,33 +1380,23 @@ h2 {
     padding-left: 12px;
     letter-spacing: 1.3px;
   }
-  .footer-main > div > p {
-    margin-top: 11px;
-    font-size: 10px;
-  }
-  .footer-links,
-  .footer-contact {
-    gap: 12px;
-  }
-  .footer-links > .eyebrow,
-  .footer-contact > .eyebrow {
-    font-size: 7px;
-    margin-bottom: 3px;
-  }
-  .footer-links > a {
+  .footer-col > a,
+  .footer-col > span {
     font-size: 11px;
   }
   .footer-contact > a {
-    font-size: 9px;
-    gap: 7px;
+    font-size: 10px;
+    gap: 8px;
   }
   .footer-contact svg {
     width: 12px;
   }
-  .footer-bottom {
+  .footer-bottom-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    padding-block: 16px;
     font-size: 8px;
-    gap: 15px;
-    padding-block: 18px;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -1817,5 +1865,277 @@ h2 {
     font-size: 10px;
     gap: 6px;
     flex-wrap: wrap;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Course cards
+   ------------------------------------------------------------------ */
+.courses-section {
+  padding-block: 26px 84px;
+}
+/* The section title stands alone now, so it takes the display size. */
+.courses-heading {
+  font-size: clamp(30px, 3.8vw, 44px);
+  letter-spacing: -1.6px;
+  line-height: 1.35;
+}
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 34px;
+}
+.course-card {
+  display: flex;
+  flex-direction: column;
+  padding: 22px;
+  border-radius: 24px;
+  background: linear-gradient(
+    158deg,
+    var(--card-from, #e2fbef) 0%,
+    var(--card-to, #f0fbe0) 100%
+  );
+  box-shadow:
+    0 1px 2px rgba(23, 46, 64, 0.04),
+    0 18px 40px -24px rgba(23, 46, 64, 0.3);
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease;
+}
+.course-card:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 2px 4px rgba(23, 46, 64, 0.05),
+    0 30px 54px -26px rgba(23, 46, 64, 0.38);
+}
+.course-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+.course-tag {
+  background: #fff;
+  color: #40607a;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  padding: 6px 11px;
+  border-radius: 999px;
+  box-shadow: 0 1px 2px rgba(23, 46, 64, 0.07);
+}
+.course-card-art {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 0 6px;
+}
+.course-card-art img {
+  width: 100%;
+  max-width: 210px;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: contain;
+  /* The illustrations ship on a white base; multiplying drops that base out
+     so the art appears to float on the card's pastel gradient. */
+  mix-blend-mode: multiply;
+}
+.course-card-title {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.55px;
+  color: #12283a;
+  margin-top: 10px;
+  /* Two lines maximum, then an ellipsis. */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.course-card-description {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #61788c;
+  margin-top: 7px;
+  /* One line maximum. */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.course-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  margin-top: 16px;
+  font-size: 12px;
+  color: #4d6b80;
+}
+.course-meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.course-meta-item svg {
+  color: #5f9cbd;
+}
+.course-meta-item strong {
+  font-weight: 600;
+  color: #1d3d54;
+}
+.course-meta-muted {
+  color: #7b90a0;
+}
+.course-card-divider {
+  height: 1px;
+  background: rgba(23, 46, 64, 0.11);
+  margin: 18px 0 16px;
+}
+.course-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  /* Pushes the footer to the bottom so a row of cards stays aligned. */
+  margin-top: auto;
+}
+.course-instructor {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  min-width: 0;
+}
+.course-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  /* Bias the circular crop towards the face in portrait photos. */
+  object-position: 50% 26%;
+  flex-shrink: 0;
+  background: #fff;
+}
+.course-avatar-mono {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  color: #2c6f92;
+  background: linear-gradient(150deg, #ffffff, #d8efff);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 2px 6px rgba(23, 46, 64, 0.12);
+}
+.course-instructor-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.course-instructor-text strong {
+  font-size: 13px;
+  font-weight: 600;
+  color: #16324a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.course-instructor-text > span {
+  font-size: 11px;
+  color: #72889a;
+}
+.course-card-action {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.course-price {
+  font-size: 13px;
+  font-weight: 600;
+  color: #16324a;
+  white-space: nowrap;
+}
+.course-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #101820;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1px;
+  padding: 13px 20px;
+  border-radius: 999px;
+  white-space: nowrap;
+  box-shadow: 0 8px 18px -10px rgba(16, 24, 32, 0.85);
+  transition:
+    background 0.2s,
+    transform 0.2s;
+}
+.course-cta:hover {
+  background: #000;
+  transform: translateY(-1px);
+}
+@media (max-width: 1100px) {
+  .courses-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+  /* The third card spans the full width so the 2-up row is not lopsided. */
+  .courses-grid > :last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+}
+@media (max-width: 800px) {
+  .courses-section {
+    padding-block: 20px 60px;
+  }
+  .courses-grid {
+    margin-top: 26px;
+  }
+  .course-card {
+    padding: 20px;
+    border-radius: 22px;
+  }
+  .course-card-art img {
+    max-width: 180px;
+  }
+  .course-card-title {
+    font-size: 19px;
+  }
+}
+@media (max-width: 600px) {
+  .courses-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  /* Full width again once the grid is a single column. */
+  .courses-grid > :last-child:nth-child(odd) {
+    grid-column: auto;
+  }
+  .course-card {
+    padding: 18px;
+  }
+  .course-card-art img {
+    max-width: 168px;
+  }
+  .course-card-meta {
+    gap: 7px 13px;
+    font-size: 11px;
+  }
+  .course-card-footer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+  }
+  .course-card-action {
+    justify-content: space-between;
+  }
+  .course-cta {
+    padding: 14px 22px;
+    font-size: 12px;
   }
 }
