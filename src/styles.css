@@ -24,9 +24,18 @@ html {
   scroll-behavior: smooth;
   /* The header scrolls away, so anchors only need a little breathing room. */
   scroll-padding-top: 24px;
+  overflow-x: hidden;
+  overflow-x: clip;
 }
 body {
   margin: 0;
+  overflow-x: hidden;
+  overflow-x: clip;
+}
+#root {
+  min-width: 0;
+  overflow-x: hidden;
+  overflow-x: clip;
 }
 a {
   color: inherit;
@@ -70,6 +79,7 @@ p {
 .container {
   max-width: 1120px;
   width: calc(100% - 96px);
+  min-width: 0;
   margin-inline: auto;
 }
 .section-space {
@@ -186,7 +196,7 @@ h2 {
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
+  gap: 1px;
   width: max-content;
   flex-shrink: 0;
 }
@@ -195,6 +205,11 @@ h2 {
   width: 132px;
   height: 42px;
   object-fit: contain;
+}
+.brand > .brand-academy {
+  /* The supplied logo has a little transparent breathing room on its right.
+     Pull the divider into that space so ACADEMY reads as one lockup. */
+  margin-left: -6px;
 }
 .brand-fallback {
   font-size: 30px;
@@ -207,10 +222,11 @@ h2 {
 }
 .brand-academy {
   border-left: 1px solid #d8e5ed;
-  padding-left: 7px;
+  padding-left: 5px;
   font-size: 8px;
   font-weight: 600;
-  letter-spacing: 1.7px;
+  letter-spacing: 1.35px;
+  line-height: 1.2;
 }
 .nav-links {
   display: flex;
@@ -269,7 +285,8 @@ h2 {
   padding-block: 100px 96px;
 }
 .hero-copy {
-  max-width: none;
+  max-width: 100%;
+  min-width: 0;
   /* Soft halo rather than a panel: keeps ink text legible on sky without
      putting a white box behind it. Set to `none` to drop it entirely. */
   text-shadow: 0 1px 26px rgba(255, 255, 255, 0.92);
@@ -308,6 +325,9 @@ h2 {
   background: var(--pale);
   border: 1px solid #dceef9;
   border-radius: 12px;
+}
+.program-overview > * {
+  min-width: 0;
 }
 .program-card-top {
   display: flex;
@@ -392,6 +412,7 @@ h2 {
   display: inline-flex;
   align-items: center;
   gap: 9px;
+  max-width: 100%;
   font-size: 12px;
   font-weight: 500;
   color: var(--blue-dark);
@@ -522,6 +543,14 @@ h2 {
   justify-content: space-between;
   gap: 25px;
   margin-bottom: 32px;
+}
+.section-intro > div,
+.learning-intro > div,
+.learning-tab-copy,
+.learning-module-copy,
+.faq-content,
+.faq-question-copy {
+  min-width: 0;
 }
 .section-intro h2 {
   margin-top: 9px;
@@ -851,7 +880,7 @@ h2 {
     font-size: 11px;
   }
   .brand {
-    gap: 4px;
+    gap: 1px;
   }
   .brand-image {
     width: 105px;
@@ -862,13 +891,13 @@ h2 {
   }
   .brand-academy {
     font-size: 7px;
-    padding-left: 6px;
-    letter-spacing: 1.2px;
+    padding-left: 4px;
+    letter-spacing: 1px;
   }
   .nav-cta {
     font-size: 10px;
-    gap: 12px;
-    padding-inline: 12px;
+    gap: 10px;
+    padding-inline: 11px;
   }
   .hero {
     padding-block: 92px 80px;
@@ -1000,15 +1029,15 @@ h2 {
     width: calc(100% - 40px);
   }
   .nav {
-    gap: 8px;
+    gap: 5px;
   }
   .nav-cta {
     margin-left: auto;
-    margin-right: 2px;
-    font-size: 10px;
-    gap: 8px;
-    padding: 10px 11px;
-    min-height: 37px;
+    margin-right: 1px;
+    font-size: 9px;
+    gap: 6px;
+    padding: 9px 9px;
+    min-height: 35px;
   }
   .mobile-toggle {
     display: flex;
@@ -1039,22 +1068,24 @@ h2 {
   .nav .brand {
     flex-direction: row;
     align-items: center;
-    gap: 4px;
+    gap: 1px;
+    min-width: 0;
   }
   .nav .brand-image {
-    width: clamp(116px, 33vw, 146px);
+    width: clamp(96px, 31vw, 130px);
     height: auto;
     aspect-ratio: 132 / 42;
   }
   .nav .brand-fallback {
-    font-size: clamp(26px, 7.4vw, 33px);
+    font-size: clamp(24px, 7.1vw, 33px);
     line-height: 1;
   }
   .nav .brand-academy {
     border-left: 1px solid #cfdde6;
-    padding-left: 6px;
-    font-size: clamp(8px, 2.3vw, 10px);
-    letter-spacing: 1.5px;
+    padding-left: 4px;
+    margin-left: -5px;
+    font-size: clamp(7px, 2vw, 9px);
+    letter-spacing: 1px;
     line-height: 1.2;
   }
   .hero {
@@ -1158,6 +1189,8 @@ h2 {
     margin-top: 22px;
     padding: 14px 18px;
     font-size: 11px;
+    white-space: normal;
+    text-align: center;
   }
   .tool-strip {
     padding-block: 22px 16px;
@@ -1337,13 +1370,14 @@ h2 {
     gap: 21px;
   }
   .cta-section h2 {
-    /* One line on phones: scale with the viewport instead of wrapping. */
+    /* Let the heading wrap inside the padded card instead of widening the page. */
     font-size: clamp(15px, 4.9vw, 21px);
     line-height: 1.5;
     letter-spacing: -0.5px;
     margin-top: 6px;
-    max-width: none;
-    white-space: nowrap;
+    max-width: 100%;
+    white-space: normal;
+    text-wrap: balance;
   }
   .cta-section p {
     font-size: 11px;
@@ -1377,8 +1411,9 @@ h2 {
   }
   .brand-footer .brand-academy {
     font-size: 8px;
-    padding-left: 6px;
-    letter-spacing: 1.3px;
+    padding-left: 4px;
+    margin-left: -5px;
+    letter-spacing: 1px;
   }
   .footer-col > a,
   .footer-col > span {
