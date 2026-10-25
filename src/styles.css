@@ -167,9 +167,9 @@ h2 {
 }
 .header {
   height: 82px;
-  background: #ffffffed;
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--line);
+  /* Transparent so the hero photo runs uninterrupted behind the nav. */
+  background: transparent;
+  border-bottom: 1px solid rgba(228, 237, 242, 0.55);
   position: sticky;
   top: 0;
   z-index: 30;
@@ -260,21 +260,24 @@ h2 {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  /* Copy hugs the top of the viewport, clear of the sticky header. */
-  padding-block: 132px 96px;
+  /* Copy sits high in the viewport, just clear of the transparent header. */
+  padding-block: 100px 96px;
 }
 .hero-copy {
-  max-width: 640px;
+  max-width: none;
   /* Soft halo rather than a panel: keeps ink text legible on sky without
      putting a white box behind it. Set to `none` to drop it entirely. */
   text-shadow: 0 1px 26px rgba(255, 255, 255, 0.92);
 }
 .hero h1 {
-  font-size: clamp(44px, 5vw, 62px);
+  /* One line, all ink. Scales with the viewport so it never has to wrap. */
+  font-size: clamp(24px, 4.15vw, 56px);
   font-weight: 500;
-  line-height: 1.18;
-  letter-spacing: -2.2px;
-  margin-top: 20px;
+  line-height: 1.2;
+  letter-spacing: -0.045em;
+  color: var(--ink);
+  white-space: nowrap;
+  margin-top: 18px;
 }
 .hero h1 .serif {
   display: inline-block;
@@ -282,12 +285,6 @@ h2 {
   font-size: 0.77em;
   letter-spacing: -0.04em;
   line-height: 1.7;
-}
-.hero-actions {
-  display: flex;
-  gap: 23px;
-  align-items: center;
-  margin-top: 30px;
 }
 .hero-scroll {
   display: flex;
@@ -793,23 +790,16 @@ h2 {
   font-size: 9px;
   color: #8a9ca8;
 }
-@media (min-width: 1400px) {
-  .hero-copy {
-    max-width: 700px;
-  }
-}
 @media (max-width: 1100px) {
   .container {
     width: calc(100% - 64px);
   }
-  .hero h1 {
-    font-size: 40px;
-    letter-spacing: -1.8px;
+  .hero {
+    padding-block: 88px 88px;
   }
-  .hero-actions > .button {
-    font-size: 11px;
-    padding-inline: 16px;
-    gap: 13px;
+  .hero h1 {
+    font-size: clamp(22px, 3.9vw, 38px);
+    letter-spacing: -0.04em;
   }
   /* Card band collapses from four columns to a 2x2 grid. */
   .program-overview {
@@ -880,18 +870,15 @@ h2 {
     padding-inline: 12px;
   }
   .hero {
-    padding-block: 116px 80px;
+    padding-block: 92px 80px;
   }
   .hero h1 {
-    font-size: 38px;
-    letter-spacing: -1.7px;
+    font-size: clamp(19px, 3.7vw, 30px);
+    letter-spacing: -0.035em;
   }
   .hero .eyebrow {
     font-size: 8px;
     letter-spacing: 1px;
-  }
-  .hero-actions {
-    margin-top: 26px;
   }
   .program-section {
     padding-block: 48px;
@@ -1070,10 +1057,7 @@ h2 {
     /* Same logic as desktop: full-screen photo, minimal copy pinned to the top. */
     min-height: 100vh;
     min-height: 100svh;
-    padding-block: 104px 28px;
-  }
-  .hero-copy {
-    max-width: none;
+    padding-block: 82px 28px;
   }
   /* Mobile swaps to the skyward group crop; no scrim, no white panel. */
   .hero-section::after {
@@ -1085,19 +1069,11 @@ h2 {
     letter-spacing: 1.2px;
   }
   .hero h1 {
-    font-size: clamp(34px, 9.6vw, 46px);
-    line-height: 1.24;
-    margin-top: 16px;
-    letter-spacing: -1.8px;
-  }
-  .hero-actions {
-    margin-top: 24px;
-  }
-  .hero-actions > .button {
-    padding: 14px 18px;
-    gap: 14px;
-    min-height: 46px;
-    font-size: 11px;
+    /* Stays on one line on phones by scaling down with the viewport. */
+    font-size: clamp(13px, 4.35vw, 21px);
+    line-height: 1.3;
+    margin-top: 12px;
+    letter-spacing: -0.03em;
   }
   .hero-scroll {
     width: 38px;
