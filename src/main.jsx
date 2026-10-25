@@ -138,76 +138,79 @@ function App() {
       </header>
       <main id="main-content">
         <section
-          className="hero container"
+          className="hero-section"
           id="course"
           aria-labelledby="course-heading"
         >
-          <div className="hero-copy">
-            <div className="eyebrow">
-              <span className="status-dot" /> A WEEKEND COURSE BY STALITE MEDIA
+          <div className="hero container">
+            <div className="hero-copy">
+              <div className="eyebrow">
+                <span className="status-dot" /> A WEEKEND COURSE BY STALITE
+                MEDIA
+              </div>
+              <h1 id="course-heading">
+                Digital marketing.
+                <br />
+                AI, <span className="serif">made simple.</span>
+              </h1>
+              <p className="hero-description">
+                Learn to market, run campaigns and build with AI.
+                <br className="desktop-break" /> Start with the basics. Grow
+                into the advanced.
+              </p>
+              <div className="hero-actions">
+                <a
+                  className="button button-primary"
+                  href={whatsapp}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Ask about the next batch <ArrowUpRight size={17} />
+                </a>
+                <a className="text-link" href="#curriculum">
+                  See what you’ll learn <ArrowRight size={16} />
+                </a>
+              </div>
+              <p className="hero-note">
+                For students, creators, professionals and business owners.
+              </p>
             </div>
-            <h1 id="course-heading">
-              Digital marketing.
-              <br />
-              AI, <span className="serif">made simple.</span>
-            </h1>
-            <p className="hero-description">
-              Learn to market, run campaigns and build with AI.
-              <br className="desktop-break" /> Start with the basics. Grow into
-              the advanced.
-            </p>
-            <div className="hero-actions">
-              <a
-                className="button button-primary"
-                href={whatsapp}
-                target="_blank"
-                rel="noreferrer"
-              >
-                Ask about the next batch <ArrowUpRight size={17} />
+            <aside className="program-card" aria-label="Course overview">
+              <div className="program-card-top">
+                <span className="eyebrow">YOUR COURSE AT A GLANCE</span>
+                <span className="program-tag">Basics → Advanced</span>
+              </div>
+              <div className="program-duration">
+                <strong>3 months</strong>
+                <span>Built around your weekends.</span>
+              </div>
+              <div className="program-facts">
+                <span>
+                  <CalendarDays size={17} /> Saturdays & Sundays
+                </span>
+                <span>
+                  <Clock3 size={17} /> 2 hr 30 min per lecture
+                </span>
+              </div>
+              <div className="program-totals">
+                <div>
+                  <strong>24</strong>
+                  <span>lectures</span>
+                </div>
+                <div>
+                  <strong>60</strong>
+                  <span>learning hours</span>
+                </div>
+                <div>
+                  <strong>3</strong>
+                  <span>focused modules</span>
+                </div>
+              </div>
+              <a className="program-link" href="#curriculum">
+                Explore the full curriculum <ArrowRight size={16} />
               </a>
-              <a className="text-link" href="#curriculum">
-                See what you’ll learn <ArrowRight size={16} />
-              </a>
-            </div>
-            <p className="hero-note">
-              For students, creators, professionals and business owners.
-            </p>
+            </aside>
           </div>
-          <aside className="program-card" aria-label="Course overview">
-            <div className="program-card-top">
-              <span className="eyebrow">YOUR COURSE AT A GLANCE</span>
-              <span className="program-tag">Basics → Advanced</span>
-            </div>
-            <div className="program-duration">
-              <strong>3 months</strong>
-              <span>Built around your weekends.</span>
-            </div>
-            <div className="program-facts">
-              <span>
-                <CalendarDays size={17} /> Saturdays & Sundays
-              </span>
-              <span>
-                <Clock3 size={17} /> 2 hr 30 min per lecture
-              </span>
-            </div>
-            <div className="program-totals">
-              <div>
-                <strong>24</strong>
-                <span>lectures</span>
-              </div>
-              <div>
-                <strong>60</strong>
-                <span>learning hours</span>
-              </div>
-              <div>
-                <strong>3</strong>
-                <span>focused modules</span>
-              </div>
-            </div>
-            <a className="program-link" href="#curriculum">
-              Explore the full curriculum <ArrowRight size={16} />
-            </a>
-          </aside>
         </section>
         <ToolMarquee />
         <section

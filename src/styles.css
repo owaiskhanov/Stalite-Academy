@@ -88,7 +88,7 @@ p {
   font-family: "Playwrite US Modern", "Segoe Print", cursive;
   font-style: normal;
   font-weight: 400;
-  letter-spacing: -0.07em;
+  letter-spacing: -0.035em;
   color: var(--blue);
   font-size: 0.88em;
   line-height: 1.6;
@@ -221,7 +221,26 @@ h2 {
   background: none;
   padding: 8px;
 }
+/* Quiet, locally hosted paper grain with a soft sky-blue wash. */
+.hero-section {
+  position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(ellipse at 86% 24%, #e4f4ff 0%, transparent 62%),
+    linear-gradient(180deg, #ffffff 0%, #f9fcff 75%, #ffffff 100%);
+}
+.hero-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: url("/textures/paper-grain.svg") repeat;
+  opacity: 0.1;
+  mask-image: linear-gradient(#000 60%, transparent);
+}
 .hero {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: 1.32fr 1fr;
   gap: 72px;
@@ -239,7 +258,7 @@ h2 {
   display: inline-block;
   white-space: nowrap;
   font-size: 0.77em;
-  letter-spacing: -0.075em;
+  letter-spacing: -0.04em;
   line-height: 1.7;
 }
 .hero-description {
