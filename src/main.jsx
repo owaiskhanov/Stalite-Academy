@@ -312,11 +312,14 @@ function App() {
           </a>
         </section>
       </main>
-      <footer className="container footer">
-        <div className="footer-main">
-          <div>
+      <footer className="footer">
+        <div className="container footer-main">
+          <div className="footer-brand">
             <Brand footer />
-            <p>Digital marketing & AI, by Stalite Media.</p>
+            <p>
+              Digital marketing & AI, by Stalite Media. A 3-month weekend
+              course built by the agency that runs the campaigns.
+            </p>
             <a
               className="text-link footer-agency"
               href="https://www.stalite.in/"
@@ -326,13 +329,21 @@ function App() {
               Visit Stalite Media <ArrowUpRight size={14} />
             </a>
           </div>
-          <div className="footer-links">
+          <nav className="footer-col" aria-label="Footer">
             <span className="eyebrow">EXPLORE</span>
             <a href="#course">The course</a>
+            <a href="#courses">The modules</a>
             <a href="#curriculum">Curriculum</a>
             <a href="#faqs">FAQs</a>
+          </nav>
+          <div className="footer-col">
+            <span className="eyebrow">THE PROGRAMME</span>
+            <span>3 months · weekends</span>
+            <span>24 lectures · 60 hours</span>
+            <span>Basics → Advanced</span>
+            <a href="#program">Course at a glance</a>
           </div>
-          <div className="footer-contact">
+          <div className="footer-col footer-contact">
             <span className="eyebrow">GET IN TOUCH</span>
             <a href="tel:+919860685430">
               <Phone size={14} /> +91 98606 85430
@@ -357,8 +368,10 @@ function App() {
           </div>
         </div>
         <div className="footer-bottom">
-          <span>© {new Date().getFullYear()} Stalite Academy.</span>
-          <span>3 months. New possibilities.</span>
+          <div className="container footer-bottom-row">
+            <span>© {new Date().getFullYear()} Stalite Academy.</span>
+            <span>3 months. New possibilities.</span>
+          </div>
         </div>
       </footer>
     </>

@@ -726,58 +726,68 @@ h2 {
   font-size: 11px;
 }
 .footer {
-  padding-top: 54px;
+  margin-top: 90px;
+  border-top: 1px solid var(--line);
 }
 .footer-main {
   display: grid;
-  grid-template-columns: 1.5fr 0.7fr 1.1fr;
-  gap: 45px;
-  padding-bottom: 36px;
+  grid-template-columns: 1.5fr 0.7fr 0.85fr 1.15fr;
+  gap: 48px;
+  padding-block: 54px 46px;
 }
-.footer-main > div > p {
-  font-size: 10px;
-  margin-top: 14px;
+.footer-brand > p {
+  font-size: 11px;
+  line-height: 1.8;
+  margin-top: 16px;
+  max-width: 32ch;
 }
 .footer-agency {
-  margin-top: 10px;
+  margin-top: 14px;
   font-size: 10px;
   color: #4f7a95;
 }
-.footer-links,
-.footer-contact {
+.footer-col {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 13px;
-  padding-top: 5px;
+  gap: 12px;
+  padding-top: 3px;
 }
-.footer-links > .eyebrow,
-.footer-contact > .eyebrow {
+.footer-col > .eyebrow {
   font-size: 8px;
   letter-spacing: 1.2px;
-  margin-bottom: 5px;
+  margin-bottom: 4px;
 }
-.footer-links > a {
+.footer-col > a,
+.footer-col > span {
   font-size: 11px;
   color: #6e8595;
+  line-height: 1.7;
+}
+.footer-col > a:hover {
+  color: var(--blue);
 }
 .footer-contact > a {
   display: flex;
+  align-items: flex-start;
   gap: 9px;
-  font-size: 10px;
-  color: #6e8595;
-  line-height: 1.8;
 }
 .footer-contact svg {
-  margin-top: 2px;
+  margin-top: 3px;
+  width: 13px;
   color: #83a1b4;
 }
 .footer-bottom {
+  border-top: 1px solid var(--line);
+  background: #f8fbfd;
+}
+.footer-bottom-row {
   display: flex;
   justify-content: space-between;
-  gap: 20px;
-  border-top: 1px solid var(--line);
-  padding-block: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  padding-block: 18px;
   font-size: 9px;
   color: #8a9ca8;
 }
@@ -977,11 +987,12 @@ h2 {
     gap: 12px;
   }
   .footer-main {
-    gap: 25px;
-    grid-template-columns: 1.2fr 0.6fr 1.2fr;
+    grid-template-columns: 1fr 1fr;
+    gap: 34px 24px;
+    padding-block: 44px 38px;
   }
-  .footer-contact > a {
-    font-size: 9px;
+  .footer-brand {
+    grid-column: 1 / -1;
   }
 }
 @media (max-width: 600px) {
@@ -1326,12 +1337,12 @@ h2 {
     gap: 21px;
   }
   .cta-section h2 {
-    font-size: 26px;
-    line-height: 1.6;
+    /* One line on phones: scale with the viewport instead of wrapping. */
+    font-size: clamp(15px, 4.9vw, 21px);
+    line-height: 1.5;
+    letter-spacing: -0.5px;
     margin-top: 6px;
-    max-width: 260px;
-  }
-  .cta-section .serif {
+    max-width: none;
     white-space: nowrap;
   }
   .cta-section p {
@@ -1344,15 +1355,21 @@ h2 {
     gap: 25px;
   }
   .footer {
-    padding-top: 37px;
+    margin-top: 64px;
   }
   .footer-main {
-    grid-template-columns: 0.75fr 1.25fr;
-    gap: 28px 20px;
-    padding-bottom: 29px;
+    gap: 30px 18px;
+    padding-block: 38px 32px;
   }
-  .footer-main > div:first-child {
-    grid-column: 1/-1;
+  /* Brand and contact span both columns; the two link columns sit side by
+     side so the mobile footer stays a tidy grid, not a long stack. */
+  .footer-brand,
+  .footer-contact {
+    grid-column: 1 / -1;
+  }
+  .footer-brand > p {
+    font-size: 10px;
+    max-width: 42ch;
   }
   .brand-footer .brand-image {
     width: 120px;
@@ -1363,33 +1380,23 @@ h2 {
     padding-left: 12px;
     letter-spacing: 1.3px;
   }
-  .footer-main > div > p {
-    margin-top: 11px;
-    font-size: 10px;
-  }
-  .footer-links,
-  .footer-contact {
-    gap: 12px;
-  }
-  .footer-links > .eyebrow,
-  .footer-contact > .eyebrow {
-    font-size: 7px;
-    margin-bottom: 3px;
-  }
-  .footer-links > a {
+  .footer-col > a,
+  .footer-col > span {
     font-size: 11px;
   }
   .footer-contact > a {
-    font-size: 9px;
-    gap: 7px;
+    font-size: 10px;
+    gap: 8px;
   }
   .footer-contact svg {
     width: 12px;
   }
-  .footer-bottom {
+  .footer-bottom-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    padding-block: 16px;
     font-size: 8px;
-    gap: 15px;
-    padding-block: 18px;
   }
 }
 @media (prefers-reduced-motion: reduce) {

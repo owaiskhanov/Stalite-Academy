@@ -72,8 +72,8 @@ export default function Curriculum() {
         </div>
         <a
           className="learning-download"
-          href="/stalite-academy-curriculum.txt"
-          download
+          href="/stalite-academy-syllabus.pdf"
+          download="Stalite-Academy-Syllabus.pdf"
         >
           <Download size={17} /> Download full syllabus
         </a>
