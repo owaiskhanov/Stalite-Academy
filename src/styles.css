@@ -14,13 +14,6 @@
      Desktop and mobile use different crops so faces stay in frame. */
   --hero-photo-desktop: url("https://osarasctypsjozjdslpd.supabase.co/storage/v1/object/public/Academy/Joyful%20Student%20Selfie%20Under%20Blue%20Skies.png");
   --hero-photo-mobile: url("https://osarasctypsjozjdslpd.supabase.co/storage/v1/object/public/Academy/Cheerful%20Skyward%20Group%20Selfie.png");
-  /* Hero grid geometry, kept in one place so the photo layer can be aligned
-     to the right-hand column at every breakpoint. */
-  --hero-container: 1120px;
-  --hero-gutter: 48px;
-  --hero-col-left: 1.32;
-  --hero-col-right: 1;
-  --hero-gap: 72px;
 }
 * {
   box-sizing: border-box;
@@ -232,50 +225,23 @@ h2 {
   background: none;
   padding: 8px;
 }
-/* Quiet, locally hosted paper grain over a soft sky-blue wash, with the
-   Supabase hero photo composited into the right-hand column on desktop. */
+/* Full-bleed Supabase hero photograph. No wash and no white panel behind the
+   copy — the photo carries the whole viewport, with the grain layered above. */
 .hero-section {
   position: relative;
   isolation: isolate;
-  background:
-    radial-gradient(ellipse at 86% 24%, #e4f4ff 0%, transparent 62%),
-    linear-gradient(180deg, #ffffff 0%, #f9fcff 75%, #ffffff 100%);
+  min-height: 100vh;
+  min-height: 100svh; /* dynamic viewport height, so mobile bars don't crop it */
+  display: flex;
+  background-color: #f9fcff;
 }
-/* The photo itself. Sits above the base wash, below the grain and the copy. */
 .hero-section::after {
   content: "";
   position: absolute;
-  /* Aligned to the hero grid's right-hand column, derived from the same
-     variables that drive the layout so it can never drift out of sync. */
-  inset: 0 0 0
-    max(
-      0px,
-      calc(
-        50% - (var(--hero-container) / 2) +
-          (
-            (
-              (
-                min(100vw, var(--hero-container)) - (var(--hero-gutter) * 2) -
-                  var(--hero-gap)
-              ) * var(--hero-col-left)
-            ) / (var(--hero-col-left) + var(--hero-col-right))
-          ) + var(--hero-gap)
-      )
-    );
-  background-image:
-    /* left-edge blend so the photo meets the white column without a seam */
-    linear-gradient(90deg, #ffffff 0%, rgba(255, 255, 255, 0) 17%),
-    /* vertical blend into the section edges */
-    linear-gradient(180deg, rgba(255, 255, 255, 0.62) 0%, rgba(255, 255, 255, 0) 24%, rgba(255, 255, 255, 0) 66%, rgba(255, 255, 255, 0.72) 100%),
-    var(--hero-photo-desktop);
-  background-size:
-    100% 100%,
-    100% 100%,
-    cover;
-  background-position:
-    0 0,
-    0 0,
-    center 22%;
+  inset: 0;
+  background-image: var(--hero-photo-desktop);
+  background-size: cover;
+  background-position: center 22%;
   background-repeat: no-repeat;
   pointer-events: none;
 }
@@ -287,23 +253,28 @@ h2 {
   pointer-events: none;
   background: url("/textures/paper-grain.svg") repeat;
   opacity: 0.1;
-  mask-image: linear-gradient(#000 60%, transparent);
 }
 .hero {
   position: relative;
   z-index: 2;
-  display: grid;
-  grid-template-columns: var(--hero-col-left) var(--hero-col-right);
-  gap: var(--hero-gap);
-  align-items: center;
-  padding-block: 77px 68px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  /* Copy hugs the top of the viewport, clear of the sticky header. */
+  padding-block: 132px 96px;
+}
+.hero-copy {
+  max-width: 640px;
+  /* Soft halo rather than a panel: keeps ink text legible on sky without
+     putting a white box behind it. Set to `none` to drop it entirely. */
+  text-shadow: 0 1px 26px rgba(255, 255, 255, 0.92);
 }
 .hero h1 {
-  font-size: 51px;
+  font-size: clamp(44px, 5vw, 62px);
   font-weight: 500;
-  line-height: 1.3;
+  line-height: 1.18;
   letter-spacing: -2.2px;
-  margin-top: 23px;
+  margin-top: 20px;
 }
 .hero h1 .serif {
   display: inline-block;
@@ -312,68 +283,76 @@ h2 {
   letter-spacing: -0.04em;
   line-height: 1.7;
 }
-.hero-description {
-  font-size: 14px;
-  line-height: 1.9;
-  margin-top: 22px;
-}
 .hero-actions {
   display: flex;
   gap: 23px;
   align-items: center;
-  margin-top: 29px;
+  margin-top: 30px;
 }
-.hero-actions .text-link {
-  font-size: 11px;
+.hero-scroll {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  margin-top: auto;
+  color: #5b7f96;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-radius: 50%;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
 }
-.hero-note {
-  margin-top: 19px;
-  font-size: 10px;
-  color: #7b8b97;
+.hero-scroll:hover {
+  color: var(--blue-dark);
+  background: #fff;
 }
-.program-card {
-  padding: 28px;
-  /* Frosted so the hero photo reads through it without hurting contrast. */
-  background: rgba(242, 250, 255, 0.84);
-  -webkit-backdrop-filter: blur(14px) saturate(1.15);
-  backdrop-filter: blur(14px) saturate(1.15);
-  border: 1px solid rgba(220, 238, 249, 0.92);
+/* The course-at-a-glance card, promoted out of the hero into its own band. */
+.program-section {
+  padding-block: 62px;
+}
+.program-overview {
+  display: grid;
+  grid-template-columns: minmax(230px, 1.15fr) minmax(190px, 0.85fr) minmax(250px, 1.2fr) auto;
+  gap: 44px;
+  align-items: center;
+  padding: 34px 38px;
+  background: var(--pale);
+  border: 1px solid #dceef9;
   border-radius: 12px;
-  box-shadow: 0 18px 44px -30px rgba(23, 46, 64, 0.55);
 }
 .program-card-top {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 .program-card-top > .eyebrow {
-  font-size: 8px;
-  letter-spacing: 1px;
+  font-size: 9px;
+  letter-spacing: 1.2px;
 }
 .program-tag {
-  font-size: 8px;
+  font-size: 9px;
   color: #5885a0;
   background: #fff;
-  padding: 6px 8px;
+  padding: 6px 9px;
   border: 1px solid #deedf6;
   border-radius: 4px;
   white-space: nowrap;
 }
-.program-duration {
-  margin-block: 29px 23px;
-}
 .program-duration strong {
   display: block;
-  font-size: 35px;
-  letter-spacing: -1.2px;
+  font-size: 44px;
+  letter-spacing: -1.6px;
   font-weight: 500;
+  line-height: 1.2;
+  margin-top: 16px;
 }
 .program-duration > span {
   display: block;
   font-size: 12px;
   color: #698195;
-  margin-top: 7px;
+  margin-top: 6px;
 }
 .program-facts {
   display: flex;
@@ -381,6 +360,8 @@ h2 {
   gap: 13px;
   font-size: 12px;
   color: #4d6b80;
+  padding-left: 44px;
+  border-left: 1px solid #dce9f2;
 }
 .program-facts > span {
   display: flex;
@@ -393,14 +374,13 @@ h2 {
 .program-totals {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  margin-top: 25px;
-  padding-block: 22px;
-  border-block: 1px solid #dce9f2;
   gap: 10px;
+  padding-inline: 44px 0;
+  border-left: 1px solid #dce9f2;
 }
 .program-totals > div {
   border-right: 1px solid #dce9f2;
-  padding-left: 16px;
+  padding-left: 20px;
 }
 .program-totals > div:first-child {
   padding-left: 0;
@@ -409,8 +389,8 @@ h2 {
   border: 0;
 }
 .program-totals strong {
-  font-size: 25px;
-  letter-spacing: -0.7px;
+  font-size: 30px;
+  letter-spacing: -1px;
   font-weight: 500;
   display: block;
 }
@@ -421,12 +401,21 @@ h2 {
   margin-top: 6px;
 }
 .program-link {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  justify-content: space-between;
-  font-size: 11px;
-  color: #437b9b;
-  padding-top: 21px;
+  gap: 9px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--blue-dark);
+  background: #fff;
+  border: 1px solid #cfe6f4;
+  border-radius: 7px;
+  padding: 14px 18px;
+  white-space: nowrap;
+}
+.program-link:hover {
+  background: #e9f6ff;
+  border-color: #a9d8f0;
 }
 .tool-strip {
   border-block: 1px solid var(--line);
@@ -805,48 +794,48 @@ h2 {
   color: #8a9ca8;
 }
 @media (min-width: 1400px) {
-  .hero {
-    gap: 90px;
-  }
-  .hero h1 {
-    font-size: 56px;
+  .hero-copy {
+    max-width: 700px;
   }
 }
 @media (max-width: 1100px) {
-  :root {
-    --hero-gutter: 32px;
-    --hero-col-left: 1.3;
-    --hero-gap: 40px;
-  }
   .container {
     width: calc(100% - 64px);
   }
-  .hero {
-    gap: 40px;
-    grid-template-columns: 1.3fr 1fr;
-  }
   .hero h1 {
-    font-size: 44px;
-  }
-  .hero-actions {
-    gap: 16px;
+    font-size: 40px;
+    letter-spacing: -1.8px;
   }
   .hero-actions > .button {
     font-size: 11px;
     padding-inline: 16px;
     gap: 13px;
   }
-  .hero-actions > .text-link {
-    font-size: 10px;
+  /* Card band collapses from four columns to a 2x2 grid. */
+  .program-overview {
+    grid-template-columns: 1fr 1fr;
+    gap: 30px 28px;
+    padding: 28px 28px;
   }
-  .program-card {
-    padding: 23px;
+  .program-facts {
+    padding-left: 28px;
+  }
+  .program-totals {
+    grid-column: 1 / -1;
+    padding-inline: 0;
+    border-left: 0;
+    border-top: 1px solid #dce9f2;
+    padding-top: 26px;
+  }
+  .program-link {
+    grid-column: 1 / -1;
+    justify-self: start;
   }
   .program-tag {
-    font-size: 7px;
+    font-size: 8px;
   }
   .program-card-top > .eyebrow {
-    font-size: 7px;
+    font-size: 8px;
   }
 
   .faq-section {
@@ -857,10 +846,6 @@ h2 {
   }
 }
 @media (max-width: 800px) {
-  :root {
-    --hero-gutter: 24px;
-    --hero-gap: 25px;
-  }
   .container {
     width: calc(100% - 48px);
   }
@@ -895,8 +880,7 @@ h2 {
     padding-inline: 12px;
   }
   .hero {
-    gap: 25px;
-    padding-block: 55px;
+    padding-block: 116px 80px;
   }
   .hero h1 {
     font-size: 38px;
@@ -906,52 +890,58 @@ h2 {
     font-size: 8px;
     letter-spacing: 1px;
   }
-  .hero-description {
-    font-size: 12px;
-  }
   .hero-actions {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 17px;
-    margin-top: 24px;
+    margin-top: 26px;
   }
-  .hero-note {
-    font-size: 9px;
+  .program-section {
+    padding-block: 48px;
   }
-  .program-card {
-    padding: 20px;
+  .program-overview {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding: 26px 24px;
   }
   .program-card-top {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 8px;
-  }
-  .program-duration {
-    margin-top: 19px;
+    align-items: center;
+    flex-direction: row;
+    gap: 10px;
   }
   .program-duration strong {
-    font-size: 29px;
+    font-size: 34px;
   }
   .program-duration > span,
   .program-facts {
-    font-size: 10px;
+    font-size: 11px;
+  }
+  .program-facts {
+    padding-left: 0;
+    border-left: 0;
+    border-top: 1px solid #dce9f2;
+    margin-top: 22px;
+    padding-top: 20px;
   }
   .program-totals {
     gap: 6px;
-    padding-block: 18px;
+    padding-inline: 0;
+    border-left: 0;
+    border-top: 1px solid #dce9f2;
+    margin-top: 22px;
+    padding-top: 20px;
   }
   .program-totals > div {
-    padding-left: 10px;
+    padding-left: 12px;
   }
   .program-totals strong {
-    font-size: 22px;
+    font-size: 24px;
   }
   .program-totals span {
     font-size: 8px;
     line-height: 1.7;
   }
   .program-link {
-    font-size: 10px;
+    justify-self: start;
+    margin-top: 22px;
+    font-size: 11px;
   }
   .section-space {
     padding-block: 58px;
@@ -1077,120 +1067,100 @@ h2 {
     letter-spacing: 2px;
   }
   .hero {
-    grid-template-columns: 1fr;
-    gap: 30px;
-    padding-block: 37px 33px;
+    /* Same logic as desktop: full-screen photo, minimal copy pinned to the top. */
+    min-height: 100vh;
+    min-height: 100svh;
+    padding-block: 104px 28px;
   }
-  /* Mobile swaps to the skyward group crop and lets it run full-bleed. */
+  .hero-copy {
+    max-width: none;
+  }
+  /* Mobile swaps to the skyward group crop; no scrim, no white panel. */
   .hero-section::after {
-    inset: 0;
-    background-image:
-      linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0.1) 36%, rgba(255, 255, 255, 0) 56%, rgba(255, 255, 255, 0.9) 100%),
-      var(--hero-photo-mobile);
-    background-size:
-      100% 100%,
-      cover;
-    background-position:
-      0 0,
-      center 28%;
-    background-repeat: no-repeat;
-  }
-  /* Opaque on mobile: the card sits directly on top of the photo here. */
-  .program-card {
-    background: #f4fbff;
-    -webkit-backdrop-filter: none;
-    backdrop-filter: none;
-    box-shadow: 0 16px 38px -28px rgba(23, 46, 64, 0.6);
+    background-image: var(--hero-photo-mobile);
+    background-position: center 26%;
   }
   .hero .eyebrow {
-    font-size: 7px;
-    letter-spacing: 1.1px;
+    font-size: 8px;
+    letter-spacing: 1.2px;
   }
   .hero h1 {
-    font-size: clamp(36px, 9.6vw, 46px);
-    line-height: 1.35;
-    margin-top: 21px;
+    font-size: clamp(34px, 9.6vw, 46px);
+    line-height: 1.24;
+    margin-top: 16px;
     letter-spacing: -1.8px;
   }
-  .hero h1 .serif {
-    font-size: 0.77em;
-  }
-  .hero-description {
-    font-size: 13px;
-    margin-top: 17px;
-    line-height: 1.9;
-  }
-  .desktop-break {
-    display: none;
-  }
   .hero-actions {
-    flex-direction: row;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 18px;
-    margin-top: 23px;
+    margin-top: 24px;
   }
   .hero-actions > .button {
-    padding: 14px 16px;
+    padding: 14px 18px;
     gap: 14px;
     min-height: 46px;
     font-size: 11px;
   }
-  .hero-actions > .text-link {
-    font-size: 10px;
+  .hero-scroll {
+    width: 38px;
+    height: 38px;
   }
-  .hero-note {
-    font-size: 9px;
-    line-height: 1.8;
-    margin-top: 16px;
+  .program-section {
+    padding-block: 40px;
   }
-  .program-card {
-    padding: 22px 23px;
+  .program-overview {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding: 24px 22px;
   }
   .program-card-top {
-    flex-direction: row;
-    align-items: center;
     gap: 10px;
   }
   .program-card-top > .eyebrow {
-    font-size: 7px;
+    font-size: 8px;
   }
   .program-tag {
-    font-size: 7px;
-  }
-  .program-duration {
-    margin-block: 20px 17px;
+    font-size: 8px;
   }
   .program-duration strong {
-    font-size: 30px;
+    font-size: 36px;
+    margin-top: 14px;
   }
   .program-duration > span {
     font-size: 11px;
   }
   .program-facts {
-    gap: 11px;
-    font-size: 11px;
+    gap: 12px;
+    font-size: 12px;
+    padding-left: 0;
+    border-left: 0;
+    border-top: 1px solid #dce9f2;
+    margin-top: 22px;
+    padding-top: 20px;
   }
   .program-facts svg {
     width: 16px;
   }
   .program-totals {
-    margin-top: 20px;
-    padding-block: 18px;
-    gap: 10px;
+    padding-inline: 0;
+    border-left: 0;
+    border-top: 1px solid #dce9f2;
+    margin-top: 22px;
+    padding-top: 20px;
+    gap: 8px;
   }
   .program-totals strong {
-    font-size: 25px;
+    font-size: 26px;
   }
   .program-totals span {
     font-size: 9px;
   }
   .program-totals > div {
-    padding-left: 16px;
+    padding-left: 14px;
   }
   .program-link {
+    justify-content: center;
+    margin-top: 22px;
+    padding: 14px 18px;
     font-size: 11px;
-    padding-top: 17px;
   }
   .tool-strip {
     padding-block: 22px 16px;
