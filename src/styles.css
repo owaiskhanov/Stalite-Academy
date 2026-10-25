@@ -186,7 +186,7 @@ h2 {
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 13px;
+  gap: 5px;
   width: max-content;
   flex-shrink: 0;
 }
@@ -207,7 +207,7 @@ h2 {
 }
 .brand-academy {
   border-left: 1px solid #d8e5ed;
-  padding-left: 13px;
+  padding-left: 7px;
   font-size: 8px;
   font-weight: 600;
   letter-spacing: 1.7px;
@@ -851,7 +851,7 @@ h2 {
     font-size: 11px;
   }
   .brand {
-    gap: 9px;
+    gap: 4px;
   }
   .brand-image {
     width: 105px;
@@ -862,7 +862,7 @@ h2 {
   }
   .brand-academy {
     font-size: 7px;
-    padding-left: 9px;
+    padding-left: 6px;
     letter-spacing: 1.2px;
   }
   .nav-cta {
@@ -1039,7 +1039,7 @@ h2 {
   .nav .brand {
     flex-direction: row;
     align-items: center;
-    gap: 10px;
+    gap: 4px;
   }
   .nav .brand-image {
     width: clamp(116px, 33vw, 146px);
@@ -1052,7 +1052,7 @@ h2 {
   }
   .nav .brand-academy {
     border-left: 1px solid #cfdde6;
-    padding-left: 10px;
+    padding-left: 6px;
     font-size: clamp(8px, 2.3vw, 10px);
     letter-spacing: 1.5px;
     line-height: 1.2;
@@ -1377,7 +1377,7 @@ h2 {
   }
   .brand-footer .brand-academy {
     font-size: 8px;
-    padding-left: 12px;
+    padding-left: 6px;
     letter-spacing: 1.3px;
   }
   .footer-col > a,
