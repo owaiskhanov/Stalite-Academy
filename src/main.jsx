@@ -3,14 +3,10 @@ import { createRoot } from "react-dom/client";
 import {
   ArrowUpRight,
   ArrowRight,
-  Download,
-  Plus,
   Menu,
   X,
-  Check,
   CalendarDays,
   Clock3,
-  Layers,
   Megaphone,
   BarChart3,
   Code2,
@@ -26,7 +22,7 @@ import "@fontsource/playwrite-us-modern/latin-400.css";
 import "./styles.css";
 import ToolMarquee from "./ToolMarquee";
 import FAQs from "./FAQs";
-import { curriculum } from "./curriculum";
+import Curriculum from "./Curriculum";
 
 const whatsapp =
   "https://wa.me/919860685430?text=" +
@@ -68,10 +64,7 @@ function Brand({ footer = false }) {
 
 function App() {
   const [menu, setMenu] = useState(false);
-  const [level, setLevel] = useState("basics");
-  const [open, setOpen] = useState(0);
   const menuToggle = useRef(null);
-  const tabs = useRef([]);
   useEffect(() => {
     function dismiss(e) {
       if (e.key === "Escape" && menu) {
@@ -82,17 +75,6 @@ function App() {
     document.addEventListener("keydown", dismiss);
     return () => document.removeEventListener("keydown", dismiss);
   }, [menu]);
-  function selectLevel(value) {
-    setLevel(value);
-    setOpen(value === "basics" ? 0 : 1);
-  }
-  function navigateTabs(event, index) {
-    if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
-    event.preventDefault();
-    const next = event.key === "Home" ? 0 : event.key === "End" ? 1 : 1 - index;
-    selectLevel(next === 0 ? "basics" : "advanced");
-    tabs.current[next]?.focus();
-  }
   return (
     <>
       <a className="skip-link" href="#main-content">
@@ -213,137 +195,7 @@ function App() {
           </div>
         </section>
         <ToolMarquee />
-        <section
-          className="curriculum-section container section-space"
-          id="curriculum"
-          aria-labelledby="curriculum-heading"
-        >
-          <div className="section-intro">
-            <div>
-              <div className="eyebrow">WHAT YOU’LL LEARN</div>
-              <h2 id="curriculum-heading">
-                One course. <span className="serif">Two levels.</span>
-              </h2>
-              <p>
-                Three modules in each phase, from foundations to advanced
-                skills.
-              </p>
-            </div>
-            <a
-              className="download-link"
-              href="/stalite-academy-curriculum.txt"
-              download
-            >
-              <Download size={16} /> Download syllabus
-            </a>
-          </div>
-          <div className="curriculum-layout">
-            <aside className="course-sidebar">
-              <div
-                className="level-switch"
-                role="tablist"
-                aria-label="Curriculum level"
-              >
-                {[
-                  ["basics", "Basics", "01"],
-                  ["advanced", "Advanced", "02"],
-                ].map(([value, label, number], i) => (
-                  <button
-                    key={value}
-                    ref={(el) => (tabs.current[i] = el)}
-                    id={`tab-${value}`}
-                    role="tab"
-                    aria-selected={level === value}
-                    aria-controls="curriculum-panel"
-                    tabIndex={level === value ? 0 : -1}
-                    className={level === value ? "active" : ""}
-                    onClick={() => selectLevel(value)}
-                    onKeyDown={(e) => navigateTabs(e, i)}
-                  >
-                    <span className="level-number">{number}</span>
-                    <span>{label}</span>
-                    <ArrowRight size={16} />
-                  </button>
-                ))}
-              </div>
-              <div className="level-summary">
-                <h3>
-                  {level === "basics"
-                    ? "Start with the essentials."
-                    : "Take your skills further."}
-                </h3>
-                <p>
-                  {level === "basics"
-                    ? "Understand the tools and build a strong foundation across all three modules."
-                    : "Go deeper into campaigns, search and AI-powered development."}
-                </p>
-                <div>
-                  <span>
-                    <Layers size={15} /> 12 lectures
-                  </span>
-                  <span>
-                    <Clock3 size={15} /> 30 hours
-                  </span>
-                </div>
-                <small>1,800 minutes per phase</small>
-              </div>
-            </aside>
-            <div
-              id="curriculum-panel"
-              className="module-list"
-              role="tabpanel"
-              aria-labelledby={`tab-${level}`}
-              tabIndex={0}
-            >
-              {curriculum[level].map((module, i) => (
-                <article
-                  className={`module ${open === i ? "module-open" : ""}`}
-                  key={`${level}-${i}`}
-                >
-                  <h3>
-                    <button
-                      className="module-toggle"
-                      id={`module-heading-${level}-${i}`}
-                      aria-expanded={open === i}
-                      aria-controls={`module-${level}-${i}`}
-                      onClick={() => setOpen(open === i ? null : i)}
-                    >
-                      <span className="module-icon">
-                        <module.icon size={20} />
-                      </span>
-                      <span className="module-name">{module.name}</span>
-                      <Plus className="module-plus" size={18} />
-                    </button>
-                  </h3>
-                  <div
-                    className="module-content"
-                    id={`module-${level}-${i}`}
-                    role="region"
-                    aria-labelledby={`module-heading-${level}-${i}`}
-                    hidden={open !== i}
-                  >
-                    {module.note ? (
-                      <p className="pending-note">{module.note}</p>
-                    ) : (
-                      <ul>
-                        {module.topics.map((topic) => (
-                          <li key={topic}>
-                            <Check size={14} />
-                            <span>{topic}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
-                </article>
-              ))}
-              <p className="curriculum-note">
-                24 lectures in total · 150 minutes each · 3,600 minutes of
-                learning
-              </p>
-            </div>
-          </div>
-        </section>
+        <Curriculum />
         <section className="why-section" id="why-stalite">
           <div className="container section-space">
             <div className="section-intro">
