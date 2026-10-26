@@ -5,9 +5,17 @@
   background: #fff;
   font-weight: 400;
   --ink: #172e40;
-  --muted: #617281;
   --blue: #0787c9;
-  --blue-dark: #03699e;
+  /* Every text colour below is tuned so that all combinations used on this
+     page clear the 4.5:1 WCAG AA ratio — including the pastel course-card
+     gradients (#ece7fd is the hardest surface) and the tinted panels. Keep
+     new copy on these tokens rather than one-off greys. */
+  --muted: #4a6072; /* body copy and descriptions */
+  --meta: #52677a; /* eyebrows, meta rows, footer links */
+  --blue-text: #026f9f; /* links, active states, the cursive accent */
+  --blue-dark: #03699e; /* primary button fill, button label, hovers */
+  --blue-deep: #025b86; /* primary button fill on hover */
+  --icon: #4d8299; /* line icons and bullet marks */
   --pale: #f2faff;
   --line: #e4edf2;
   /* Header height, shared so the hero can slide underneath it. */
@@ -58,7 +66,7 @@ a {
 button:focus-visible,
 a:focus-visible,
 [tabindex]:focus-visible {
-  outline: 3px solid #38bdf8;
+  outline: 3px solid #0284c7;
   outline-offset: 5px;
 }
 svg {
@@ -96,7 +104,7 @@ p {
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 1.35px;
-  color: #637c8d;
+  color: var(--meta);
 }
 .status-dot {
   height: 6px;
@@ -110,7 +118,7 @@ p {
   font-style: normal;
   font-weight: 400;
   letter-spacing: -0.035em;
-  color: var(--blue);
+  color: var(--blue-text);
   font-size: 0.88em;
   line-height: 1.6;
 }
@@ -136,11 +144,11 @@ h2 {
     box-shadow 0.2s;
 }
 .button-primary {
-  background: var(--blue);
+  background: var(--blue-dark);
   color: #fff;
 }
 .button-primary:hover {
-  background: var(--blue-dark);
+  background: var(--blue-deep);
   box-shadow: 0 4px 16px #0284c71a;
 }
 .button-small {
@@ -163,7 +171,7 @@ h2 {
   line-height: 1.6;
 }
 .text-link:hover {
-  color: var(--blue);
+  color: var(--blue-text);
 }
 .skip-link {
   position: fixed;
@@ -222,7 +230,7 @@ h2 {
   line-height: 1.25;
 }
 .brand-fallback > span {
-  color: var(--blue);
+  color: var(--blue-text);
 }
 .brand-academy {
   border-left: 1px solid #d8e5ed;
@@ -237,10 +245,10 @@ h2 {
   align-items: center;
   gap: 30px;
   font-size: 12px;
-  color: #526675;
+  color: var(--muted);
 }
 .nav-links a:hover {
-  color: var(--blue);
+  color: var(--blue-text);
 }
 .mobile-toggle {
   display: none;
@@ -345,7 +353,7 @@ h2 {
 }
 .program-tag {
   font-size: 9px;
-  color: #5885a0;
+  color: var(--meta);
   background: #fff;
   padding: 6px 9px;
   border: 1px solid #deedf6;
@@ -363,7 +371,7 @@ h2 {
 .program-duration > span {
   display: block;
   font-size: 12px;
-  color: #698195;
+  color: var(--meta);
   margin-top: 6px;
 }
 .program-facts {
@@ -371,7 +379,7 @@ h2 {
   flex-direction: column;
   gap: 13px;
   font-size: 12px;
-  color: #4d6b80;
+  color: var(--muted);
   padding-left: 44px;
   border-left: 1px solid #dce9f2;
 }
@@ -381,7 +389,7 @@ h2 {
   gap: 10px;
 }
 .program-facts svg {
-  color: #5f9cbd;
+  color: var(--icon);
 }
 .program-totals {
   display: grid;
@@ -409,7 +417,7 @@ h2 {
 .program-totals span {
   display: block;
   font-size: 9px;
-  color: #708597;
+  color: var(--meta);
   margin-top: 6px;
 }
 .program-link {
@@ -457,7 +465,7 @@ h2 {
 }
 .tools-heading-end p {
   font-size: 11px;
-  color: #7a8c99;
+  color: var(--meta);
 }
 .marquee-control {
   display: flex;
@@ -467,7 +475,7 @@ h2 {
   height: 32px;
   border: 1px solid var(--line);
   background: #fff;
-  color: #7c94a4;
+  color: var(--meta);
   border-radius: 50%;
 }
 .marquee-control:hover {
@@ -521,7 +529,7 @@ h2 {
 .tool-tile strong {
   font-size: 12px;
   font-weight: 500;
-  color: #4b6578;
+  color: var(--muted);
 }
 .marquee-window:hover .marquee-track,
 .is-paused .marquee-track {
@@ -530,7 +538,7 @@ h2 {
 .tools-disclaimer {
   font-size: 8px;
   line-height: 1.6;
-  color: #8495a2;
+  color: var(--meta);
   margin-top: 12px;
 }
 .is-paused .marquee-control {
@@ -572,11 +580,11 @@ h2 {
   white-space: nowrap;
   border-bottom: 1px solid #cbdfe9;
   padding-bottom: 7px;
-  color: #526e81;
+  color: var(--muted);
   margin-bottom: 5px;
 }
 .download-link:hover {
-  color: var(--blue);
+  color: var(--blue-text);
 }
 
 .why-section {
@@ -599,7 +607,7 @@ h2 {
   border: 0;
 }
 .benefit > svg {
-  color: #5f91ae;
+  color: var(--icon);
 }
 .benefit h3 {
   font-size: 14px;
@@ -613,7 +621,7 @@ h2 {
 }
 .why-section .text-link {
   font-size: 11px;
-  color: #5c7e94;
+  color: var(--muted);
 }
 .faq-section {
   display: grid;
@@ -649,7 +657,7 @@ h2 {
   align-items: center;
   font-size: 11px;
   font-weight: 500;
-  color: #147eaf;
+  color: var(--blue-text);
 }
 .faq-filters {
   display: flex;
@@ -659,7 +667,7 @@ h2 {
 }
 .faq-filters button {
   background: #f6f9fb;
-  color: #718695;
+  color: var(--meta);
   padding: 9px 12px;
   border: 1px solid transparent;
   border-radius: 5px;
@@ -669,7 +677,7 @@ h2 {
   background: #ecf7fd;
 }
 .faq-filters button.active {
-  color: #097eb8;
+  color: var(--blue-text);
   background: #eaf7ff;
   border-color: #d3ebfa;
 }
@@ -707,16 +715,16 @@ h2 {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #7b9aaf;
+  color: var(--meta);
   flex-shrink: 0;
   transition: transform 0.2s;
 }
 .faq-open .faq-expand {
   transform: rotate(45deg);
-  color: var(--blue);
+  color: var(--blue-text);
 }
 .faq-open .faq-question-copy {
-  color: #0879ad;
+  color: var(--blue-text);
 }
 .faq-answer p {
   font-size: 12px;
@@ -728,14 +736,19 @@ h2 {
   align-items: center;
   gap: 6px;
   font-size: 10px;
-  color: #8396a3;
+  color: var(--meta);
   margin-top: 20px;
 }
 .faq-bottom-note a {
   display: inline-flex;
   gap: 5px;
   align-items: center;
-  color: #3f85aa;
+  color: var(--blue-text);
+  /* Sits inside a sentence, so it also carries an underline: colour alone is
+     not enough to separate it from the surrounding note (WCAG 1.4.1). */
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
 }
 .cta-section {
   display: flex;
@@ -777,7 +790,7 @@ h2 {
 .footer-agency {
   margin-top: 14px;
   font-size: 10px;
-  color: #4f7a95;
+  color: var(--muted);
 }
 .footer-col {
   display: flex;
@@ -794,11 +807,11 @@ h2 {
 .footer-col > a,
 .footer-col > span {
   font-size: 11px;
-  color: #6e8595;
+  color: var(--meta);
   line-height: 1.7;
 }
 .footer-col > a:hover {
-  color: var(--blue);
+  color: var(--blue-text);
 }
 .footer-contact > a {
   display: flex;
@@ -808,7 +821,7 @@ h2 {
 .footer-contact svg {
   margin-top: 3px;
   width: 13px;
-  color: #83a1b4;
+  color: var(--icon);
 }
 .footer-bottom {
   border-top: 1px solid var(--line);
@@ -822,7 +835,7 @@ h2 {
   gap: 8px 20px;
   padding-block: 18px;
   font-size: 9px;
-  color: #8a9ca8;
+  color: var(--meta);
 }
 @media (max-width: 1100px) {
   .container {
@@ -1503,7 +1516,7 @@ h2 {
   border-radius: 7px;
   padding: 13px 17px;
   font-size: 12px;
-  color: #486c82;
+  color: var(--muted);
   margin-bottom: 5px;
 }
 .learning-download:hover {
@@ -1546,10 +1559,10 @@ h2 {
   font-size: 13px;
   border-radius: 8px;
   background: #f5f8fb;
-  color: #879ba9;
+  color: var(--meta);
 }
 .is-selected .learning-step {
-  color: #0782bd;
+  color: var(--blue-text);
   background: #e1f2fd;
 }
 .learning-tab-copy {
@@ -1565,7 +1578,7 @@ h2 {
 }
 .learning-tab-description {
   font-size: 13px;
-  color: #637e90;
+  color: var(--muted);
   line-height: 1.6;
 }
 .learning-tab-duration {
@@ -1573,7 +1586,7 @@ h2 {
   align-items: center;
   gap: 8px;
   font-size: 11px;
-  color: #7b90a0;
+  color: var(--meta);
   margin-top: 4px;
 }
 .learning-tab-indicator {
@@ -1583,10 +1596,10 @@ h2 {
   width: 27px;
   height: 27px;
   flex-shrink: 0;
-  color: #90a7b7;
+  color: var(--icon);
 }
 .is-selected .learning-tab-indicator {
-  background: #0787c9;
+  background: var(--blue-dark);
   color: #fff;
   border-radius: 50%;
 }
@@ -1604,7 +1617,7 @@ h2 {
 }
 .learning-phase > span {
   font-size: 12px;
-  color: #7a91a1;
+  color: var(--meta);
   display: flex;
   gap: 8px;
 }
@@ -1635,7 +1648,7 @@ h2 {
 }
 .learning-module-number {
   font-size: 12px;
-  color: #80a1b7;
+  color: var(--meta);
   flex-shrink: 0;
   font-weight: 400;
 }
@@ -1653,7 +1666,7 @@ h2 {
 }
 .learning-module-preview {
   font-size: 12px;
-  color: #7a90a0;
+  color: var(--muted);
   line-height: 1.7;
   font-weight: 400;
 }
@@ -1661,7 +1674,7 @@ h2 {
   display: flex;
   align-items: center;
   gap: 14px;
-  color: #7190a5;
+  color: var(--meta);
   flex-shrink: 0;
 }
 .learning-disclosure > span {
@@ -1672,7 +1685,7 @@ h2 {
   transition: transform 0.2s;
 }
 .is-open .learning-disclosure {
-  color: #1682b8;
+  color: var(--blue-text);
 }
 .is-open .learning-disclosure svg {
   transform: rotate(45deg);
@@ -1696,10 +1709,10 @@ h2 {
   gap: 11px;
   font-size: 13px;
   line-height: 1.9;
-  color: #516d81;
+  color: var(--muted);
 }
 .learning-topics li svg {
-  color: #86b5cf;
+  color: var(--icon);
   margin-top: 5px;
   width: 13px;
 }
@@ -1715,7 +1728,7 @@ h2 {
   border-top: 1px solid var(--line);
   margin-top: 27px;
   padding-top: 22px;
-  color: #788f9f;
+  color: var(--meta);
 }
 .learning-total > span {
   display: flex;
@@ -1725,11 +1738,11 @@ h2 {
   line-height: 1.7;
 }
 .learning-total svg {
-  color: #88a6ba;
+  color: var(--icon);
 }
 .learning-total strong {
   font-weight: 500;
-  color: #496d83;
+  color: var(--muted);
 }
 @media (max-width: 1000px) {
   .learning-intro h2 {
@@ -1955,7 +1968,7 @@ h2 {
 }
 .course-tag {
   background: #fff;
-  color: #40607a;
+  color: var(--muted);
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.5px;
@@ -1996,7 +2009,7 @@ h2 {
 .course-card-description {
   font-size: 13px;
   line-height: 1.6;
-  color: #61788c;
+  color: var(--muted);
   margin-top: 7px;
   /* One line maximum. */
   white-space: nowrap;
@@ -2009,7 +2022,7 @@ h2 {
   gap: 8px 16px;
   margin-top: 16px;
   font-size: 12px;
-  color: #4d6b80;
+  color: var(--muted);
 }
 .course-meta-item {
   display: inline-flex;
@@ -2017,14 +2030,14 @@ h2 {
   gap: 6px;
 }
 .course-meta-item svg {
-  color: #5f9cbd;
+  color: var(--icon);
 }
 .course-meta-item strong {
   font-weight: 600;
   color: #1d3d54;
 }
 .course-meta-muted {
-  color: #7b90a0;
+  color: var(--meta);
 }
 .course-card-divider {
   height: 1px;
@@ -2083,7 +2096,7 @@ h2 {
 }
 .course-instructor-text > span {
   font-size: 11px;
-  color: #72889a;
+  color: var(--meta);
 }
 .course-card-action {
   display: flex;
