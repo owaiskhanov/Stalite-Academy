@@ -25,6 +25,7 @@ Deploy the generated `dist` directory as a static website.
 - Preserves the supplied Basics and Advanced structure, with three modules per phase, 12 lectures per phase, and 150 minutes per lecture.
 - Minimal white and sky-blue visual theme with a useful course overview, plain-language CTAs and responsive layouts.
 - Keyboard-accessible curriculum level tabs, expandable modules, categorised FAQ accordions and mobile navigation with Escape-to-close support.
+- All text passes WCAG AA contrast (4.5:1 or better) on every surface it sits on, including the pastel course-card gradients and the tinted panels. Text colours come from the tokens at the top of `src/styles.css` (`--muted`, `--meta`, `--blue-text`, `--blue-dark`, `--icon`); `--blue` is reserved for brand fills, where white text would fall under 4.5:1. Links that sit inside a sentence also carry an underline, so they are not distinguished by colour alone.
 - Seamless 13-platform logo marquee using locally hosted SVGs, a pause control, hover pause and reduced-motion support. Logo attribution is documented in `public/logos/README.md`.
 - Downloadable full curriculum in `public/stalite-academy-curriculum.txt`.
 - Enquiry CTAs open WhatsApp with a pre-filled course message. No enquiry data is stored by this page.
