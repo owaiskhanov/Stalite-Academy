@@ -6,3 +6,6 @@ test-results/
 .env.*
 !.env.example
 .venv/
+# Cached hero originals downloaded by scripts/compress-hero.mjs.
+# Only the compressed output in public/hero/ is committed.
+.hero-source/
