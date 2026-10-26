@@ -110,14 +110,19 @@ function Brand({ footer = false }) {
           stalite<span>.</span>
         </span>
       ) : (
-        <img
-          className="brand-image"
-          src="https://www.stalite.in/logo.png"
-          alt="Stalite Media"
-          width="132"
-          height="42"
-          onError={() => setFailed(true)}
-        />
+        /* Crop frame: in the footer this clips the transparent padding
+           baked into logo.png so the mark sits flush to the lockup edges;
+           the header bypasses the crop in CSS (see .brand-media / .nav). */
+        <span className="brand-media">
+          <img
+            className="brand-image"
+            src="https://www.stalite.in/logo.png"
+            alt="Stalite Media"
+            width="132"
+            height="42"
+            onError={() => setFailed(true)}
+          />
+        </span>
       )}
       <span className="brand-academy">ACADEMY</span>
     </a>

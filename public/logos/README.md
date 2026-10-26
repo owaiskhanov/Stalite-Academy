@@ -6,4 +6,4 @@
 
 All marks remain the property of their respective owners. Display does not imply partnership or endorsement. GitHub is shown as a development tool; no curriculum modules or lectures have been added.
 
-The Stalite brand image uses the user-supplied original at https://www.stalite.in/logo.png. It is not recreated or recoloured.
+The Stalite brand image uses the user-supplied original at https://www.stalite.in/logo.png. It is not recreated; in the header (which floats over the hero photo) CSS renders the full, uncropped mark white, while the footer shows the original colours with the PNG's transparent padding trimmed by a CSS crop frame. The source file itself is untouched.
