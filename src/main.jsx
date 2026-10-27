@@ -129,9 +129,30 @@ function Brand({ footer = false }) {
   );
 }
 
+/**
+ * Background treatments for the "Learn how it comes together" band. Each key
+ * maps to a `data-bg` rule in styles.css. Append ?bg=<key> to the URL to pin
+ * one, or ?bg=options to get a switcher and flip between them in place.
+ */
+const backgroundOptions = [
+  { key: "sky", label: "Sky wash" },
+  { key: "gradient", label: "Gradient" },
+  { key: "network", label: "Network" },
+  { key: "sky-soft", label: "Sky soft" },
+];
+
 function App() {
   const [menu, setMenu] = useState(false);
+  const [whyBg, setWhyBg] = useState("sky");
+  const [bgChooser, setBgChooser] = useState(false);
   const menuToggle = useRef(null);
+  useEffect(() => {
+    const choice = new URLSearchParams(window.location.search).get("bg");
+    if (!choice) return;
+    if (choice === "options") setBgChooser(true);
+    else if (backgroundOptions.some(({ key }) => key === choice))
+      setWhyBg(choice);
+  }, []);
   useEffect(() => {
     function dismiss(e) {
       if (e.key === "Escape" && menu) {
@@ -265,7 +286,30 @@ function App() {
         <ToolMarquee />
 
         <Curriculum />
-        <section className="why-section" id="why-stalite">
+        <section
+          className="why-section"
+          id="why-stalite"
+          data-bg={whyBg}
+        >
+          {bgChooser && (
+            <div
+              className="bg-chooser"
+              role="group"
+              aria-label="Background options"
+            >
+              <span className="bg-chooser-label">Background</span>
+              {backgroundOptions.map(({ key, label }) => (
+                <button
+                  key={key}
+                  type="button"
+                  aria-pressed={whyBg === key}
+                  onClick={() => setWhyBg(key)}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+          )}
           <div className="container section-space">
             <div className="section-intro">
               <div>
