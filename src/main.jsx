@@ -129,9 +129,64 @@ function Brand({ footer = false }) {
   );
 }
 
+/**
+ * Background treatments for the two sky bands. Each key maps to a `data-bg`
+ * rule in styles.css. Pin one with ?bg=<key> / ?curriculum=<key>, or add
+ * ?bg=options to get a switcher and flip between them in place.
+ */
+const whyOptions = [
+  { key: "sky", label: "Sky wash" },
+  { key: "gradient", label: "Gradient" },
+  { key: "network", label: "Network" },
+  { key: "sky-soft", label: "Sky soft" },
+];
+/* The curriculum band is much taller, so it gets a horizon treatment that keeps
+   the sky behind the heading and lets the white cards sit on plain white. */
+const curriculumOptions = [
+  { key: "sky", label: "Sky wash" },
+  { key: "horizon", label: "Horizon" },
+  { key: "gradient", label: "Gradient" },
+  { key: "sky-soft", label: "Sky soft" },
+];
+
+/** Preview-only switcher; rendered when the URL carries ?bg=options. */
+function BgChooser({ groups }) {
+  return (
+    <div className="bg-chooser" role="group" aria-label="Background options">
+      {groups.map(({ label, value, options, onChange }) => (
+        <div className="bg-chooser-row" key={label}>
+          <span className="bg-chooser-label">{label}</span>
+          {options.map((option) => (
+            <button
+              key={option.key}
+              type="button"
+              aria-pressed={value === option.key}
+              onClick={() => onChange(option.key)}
+            >
+              {option.label}
+            </button>
+          ))}
+        </div>
+      ))}
+    </div>
+  );
+}
+
 function App() {
   const [menu, setMenu] = useState(false);
+  const [whyBg, setWhyBg] = useState("sky");
+  const [curriculumBg, setCurriculumBg] = useState("sky");
+  const [bgChooser, setBgChooser] = useState(false);
   const menuToggle = useRef(null);
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const why = params.get("bg");
+    const curriculum = params.get("curriculum");
+    if (why === "options") setBgChooser(true);
+    else if (whyOptions.some(({ key }) => key === why)) setWhyBg(why);
+    if (curriculumOptions.some(({ key }) => key === curriculum))
+      setCurriculumBg(curriculum);
+  }, []);
   useEffect(() => {
     function dismiss(e) {
       if (e.key === "Escape" && menu) {
@@ -147,6 +202,24 @@ function App() {
       <a className="skip-link" href="#main-content">
         Skip to content
       </a>
+      {bgChooser && (
+        <BgChooser
+          groups={[
+            {
+              label: "Why band",
+              value: whyBg,
+              options: whyOptions,
+              onChange: setWhyBg,
+            },
+            {
+              label: "Curriculum",
+              value: curriculumBg,
+              options: curriculumOptions,
+              onChange: setCurriculumBg,
+            },
+          ]}
+        />
+      )}
       <header className="header">
         <div className="container nav">
           <Brand />
@@ -264,8 +337,8 @@ function App() {
         </section>
         <ToolMarquee />
 
-        <Curriculum />
-        <section className="why-section" id="why-stalite">
+        <Curriculum bg={curriculumBg} />
+        <section className="why-section" id="why-stalite" data-bg={whyBg}>
           <div className="container section-space">
             <div className="section-intro">
               <div>

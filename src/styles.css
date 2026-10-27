@@ -717,12 +717,141 @@ h2 {
   color: var(--blue-text);
 }
 
+/* ---------------------------------------------------------------------------
+   "Learn how it comes together" band.
+
+   The page opens on a full-bleed sky photograph, so this band answers it with
+   the same light: a soft sky layer under the copy, paper grain on top (exactly
+   like the hero), and a wash that keeps the three benefit columns readable.
+   Four treatments ship as `data-bg` variants so one can be chosen:
+
+     sky       — the generated sky wash photo, softened  (default)
+     gradient  — the same palette in pure CSS, no image request
+     network   — thin linked outlines hinting at the three modules
+     sky-soft  — the sky photo, dialled back almost to white
+
+   Preview them at /?bg=sky|gradient|network|sky-soft.
+--------------------------------------------------------------------------- */
 .why-section {
-  background: #f6fbfe;
-  border-block: 1px solid #eaf2f7;
+  position: relative;
+  isolation: isolate;
+  background-color: #f5fafe;
+}
+/* The photograph / gradient layer. Sits below the grain and the copy. */
+.why-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+/* Same grain tile and opacity as the hero, so both skies feel printed on the
+   same paper. */
+.why-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: url("/textures/paper-grain.svg") repeat;
+  opacity: 0.1;
 }
 .why-section .section-space {
+  position: relative;
+  z-index: 2;
   padding-block: 54px;
+}
+
+/* A — hero sky, softened. White fades at the top and bottom edges let the band
+   dissolve into the white sections above and below it, so it reads as the same
+   weather as the hero rather than as a pasted-on panel. Opacities are tuned so
+   the band stays a hair under 97% luminance: the ink copy keeps its full
+   contrast while the blue reads clearly at 1440px and up. */
+.why-section[data-bg="sky"]::after {
+  background-image:
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      rgba(255, 255, 255, 0.72) 13%,
+      rgba(255, 255, 255, 0.43) 48%,
+      rgba(255, 255, 255, 0.69) 85%,
+      #ffffff 100%
+    ),
+    url("/backgrounds/sky-wash.jpg");
+  background-position:
+    center,
+    center 34%;
+  background-size:
+    cover,
+    cover;
+}
+
+/* B — the same sky as a mesh gradient: the palette of the hero photo rebuilt
+   in CSS. No image request, no layout shift, and it scales to any height.
+   Order matters — the list paints top to bottom, so the white sun hotspot
+   sits over the two blue glows, which sit over the vertical fade. */
+.why-section[data-bg="gradient"]::after {
+  background-image:
+    radial-gradient(
+      75% 130% at 4% -18%,
+      #ffffff 0%,
+      #ffffff 62%,
+      rgba(255, 255, 255, 0) 100%
+    ),
+    radial-gradient(
+      62% 165% at 97% -28%,
+      rgba(7, 135, 201, 0.24) 0%,
+      rgba(7, 135, 201, 0) 68%
+    ),
+    radial-gradient(
+      72% 125% at 10% 124%,
+      rgba(7, 135, 201, 0.12) 0%,
+      rgba(7, 135, 201, 0) 72%
+    ),
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      rgba(255, 255, 255, 0.5) 14%,
+      rgba(255, 255, 255, 0.3) 50%,
+      rgba(255, 255, 255, 0.56) 86%,
+      #ffffff 100%
+    ),
+    linear-gradient(160deg, #f4faff 0%, #e6f4fd 52%, #d6ebf8 100%);
+}
+
+/* C — three linked outlines, a quiet nod to social, search and build. */
+.why-section[data-bg="network"]::after {
+  background-image:
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      rgba(255, 255, 255, 0.73) 14%,
+      rgba(255, 255, 255, 0.47) 50%,
+      rgba(255, 255, 255, 0.73) 86%,
+      #ffffff 100%
+    ),
+    url("/backgrounds/network-wash.jpg");
+}
+
+/* D — the sky photo dialled right back: texture you only notice after the copy
+   has been read. */
+.why-section[data-bg="sky-soft"]::after {
+  background-image:
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      rgba(255, 255, 255, 0.88) 16%,
+      rgba(255, 255, 255, 0.77) 50%,
+      rgba(255, 255, 255, 0.88) 86%,
+      #ffffff 100%
+    ),
+    url("/backgrounds/sky-wash.jpg");
+  background-position:
+    center,
+    center 42%;
 }
 .benefit-grid {
   display: grid;
@@ -752,6 +881,56 @@ h2 {
 .why-section .text-link {
   font-size: 11px;
   color: var(--muted);
+}
+/* Switcher shown only for ?bg=options — used to compare treatments while
+   choosing, never part of the shipped page. */
+.bg-chooser {
+  position: fixed;
+  z-index: 20;
+  left: 50%;
+  bottom: 20px;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 2px;
+  max-width: calc(100vw - 32px);
+  padding: 6px 8px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 8px 26px rgba(23, 46, 64, 0.14);
+  backdrop-filter: blur(8px);
+}
+.bg-chooser-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.bg-chooser-label {
+  font-size: 9px;
+  min-width: 74px;
+  font-weight: 600;
+  letter-spacing: 1.1px;
+  text-transform: uppercase;
+  color: var(--meta);
+  padding-inline: 8px 4px;
+}
+.bg-chooser button {
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: transparent;
+  font-size: 11px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.bg-chooser button:hover {
+  background: var(--pale);
+  color: var(--ink);
+}
+.bg-chooser button[aria-pressed="true"] {
+  background: var(--blue-dark);
+  color: #fff;
 }
 .faq-section {
   display: grid;
@@ -1452,6 +1631,33 @@ h2 {
   .why-section .section-space {
     padding-block: 39px;
   }
+  /* Portrait viewport: the band is taller and the photo crops to a narrow
+     slice, so let a little more sky through and keep the copy on the palest
+     part of it. */
+  .why-section[data-bg="sky"]::after {
+    background-image:
+      linear-gradient(
+        180deg,
+        #ffffff 0%,
+        rgba(255, 255, 255, 0.66) 12%,
+        rgba(255, 255, 255, 0.38) 45%,
+        rgba(255, 255, 255, 0.62) 88%,
+        #ffffff 100%
+      ),
+      url("/backgrounds/sky-wash.jpg");
+    background-position:
+      center,
+      center 20%;
+  }
+  .why-section[data-bg="sky-soft"]::after {
+    background-position:
+      center,
+      center 26%;
+  }
+  .why-section[data-bg="network"]::after {
+    background-position: center;
+    background-size: auto, 190% auto;
+  }
   .why-section .section-intro .text-link {
     margin-top: 16px;
     font-size: 10px;
@@ -1641,9 +1847,136 @@ h2 {
   }
 }
 
-/* An expanded, full-width learning roadmap. */
-.curriculum-section {
+/* ---------------------------------------------------------------------------
+   "One course. Two levels." band.
+
+   Same sky language as the hero and the why band, but this section is much
+   taller and filled with white cards, so the treatments are tuned to keep the
+   card surfaces crisp. Four ship as `data-bg` variants:
+
+     sky       — the hero sky photograph, softened            (default)
+     horizon   — sky behind the heading only, cards on white
+     gradient  — the same palette in pure CSS, no image request
+     sky-soft  — the sky photo dialled back almost to white
+
+   Preview them at /?bg=options, or pin one with /?curriculum=<key>.
+--------------------------------------------------------------------------- */
+.curriculum-band {
+  position: relative;
+  isolation: isolate;
   padding-block: 94px 88px;
+  background-color: #fff;
+}
+.curriculum-band::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+/* The hero's grain tile, so every sky on the page is printed on the same paper. */
+.curriculum-band::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: url("/textures/paper-grain.svg") repeat;
+  opacity: 0.1;
+}
+.curriculum-band > .container {
+  position: relative;
+  z-index: 2;
+}
+
+/* A — the hero sky across the whole band. The mid-band white is a little
+   stronger than on the why band so the white cards still read as cards. */
+.curriculum-band[data-bg="sky"]::after {
+  background-image:
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      rgba(255, 255, 255, 0.66) 8%,
+      rgba(255, 255, 255, 0.5) 34%,
+      rgba(255, 255, 255, 0.56) 70%,
+      rgba(255, 255, 255, 0.86) 93%,
+      #ffffff 100%
+    ),
+    url("/backgrounds/sky-wash.jpg");
+  background-position:
+    center,
+    center 28%;
+}
+
+/* B — the sky sits behind the heading only and dissolves into white before the
+   level cards start, so the dense curriculum sits on plain paper. */
+.curriculum-band[data-bg="horizon"]::after {
+  background-image:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.16) 0%,
+      rgba(255, 255, 255, 0.42) 22%,
+      rgba(255, 255, 255, 0.8) 46%,
+      #ffffff 66%,
+      #ffffff 100%
+    ),
+    url("/backgrounds/sky-wash.jpg");
+  background-position:
+    center,
+    center 12%;
+  background-size:
+    cover,
+    100% 760px;
+}
+
+/* C — the palette of the hero photo rebuilt as a CSS mesh gradient. */
+.curriculum-band[data-bg="gradient"]::after {
+  background-image:
+    radial-gradient(
+      70% 34% at 4% 0%,
+      #ffffff 0%,
+      #ffffff 58%,
+      rgba(255, 255, 255, 0) 100%
+    ),
+    radial-gradient(
+      58% 46% at 98% -6%,
+      rgba(7, 135, 201, 0.24) 0%,
+      rgba(7, 135, 201, 0) 68%
+    ),
+    radial-gradient(
+      66% 36% at 8% 106%,
+      rgba(7, 135, 201, 0.12) 0%,
+      rgba(7, 135, 201, 0) 72%
+    ),
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      rgba(255, 255, 255, 0.46) 12%,
+      rgba(255, 255, 255, 0.34) 50%,
+      rgba(255, 255, 255, 0.62) 88%,
+      #ffffff 100%
+    ),
+    linear-gradient(164deg, #f4faff 0%, #e8f5fd 54%, #dbedf9 100%);
+}
+
+/* D — the sky photo dialled right back: the faintest of weather. */
+.curriculum-band[data-bg="sky-soft"]::after {
+  background-image:
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      rgba(255, 255, 255, 0.9) 12%,
+      rgba(255, 255, 255, 0.82) 50%,
+      rgba(255, 255, 255, 0.9) 88%,
+      #ffffff 100%
+    ),
+    url("/backgrounds/sky-wash.jpg");
+  background-position:
+    center,
+    center 34%;
 }
 .learning-intro {
   display: flex;
@@ -1940,8 +2273,31 @@ h2 {
   }
 }
 @media (max-width: 700px) {
-  .curriculum-section {
+  .curriculum-band {
     padding-block: 58px;
+  }
+  /* Portrait viewport: the band is taller and the photo crops to a narrow
+     slice, so lift the horizon and let a little more sky through. */
+  .curriculum-band[data-bg="sky"]::after {
+    background-image:
+      linear-gradient(
+        180deg,
+        #ffffff 0%,
+        rgba(255, 255, 255, 0.62) 7%,
+        rgba(255, 255, 255, 0.44) 32%,
+        rgba(255, 255, 255, 0.52) 72%,
+        rgba(255, 255, 255, 0.84) 94%,
+        #ffffff 100%
+      ),
+      url("/backgrounds/sky-wash.jpg");
+    background-position:
+      center,
+      center 16%;
+  }
+  .curriculum-band[data-bg="horizon"]::after {
+    background-size:
+      cover,
+      100% 560px;
   }
   .learning-intro {
     display: block;
