@@ -1,6 +1,6 @@
 # Stalite Academy
 
-A responsive React landing page for Stalite Media's 3-month Digital Marketing and AI course.
+A responsive React landing page for Stalite Media's Digital Marketing and AI course.
 
 ## Development
 
@@ -22,12 +22,12 @@ Deploy the generated `dist` directory as a static website.
 
 ## Content and interactions
 
-- Preserves the supplied Basics and Advanced structure, with three modules per phase, 12 lectures per phase, and 150 minutes per lecture.
+- Presents the Basics curriculum, with three modules, 12 lectures and 150 minutes per lecture.
 - Minimal white and sky-blue visual theme with a useful course overview, plain-language CTAs and responsive layouts.
-- Keyboard-accessible curriculum level tabs, expandable modules, categorised FAQ accordions and mobile navigation with Escape-to-close support.
+- Keyboard-accessible expandable curriculum modules, categorised FAQ accordions and mobile navigation with Escape-to-close support.
 - All text passes WCAG AA contrast (4.5:1 or better) on every surface it sits on, including the pastel course-card gradients and the tinted panels. Text colours come from the tokens at the top of `src/styles.css` (`--muted`, `--meta`, `--blue-text`, `--blue-dark`, `--icon`); `--blue` is reserved for brand fills, where white text would fall under 4.5:1. Links that sit inside a sentence also carry an underline, so they are not distinguished by colour alone.
-- The "Learn how it comes together" and "One course. Two levels." bands echo the hero: a soft sky layer under the copy, the same `paper-grain.svg` tile and 0.1 opacity on top, and white fades at the top and bottom edges so the band dissolves into the sections either side. Four treatments are built (see below) and one is picked per page.
-- Seamless 13-platform logo marquee using locally hosted SVGs, a pause control, hover pause and reduced-motion support. Logo attribution is documented in `public/logos/README.md`.
+- The curriculum band echoes the hero with a soft sky layer, the `paper-grain.svg` tile and white fades. Four treatments are available (see below).
+- Seamless platform logo marquee using locally hosted SVGs, a pause control, hover pause and reduced-motion support. Logo attribution is documented in `public/logos/README.md`.
 - Downloadable full curriculum in `public/stalite-academy-curriculum.txt`.
 - Enquiry CTAs open WhatsApp with a pre-filled course message. No enquiry data is stored by this page.
 - Phone, email and office address sourced from https://www.stalite.in/contact on 25 October 2026.
@@ -38,20 +38,9 @@ Deploy the generated `dist` directory as a static website.
 
 ## Sky backgrounds
 
-Two bands pick up the hero's weather: the "Learn how it comes together" band
-(`.why-section`, `src/main.jsx`) and the "One course. Two levels." band
-(`.curriculum-band`, `src/Curriculum.jsx`). Both are full-bleed sections whose
-`data-bg` attribute selects a treatment defined in `src/styles.css`, and both
-layer the hero's `paper-grain.svg` tile at the same `0.1` opacity on top.
-
-**`.why-section` — `?bg=`**
-
-| `data-bg` | Treatment | Assets |
-| --- | --- | --- |
-| `sky` | The hero sky photograph, softened. Default. | `public/backgrounds/sky-wash.jpg` |
-| `gradient` | The same palette rebuilt as a CSS mesh gradient — no image request, scales to any height. | none |
-| `network` | Faint linked outlines on paper white, a nod to the three connected modules. | `public/backgrounds/network-wash.jpg` |
-| `sky-soft` | The sky photograph dialled back almost to white. | `public/backgrounds/sky-wash.jpg` |
+The curriculum band (`.curriculum-band`, `src/Curriculum.jsx`) picks up the
+hero's sky treatment. Its `data-bg` attribute selects a treatment defined in
+`src/styles.css`, with the `paper-grain.svg` tile layered on top.
 
 **`.curriculum-band` — `?curriculum=`**
 
@@ -62,16 +51,9 @@ layer the hero's `paper-grain.svg` tile at the same `0.1` opacity on top.
 | `gradient` | The same palette as a CSS mesh gradient. No image request. | none |
 | `sky-soft` | The sky photograph dialled almost to white. | `public/backgrounds/sky-wash.jpg` |
 
-To change a shipped default, edit the matching `useState("sky")` value in
-`src/main.jsx`. To compare treatments without touching code, append a query
-string:
-
-- `?bg=sky` / `?curriculum=horizon` (etc.) pin one treatment per band.
-- `?bg=options` shows a small two-row switcher so you can flip both bands in
-  place. It only renders for that query string and never ships on the live page.
-
-Both background images are 1536×864 JPEGs (132 KB and 80 KB) and sit below the
-fold, so they never block first paint.
+To change the default, edit the `curriculumBg` initial state in `src/main.jsx`.
+Use `?curriculum=horizon` (or another key above) to pin a treatment, or
+`?bg=options` to show a preview-only background switcher.
 
 ## Deployment context
 
