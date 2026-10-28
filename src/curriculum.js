@@ -6,7 +6,6 @@ export const curriculum = {
       name: "Social Media Marketing",
       icon: Megaphone,
       topics: [
-        "Google Business Profile: setup, optimisation, citations, posts, reviews",
         "Video marketing and YouTube optimisation",
         "Mobile marketing and SMS marketing",
         "Social media optimisation: profiles, content calendar, engagement, analytics",
@@ -24,47 +23,90 @@ export const curriculum = {
       name: "Performance Marketing and Search",
       icon: BarChart3,
       topics: [
-        "Meta Ads: account creation, connecting WhatsApp and Instagram, types of ads, creating campaigns",
-        "Google Ads: account creation and campaigns",
-        "SEO: what it is, how it pulls data, why it matters in 2026 and beyond, keyword research",
+        "Google Business Profile: setup, optimisation, citations, posts, reviews",
+        "Why running ads will not be taken over by AI anytime soon",
+        {
+          title: "Meta Ads",
+          subtopics: [
+            "Account creation",
+            "Connecting WhatsApp and Instagram",
+            "Types of ads",
+            "Campaign objectives and audience basics",
+            "Budgets and scheduling",
+            "Creating campaigns",
+            "Understanding basic campaign metrics",
+          ],
+        },
+        {
+          title: "Google Ads",
+          subtopics: [
+            "Account creation",
+            "Google Ads campaign types",
+            "Campaign goals and keyword basics",
+            "Budgets and bidding fundamentals",
+            "Creating campaigns and writing ad copy",
+            "Understanding basic campaign metrics",
+          ],
+        },
+        {
+          title: "SEO/AISO",
+          subtopics: [
+            "What SEO is and how it pulls data",
+            "Why SEO matters in 2026 and beyond",
+            "Keyword research and search intent",
+            "On-page SEO: titles, descriptions and content",
+            "Introduction to AISO and AI-powered search",
+            "Creating helpful content for people and search engines",
+            "Measuring search visibility and performance",
+          ],
+        },
       ],
     },
     {
       name: "AI Powered Website and Web App Development",
       icon: Code2,
       topics: [
-        "Web fundamentals and prompting AI tools",
-        "Building websites with Antigravity",
-      ],
-    },
-  ],
-  advanced: [
-    {
-      name: "Social Media Marketing",
-      icon: Megaphone,
-      topics: [],
-      note: "No content yet.",
-    },
-    {
-      name: "Performance Marketing and Search",
-      icon: BarChart3,
-      topics: [
-        "Meta Ads: campaign types, ad sets (audience and demographics), ad formats (carousel, multi, static, video)",
-        "Google Ads structure and campaign setup",
-        "Applying keyword research to a website (live demo), blogs and conversational blogs",
-        "AISO and why it matters in 2026 and beyond",
-        "Google Search Console connection and walkthrough",
-        "Q&A and problem solving",
-      ],
-    },
-    {
-      name: "AI Powered Website and Web App Development",
-      icon: Code2,
-      topics: [
-        "Front end and responsive design with prompting",
-        "Back end: Google Cloud, Firebase, OAuth, storage",
-        "Databases: Supabase and Firebase",
-        "Dashboards and data visualisation",
+        {
+          title: "Website Fundamentals",
+          subtopics: [
+            "How websites, browsers and hosting work",
+            "Domains, web pages and responsive design",
+            "Introduction to prompting AI tools",
+          ],
+        },
+        {
+          title: "Prompt Engineering for Web Development",
+          subtopics: [
+            "Writing clear prompts for layouts, features and functionality",
+            "Providing context and examples to guide AI tools",
+            "Iterating on prompts to improve results",
+          ],
+        },
+        {
+          title: "Building Websites with Antigravity or AI Agents",
+          subtopics: [
+            "Using prompts to build a website with Antigravity or AI agents",
+            "Planning pages, layouts and content with AI",
+            "Refining design and functionality through follow-up prompts",
+            "Reviewing and testing the website across devices",
+            "Preparing the website for publishing",
+          ],
+        },
+        {
+          title: "Deployment and Hosting",
+          subtopics: [
+            "Using GitHub to manage and publish website code",
+            "Connecting a GitHub repository to Render or Vercel for hosting",
+            "Deploying updates and checking the live website",
+          ],
+        },
+        {
+          title: "Databases",
+          subtopics: [
+            "What databases are and how they store information",
+            "Connecting a website to a database",
+          ],
+        },
       ],
     },
   ],

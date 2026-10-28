@@ -434,21 +434,15 @@ h2 {
   text-shadow: 0 1px 26px rgba(255, 255, 255, 0.92);
 }
 .hero h1 {
-  /* One line, all ink. Scales with the viewport so it never has to wrap. */
-  font-size: clamp(24px, 4.15vw, 56px);
+  /* Keep the full tagline on one line on desktop. */
+  font-size: clamp(24px, 3.6vw, 48px);
   font-weight: 500;
   line-height: 1.2;
   letter-spacing: -0.045em;
   color: var(--ink);
+  max-width: 100%;
   white-space: nowrap;
   margin-top: 18px;
-}
-.hero h1 .serif {
-  display: inline-block;
-  white-space: nowrap;
-  font-size: 0.77em;
-  letter-spacing: -0.04em;
-  line-height: 1.7;
 }
 .hero-actions {
   /* The hero CTA is mobile-only; see the max-width: 600px block. */
@@ -1848,7 +1842,7 @@ h2 {
 }
 
 /* ---------------------------------------------------------------------------
-   "One course. Two levels." band.
+   curriculum band.
 
    Same sky language as the hero and the why band, but this section is much
    taller and filled with white cards, so the treatments are tuned to keep the
@@ -2208,6 +2202,20 @@ h2 {
   color: var(--icon);
   margin-top: 5px;
   width: 13px;
+}
+.learning-topic-group strong {
+  color: var(--ink);
+  font-weight: 700;
+}
+.learning-topics .learning-subtopics {
+  display: block;
+  list-style: disc;
+  margin: 4px 0 0;
+  padding-left: 18px;
+}
+.learning-topics .learning-subtopics li {
+  display: list-item;
+  padding-left: 2px;
 }
 .learning-pending {
   font-size: 14px;

@@ -7,35 +7,28 @@ const questions = [
     category: "Course & schedule",
     question: "How does the weekend schedule work?",
     answer:
-      "Classes run on Saturdays and Sundays over 3 months. Each lecture is 2 hours 30 minutes (150 minutes), with 24 lectures in total. That adds up to 60 learning hours. Contact the team for the next batch dates and exact class timings.",
-  },
-  {
-    id: "levels",
-    category: "Course & schedule",
-    question: "What is the difference between Basics and Advanced?",
-    answer:
-      "Each phase has 12 lectures and 1,800 minutes of learning across the same three modules: Social Media Marketing, Performance Marketing and Search, and AI Powered Website and Web App Development. Basics establishes the foundations; Advanced goes deeper into campaigns, search and development. Advanced Social Media Marketing has no content yet.",
+      "Classes run on Saturdays and Sundays. The Basics curriculum lists 12 lectures of 2 hours 30 minutes each, for 30 learning hours. Contact the team to confirm the current schedule, batch dates and exact timings.",
   },
   {
     id: "experience",
     category: "Learning",
     question: "I’m new to digital marketing. Where will I start?",
     answer:
-      "The Basics phase starts with foundational topics: social media profiles, ad account creation, keyword research, web fundamentals and prompting AI tools. If you’re unsure whether the course matches your experience, talk to the team before enrolling.",
+      "The Basics curriculum starts with foundational topics: social media profiles, ad account creation, keyword research, web fundamentals and prompting AI tools. If you’re unsure whether the course matches your experience, talk to the team before enrolling.",
   },
   {
     id: "platforms",
     category: "Learning",
     question: "Which marketing platforms will I learn about?",
     answer:
-      "The curriculum covers Google Business Profile, YouTube, Facebook, Instagram, LinkedIn, X, email, SMS and affiliate marketing. You’ll also learn Meta Ads, Google Ads, SEO, AISO and Google Search Console. The full curriculum lists exactly what is included in each phase.",
+      "The curriculum covers Google Business Profile, YouTube, Facebook, Instagram, LinkedIn, X, email, SMS and affiliate marketing. You’ll also learn Meta Ads, Google Ads, SEO and AISO. The full curriculum lists exactly what is included.",
   },
   {
     id: "ai",
     category: "Learning",
     question: "Will I actually learn to build with AI?",
     answer:
-      "Yes. Basics includes web fundamentals, prompting AI tools and building websites with Antigravity. Advanced covers responsive front ends, Google Cloud, Firebase, OAuth, storage, Supabase, dashboards and data visualisation.",
+      "Yes. Basics includes website fundamentals, prompt engineering, building websites with Antigravity or AI agents, databases, deployment and hosting.",
   },
   {
     id: "fees",

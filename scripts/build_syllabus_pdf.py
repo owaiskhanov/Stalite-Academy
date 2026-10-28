@@ -22,6 +22,7 @@ from reportlab.platypus import (
     BaseDocTemplate,
     Frame,
     HRFlowable,
+    KeepTogether,
     PageTemplate,
     Paragraph,
     Spacer,
@@ -82,7 +83,10 @@ def parse_syllabus(text):
             current_section["modules"].append(current_module)
             continue
         if line.startswith("- ") and current_module is not None:
-            current_module["topics"].append(line[2:].strip())
+            if raw.startswith("  ") and current_module["topics"]:
+                current_module["topics"][-1]["subtopics"].append(line[2:].strip())
+            else:
+                current_module["topics"].append({"text": line[2:].strip(), "subtopics": []})
             continue
         if mode == "header":
             header.append(line)
@@ -143,11 +147,21 @@ styles = {
         "topic",
         fontName="Helvetica",
         fontSize=9.6,
-        leading=14.5,
+        leading=13,
         textColor=MUTED,
         leftIndent=6 * mm,
         bulletIndent=1 * mm,
-        spaceAfter=1.4 * mm,
+        spaceAfter=0.6 * mm,
+    ),
+    "subtopic": ParagraphStyle(
+        "subtopic",
+        fontName="Helvetica",
+        fontSize=9.6,
+        leading=13,
+        textColor=MUTED,
+        leftIndent=12 * mm,
+        bulletIndent=7 * mm,
+        spaceAfter=0.6 * mm,
     ),
     "note": ParagraphStyle(
         "note",
@@ -237,15 +251,15 @@ def build(header, sections, contact):
     story.append(Spacer(1, 7 * mm))
     story.append(Paragraph("Digital Marketing &amp; AI", styles["title"]))
     story.append(
-        Paragraph("Full course syllabus — the 3-month weekend programme by Stalite Media.", styles["subtitle"])
+        Paragraph("Basics curriculum — a weekend programme by Stalite Media.", styles["subtitle"])
     )
     story.append(Spacer(1, 6 * mm))
 
     facts = [line.split(":", 1) for line in header if ":" in line]
     stats = [
-        ("3 months", "weekend course"),
-        ("24", "lectures"),
-        ("60 hrs", "of learning"),
+        ("3", "focused modules"),
+        ("12", "lectures"),
+        ("30 hrs", "of learning"),
         ("Sat & Sun", "2 h 30 m each"),
     ]
     for line in header:
@@ -288,9 +302,13 @@ def build(header, sections, contact):
             if module["note"]:
                 story.append(Paragraph(module["note"], styles["note"]))
             for topic in module["topics"]:
-                story.append(
-                    Paragraph(topic, styles["topic"], bulletText="\u2022")
-                )
+                text = topic["text"]
+                if topic["subtopics"]:
+                    text = f"<b>{text}</b>"
+                paragraphs = [Paragraph(text, styles["topic"], bulletText="\u2022")]
+                for subtopic in topic["subtopics"]:
+                    paragraphs.append(Paragraph(subtopic, styles["subtopic"], bulletText="\u2022"))
+                story.append(KeepTogether(paragraphs) if topic["subtopics"] else paragraphs[0])
 
     story.append(Spacer(1, 9 * mm))
     story.append(HRFlowable(width="100%", thickness=0.7, color=LINE))

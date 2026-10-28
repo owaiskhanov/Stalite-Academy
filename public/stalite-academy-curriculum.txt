@@ -1,13 +1,12 @@
 STALITE ACADEMY
-A 3-month digital marketing and AI course by Stalite Media
+A digital marketing and AI course by Stalite Media
 Classes: Saturdays and Sundays
 Each lecture: 2 hours 30 minutes (150 minutes)
-Total: 24 lectures, 3,600 minutes (60 hours)
+Basics: 12 lectures, 1,800 minutes (30 hours)
 
 BASICS (12 lectures, 1,800 min)
 
 1. Social Media Marketing
-- Google Business Profile: setup, optimisation, citations, posts, reviews
 - Video marketing and YouTube optimisation
 - Mobile marketing and SMS marketing
 - Social media optimisation: profiles, content calendar, engagement, analytics
@@ -21,31 +20,54 @@ BASICS (12 lectures, 1,800 min)
 - Freelancing, agency pricing, and certification prep
 
 2. Performance Marketing and Search
-- Meta Ads: account creation, connecting WhatsApp and Instagram, types of ads, creating campaigns
-- Google Ads: account creation and campaigns
-- SEO: what it is, how it pulls data, why it matters in 2026 and beyond, keyword research
+- Google Business Profile: setup, optimisation, citations, posts, reviews
+- Why running ads will not be taken over by AI anytime soon
+- Meta Ads
+  - Account creation
+  - Connecting WhatsApp and Instagram
+  - Types of ads
+  - Campaign objectives and audience basics
+  - Budgets and scheduling
+  - Creating campaigns
+  - Understanding basic campaign metrics
+- Google Ads
+  - Account creation
+  - Google Ads campaign types
+  - Campaign goals and keyword basics
+  - Budgets and bidding fundamentals
+  - Creating campaigns and writing ad copy
+  - Understanding basic campaign metrics
+- SEO/AISO
+  - What SEO is and how it pulls data
+  - Why SEO matters in 2026 and beyond
+  - Keyword research and search intent
+  - On-page SEO: titles, descriptions and content
+  - Introduction to AISO and AI-powered search
+  - Creating helpful content for people and search engines
+  - Measuring search visibility and performance
 
 3. AI Powered Website and Web App Development
-- Web fundamentals and prompting AI tools
-- Building websites with Antigravity
-
-ADVANCED (12 lectures, 1,800 min)
-
-1. Social Media Marketing: no content yet
-
-2. Performance Marketing and Search
-- Meta Ads: campaign types, ad sets (audience and demographics), ad formats (carousel, multi, static, video)
-- Google Ads structure and campaign setup
-- Applying keyword research to a website (live demo), blogs and conversational blogs
-- AISO and why it matters in 2026 and beyond
-- Google Search Console connection and walkthrough
-- Q&A and problem solving
-
-3. AI Powered Website and Web App Development
-- Front end and responsive design with prompting
-- Back end: Google Cloud, Firebase, OAuth, storage
-- Databases: Supabase and Firebase
-- Dashboards and data visualisation
+- Website Fundamentals
+  - How websites, browsers and hosting work
+  - Domains, web pages and responsive design
+  - Introduction to prompting AI tools
+- Prompt Engineering for Web Development
+  - Writing clear prompts for layouts, features and functionality
+  - Providing context and examples to guide AI tools
+  - Iterating on prompts to improve results
+- Building Websites with Antigravity or AI Agents
+  - Using prompts to build a website with Antigravity or AI agents
+  - Planning pages, layouts and content with AI
+  - Refining design and functionality through follow-up prompts
+  - Reviewing and testing the website across devices
+  - Preparing the website for publishing
+- Deployment and Hosting
+  - Using GitHub to manage and publish website code
+  - Connecting a GitHub repository to Render or Vercel for hosting
+  - Deploying updates and checking the live website
+- Databases
+  - What databases are and how they store information
+  - Connecting a website to a database
 
 CONTACT STALITE MEDIA
 Phone / WhatsApp: +91 98606 85430

@@ -7,9 +7,6 @@ import {
   X,
   CalendarDays,
   Clock3,
-  Megaphone,
-  BarChart3,
-  Code2,
   MapPin,
   Mail,
   Phone,
@@ -34,16 +31,10 @@ const whatsappForCourse = (title) =>
   encodeURIComponent(
     `Hi Stalite Media, I'd like to discuss growing my brand. I'm interested in the ${title} course.`,
   );
-const subjects = [
-  [Megaphone, "Social media", "Create content. Build a presence."],
-  [BarChart3, "Performance & search", "Understand ads, SEO and AISO."],
-  [Code2, "AI-powered development", "Build websites and web apps."],
-];
-
 /**
- * The three modules of the 3-month programme, shaped for CourseCard.
- * Titles and descriptions mirror src/curriculum.js. Ratings and durations
- * are sample figures — swap them for real data before launch.
+ * The three modules of the programme, shaped for CourseCard.
+ * Titles and descriptions mirror src/curriculum.js. Ratings are sample
+ * figures — swap them for real data before launch.
  */
 const courses = [
   {
@@ -54,7 +45,6 @@ const courses = [
     imageAlt: "3D illustration of a megaphone with floating social icons",
     tags: ["Popular", "Online"],
     rating: 4.8,
-    duration: "20h",
     certificate: true,
     instructor: "Shaad Karmally",
     instructorRole: "Instructor",
@@ -70,7 +60,6 @@ const courses = [
     imageAlt: "3D illustration of a bar chart, magnifying glass and target",
     tags: ["Online"],
     rating: 4.9,
-    duration: "20h",
     certificate: true,
     instructor: "Owais Khan",
     instructorRole: "Instructor",
@@ -86,7 +75,6 @@ const courses = [
     imageAlt: "3D illustration of a robot head beside code windows",
     tags: ["New", "Online"],
     rating: 4.8,
-    duration: "20h",
     certificate: true,
     instructor: "Owais Khan",
     instructorRole: "Instructor",
@@ -129,17 +117,7 @@ function Brand({ footer = false }) {
   );
 }
 
-/**
- * Background treatments for the two sky bands. Each key maps to a `data-bg`
- * rule in styles.css. Pin one with ?bg=<key> / ?curriculum=<key>, or add
- * ?bg=options to get a switcher and flip between them in place.
- */
-const whyOptions = [
-  { key: "sky", label: "Sky wash" },
-  { key: "gradient", label: "Gradient" },
-  { key: "network", label: "Network" },
-  { key: "sky-soft", label: "Sky soft" },
-];
+/** Curriculum background treatments, selectable with ?curriculum=<key>. */
 /* The curriculum band is much taller, so it gets a horizon treatment that keeps
    the sky behind the heading and lets the white cards sit on plain white. */
 const curriculumOptions = [
@@ -174,16 +152,13 @@ function BgChooser({ groups }) {
 
 function App() {
   const [menu, setMenu] = useState(false);
-  const [whyBg, setWhyBg] = useState("sky");
   const [curriculumBg, setCurriculumBg] = useState("sky");
   const [bgChooser, setBgChooser] = useState(false);
   const menuToggle = useRef(null);
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    const why = params.get("bg");
     const curriculum = params.get("curriculum");
-    if (why === "options") setBgChooser(true);
-    else if (whyOptions.some(({ key }) => key === why)) setWhyBg(why);
+    if (params.get("bg") === "options") setBgChooser(true);
     if (curriculumOptions.some(({ key }) => key === curriculum))
       setCurriculumBg(curriculum);
   }, []);
@@ -205,12 +180,6 @@ function App() {
       {bgChooser && (
         <BgChooser
           groups={[
-            {
-              label: "Why band",
-              value: whyBg,
-              options: whyOptions,
-              onChange: setWhyBg,
-            },
             {
               label: "Curriculum",
               value: curriculumBg,
@@ -271,7 +240,7 @@ function App() {
                 MEDIA
               </div>
               <h1 id="course-heading">
-                Digital marketing. AI, <span className="serif">made simple.</span>
+                Build with AI and learn digital marketing.
               </h1>
               {/* Hidden on desktop; mobile centres the hero and shows this CTA. */}
               <div className="hero-actions">
@@ -293,9 +262,9 @@ function App() {
             <div className="program-duration">
               <div className="program-card-top">
                 <span className="eyebrow">YOUR COURSE AT A GLANCE</span>
-                <span className="program-tag">Basics → Advanced</span>
+                <span className="program-tag">Basics</span>
               </div>
-              <strong>3 months</strong>
+              <strong>Basics</strong>
               <span>Built around your weekends.</span>
             </div>
             <div className="program-facts">
@@ -308,11 +277,11 @@ function App() {
             </div>
             <div className="program-totals">
               <div>
-                <strong>24</strong>
+                <strong>12</strong>
                 <span>lectures</span>
               </div>
               <div>
-                <strong>60</strong>
+                <strong>30</strong>
                 <span>learning hours</span>
               </div>
               <div>
@@ -338,39 +307,6 @@ function App() {
         <ToolMarquee />
 
         <Curriculum bg={curriculumBg} />
-        <section className="why-section" id="why-stalite" data-bg={whyBg}>
-          <div className="container section-space">
-            <div className="section-intro">
-              <div>
-                <div className="eyebrow">BUILT BY STALITE MEDIA</div>
-                <h2>
-                  Learn how it <span className="serif">comes together.</span>
-                </h2>
-                <p>
-                  Social media, paid campaigns and development. Connected in one
-                  course.
-                </p>
-              </div>
-              <a
-                className="text-link"
-                href="https://www.stalite.in/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Meet the agency <ArrowUpRight size={16} />
-              </a>
-            </div>
-            <div className="benefit-grid">
-              {subjects.map(([Icon, title, text]) => (
-                <article className="benefit" key={title}>
-                  <Icon size={23} strokeWidth={1.6} />
-                  <h3>{title}</h3>
-                  <p>{text}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
         <FAQs whatsapp={whatsapp} />
         <section className="cta-section container">
           <div>
@@ -395,7 +331,7 @@ function App() {
           <div className="footer-brand">
             <Brand footer />
             <p>
-              Digital marketing & AI, by Stalite Media. A 3-month weekend
+              Digital marketing & AI, by Stalite Media. A weekend
               course built by the agency that runs the campaigns.
             </p>
             <a
@@ -416,9 +352,9 @@ function App() {
           </nav>
           <div className="footer-col">
             <span className="eyebrow">THE PROGRAMME</span>
-            <span>3 months · weekends</span>
-            <span>24 lectures · 60 hours</span>
-            <span>Basics → Advanced</span>
+            <span>Weekend course</span>
+            <span>12 lectures · 30 hours</span>
+            <span>Basics</span>
             <a href="#program">Course at a glance</a>
           </div>
           <div className="footer-col footer-contact">
@@ -448,7 +384,7 @@ function App() {
         <div className="footer-bottom">
           <div className="container footer-bottom-row">
             <span>© {new Date().getFullYear()} Stalite Academy.</span>
-            <span>3 months. New possibilities.</span>
+            <span>Learn. Build. Grow.</span>
           </div>
         </div>
       </footer>
