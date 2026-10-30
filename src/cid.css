@@ -1,0 +1,571 @@
+/* ---------------------------------------------------------------------------
+   /cid — "Curriculum in depth".
+
+   A standalone page for the two platform syllabi. Everything here is scoped
+   to this page (.cid-*), plus the solid header treatment the page needs: the
+   landing page floats a white logo over the hero photo, which would be
+   invisible on a white page.
+--------------------------------------------------------------------------- */
+
+/* --- header, solid variant ------------------------------------------------ */
+.header-solid {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: saturate(150%) blur(12px);
+  -webkit-backdrop-filter: saturate(150%) blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+.header-solid .nav .brand-image {
+  filter: none;
+}
+.header-solid .nav .brand-academy {
+  color: var(--ink);
+  border-left-color: #d8e5ed;
+  text-shadow: none;
+}
+.header-solid .nav .brand-fallback {
+  color: var(--ink);
+  text-shadow: none;
+}
+.header-solid .nav .brand-fallback > span {
+  color: var(--blue-text);
+}
+.header-solid .nav-cta {
+  color: var(--blue-dark);
+  background: var(--pale);
+  border-color: #d5eaf6;
+  box-shadow: none;
+  text-shadow: none;
+}
+.header-solid .nav-cta:hover,
+.header-solid .nav-cta:focus-visible {
+  background: #e4f4ff;
+}
+.header-solid .nav-cta::before,
+.header-solid .nav-cta::after {
+  content: none;
+}
+.nav-links a[aria-current="page"] {
+  color: var(--blue-text);
+  font-weight: 500;
+}
+
+/* --- page hero ------------------------------------------------------------ */
+.cid-hero {
+  position: relative;
+  isolation: isolate;
+  padding-block: 52px 50px;
+  background-color: #fff;
+}
+.cid-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      rgba(255, 255, 255, 0.72) 26%,
+      rgba(255, 255, 255, 0.52) 62%,
+      rgba(255, 255, 255, 0.9) 92%,
+      #ffffff 100%
+    ),
+    url("/backgrounds/sky-wash.jpg");
+  background-position:
+    center,
+    center 26%;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.cid-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: url("/textures/paper-grain.svg") repeat;
+  opacity: 0.1;
+}
+.cid-hero > .container {
+  position: relative;
+  z-index: 2;
+}
+.cid-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  color: var(--meta);
+  margin-bottom: 22px;
+}
+.cid-back:hover {
+  color: var(--blue-text);
+}
+.cid-hero h1 {
+  font-size: clamp(34px, 5.4vw, 56px);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.045em;
+  color: var(--ink);
+  margin-top: 16px;
+  max-width: 24ch;
+}
+.cid-hero-copy {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--muted);
+  margin-top: 18px;
+  max-width: 62ch;
+}
+.cid-hero-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 26px;
+  margin-top: 26px;
+  font-size: 11px;
+  color: var(--meta);
+}
+.cid-hero-stats > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.cid-hero-stats strong {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+}
+.cid-hero-stats svg {
+  color: var(--icon);
+}
+
+/* --- jump links ----------------------------------------------------------- */
+.cid-jump {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 30px;
+  max-width: 740px;
+}
+.cid-jump a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px 18px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font-size: 13px;
+  color: var(--muted);
+  transition:
+    border-color 0.2s,
+    background 0.2s,
+    transform 0.2s;
+}
+.cid-jump a:hover {
+  background: #fbfdff;
+  border-color: #b6dcee;
+  transform: translateY(-1px);
+}
+.cid-jump-index {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--icon);
+}
+.cid-jump-name {
+  font-weight: 600;
+  color: var(--ink);
+}
+.cid-jump-count {
+  margin-left: auto;
+  font-size: 11px;
+  color: var(--meta);
+}
+.cid-jump svg {
+  color: var(--icon);
+}
+
+/* --- curriculum cards ----------------------------------------------------- */
+.cid-cards {
+  display: grid;
+  gap: 40px;
+  padding-block: 56px 0;
+}
+.cid-card {
+  --accent: var(--blue-text);
+  --accent-soft: #eaf4fd;
+  position: relative;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  padding: clamp(22px, 3.4vw, 46px);
+  box-shadow: 0 44px 84px -68px rgba(23, 46, 64, 0.55);
+  scroll-margin-top: calc(var(--header-h) + 20px);
+}
+/* A hairline of the platform colour along the top edge, fading right, so the
+   two cards read as a pair without changing their white surfaces. */
+.cid-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 26px;
+  right: 26px;
+  height: 3px;
+  border-radius: 0 0 3px 3px;
+  background: linear-gradient(90deg, var(--accent), rgba(255, 255, 255, 0));
+  pointer-events: none;
+}
+.cid-card[data-platform="facebook"] {
+  --accent: #0b64a8;
+  --accent-soft: #eaf4fd;
+}
+.cid-card[data-platform="instagram"] {
+  --accent: #9d2b63;
+  --accent-soft: #fdeef4;
+}
+.cid-card-head {
+  display: block;
+}
+.cid-card-kicker {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.cid-index {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 38px;
+  height: 28px;
+  padding-inline: 9px;
+  border-radius: 7px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+.cid-card-kicker .eyebrow {
+  color: var(--accent);
+  font-size: 10px;
+  letter-spacing: 1.5px;
+}
+.cid-kicker-rule {
+  flex: 1 1 40px;
+  min-width: 20px;
+  height: 1px;
+  background: var(--line);
+}
+.cid-kicker-meta {
+  font-size: 11px;
+  color: var(--meta);
+}
+.cid-card-title {
+  margin-top: 18px;
+  font-size: clamp(34px, 5.4vw, 58px);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.042em;
+  color: var(--ink);
+}
+.cid-card-subtitle {
+  margin-top: 12px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.cid-objective {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  margin-top: 22px;
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--muted);
+  max-width: 78ch;
+}
+.cid-objective svg {
+  color: var(--icon);
+  margin-top: 4px;
+}
+.cid-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 22px;
+}
+.cid-chip {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 5px;
+  padding: 7px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 11px;
+  color: var(--muted);
+  background: #fff;
+}
+.cid-chip strong {
+  font-weight: 600;
+  color: var(--ink);
+}
+.cid-chip-plain {
+  background: var(--pale);
+  border-color: #e1eff8;
+  color: var(--meta);
+}
+.cid-modules-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 34px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+.cid-expand-all {
+  flex-shrink: 0;
+  padding: 3px 0;
+  background: none;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--blue-text);
+  border-bottom: 1px solid transparent;
+}
+.cid-expand-all:hover {
+  border-bottom-color: currentColor;
+}
+.cid-modules {
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 0;
+}
+.cid-module {
+  border-bottom: 1px solid var(--line);
+}
+.cid-module-heading {
+  font: inherit;
+  margin: 0;
+}
+.cid-module-toggle {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  width: 100%;
+  padding: 19px 2px;
+  text-align: left;
+  background: transparent;
+  border-radius: 8px;
+}
+.cid-module-toggle:hover .cid-module-title {
+  color: var(--accent);
+}
+.cid-module-num {
+  width: 24px;
+  flex-shrink: 0;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--meta);
+  font-variant-numeric: tabular-nums;
+}
+.cid-module-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+.cid-module-title {
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.45;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  transition: color 0.2s;
+}
+.cid-module-count {
+  font-size: 11px;
+  color: var(--meta);
+}
+.cid-module-sign {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--icon);
+  transition:
+    transform 0.22s,
+    background 0.2s,
+    border-color 0.2s,
+    color 0.2s;
+}
+.cid-module.is-open .cid-module-sign {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  transform: rotate(45deg);
+}
+.cid-module-panel {
+  padding: 2px 0 24px 42px;
+}
+.cid-module-panel ul {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 40px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.cid-module-panel li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+.cid-module-panel li svg {
+  width: 13px;
+  height: 13px;
+  margin-top: 5px;
+  color: var(--accent);
+}
+.cid-card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 26px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--accent);
+}
+.cid-card-cta:hover {
+  color: var(--blue-deep);
+}
+.cid-card[data-platform="instagram"] .cid-card-cta:hover {
+  color: #7a1f4c;
+}
+
+/* --- responsive ----------------------------------------------------------- */
+@media (max-width: 1000px) {
+  .cid-card-title {
+    letter-spacing: -0.035em;
+  }
+  .cid-module-panel ul {
+    gap: 11px 28px;
+  }
+  .cid-module-toggle {
+    gap: 14px;
+  }
+}
+@media (max-width: 700px) {
+  /* Anchor jumps still clear the sticky header on small screens. */
+  .cid-card {
+    scroll-margin-top: calc(var(--header-h) + 12px);
+  }
+  .cid-hero {
+    padding-block: 34px 36px;
+  }
+  .cid-back {
+    margin-bottom: 18px;
+  }
+  .cid-hero h1 {
+    font-size: 33px;
+    max-width: 20ch;
+  }
+  .cid-hero-copy {
+    font-size: 13px;
+  }
+  .cid-hero-stats {
+    gap: 10px 18px;
+    margin-top: 20px;
+  }
+  .cid-jump {
+    grid-template-columns: 1fr;
+    margin-top: 24px;
+  }
+  .cid-cards {
+    gap: 26px;
+    padding-block: 34px 0;
+  }
+  .cid-card {
+    border-radius: 18px;
+    padding: 20px;
+  }
+  .cid-card-title {
+    margin-top: 14px;
+    letter-spacing: -0.03em;
+  }
+  .cid-card-subtitle {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+  }
+  .cid-objective {
+    font-size: 13px;
+    margin-top: 18px;
+  }
+  .cid-card-meta {
+    gap: 7px;
+    margin-top: 18px;
+  }
+  .cid-chip {
+    padding: 6px 10px;
+    font-size: 10px;
+  }
+  .cid-modules-head {
+    margin-top: 26px;
+    padding-top: 20px;
+  }
+  .cid-module-toggle {
+    gap: 12px;
+    padding: 16px 0;
+  }
+  .cid-module-num {
+    width: 20px;
+  }
+  .cid-module-title {
+    font-size: 15px;
+  }
+  .cid-module-sign {
+    width: 26px;
+    height: 26px;
+  }
+  .cid-module-panel {
+    padding: 0 0 18px 32px;
+  }
+  .cid-module-panel ul {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .cid-module-panel li {
+    font-size: 12.5px;
+  }
+  .cid-card-cta {
+    font-size: 11px;
+    margin-top: 20px;
+  }
+}
+@media (max-width: 420px) {
+  .cid-module-panel {
+    padding-left: 0;
+  }
+  .cid-kicker-meta {
+    display: none;
+  }
+  .cid-kicker-rule {
+    display: none;
+  }
+}

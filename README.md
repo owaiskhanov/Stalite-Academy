@@ -20,6 +20,25 @@ npm run preview
 
 Deploy the generated `dist` directory as a static website.
 
+## Pages
+
+| Route | Source | What it is |
+| --- | --- | --- |
+| `/` | `index.html` → `src/main.jsx` | The landing page: hero, course-at-a-glance, three modules, curriculum band, FAQs. |
+| `/cid` | `cid.html` → `src/cid.jsx` | "Curriculum in depth": the full Facebook Marketing and Instagram Marketing syllabi as two cards, ten expandable modules each. |
+
+`/cid` is a second Vite entry (`build.rollupOptions.input` in `vite.config.js`)
+rather than a client-side route, so it ships its own title, description,
+canonical URL and structured data. Vercel serves it from `cid.html` because
+`vercel.json` sets `cleanUrls: true`; a small dev/preview middleware in
+`vite.config.js` mirrors that rewrite locally. `cid.css` holds everything
+specific to the page, and the header ("solid" variant), footer and WhatsApp
+links are shared from `src/SiteChrome.jsx`.
+
+The syllabus content lives in `src/deepCurriculum.js` — edit module titles and
+pointers there; counts on the page (modules, pointers, per-module totals) are
+derived, so they stay in sync automatically.
+
 ## Content and interactions
 
 - Presents the Basics curriculum, with three modules, 12 lectures and 150 minutes per lecture.

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import {
+  ArrowUpRight,
   Check,
   Clock3,
   Download,
@@ -37,13 +38,18 @@ export default function Curriculum({ bg = "sky" }) {
               Open a module to see exactly what’s covered.
             </p>
           </div>
-          <a
-            className="learning-download"
-            href="/stalite-academy-syllabus.pdf"
-            download="Stalite-Academy-Syllabus.pdf"
-          >
-            <Download size={17} /> Download full syllabus
-          </a>
+          <div className="learning-intro-actions">
+            <a className="learning-download" href="/cid">
+              <Layers size={17} /> Curriculum in depth
+            </a>
+            <a
+              className="learning-download"
+              href="/stalite-academy-syllabus.pdf"
+              download="Stalite-Academy-Syllabus.pdf"
+            >
+              <Download size={17} /> Download full syllabus
+            </a>
+          </div>
         </div>
 
         <div className="learning-panel" id="curriculum-panel">

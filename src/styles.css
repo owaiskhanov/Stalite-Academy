@@ -1994,6 +1994,14 @@ h2 {
   line-height: 1.8;
   margin-top: 10px;
 }
+/* Two links share the intro's right edge: the /cid deep-dive and the PDF. */
+.learning-intro-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
 .learning-download {
   display: inline-flex;
   align-items: center;
@@ -2322,8 +2330,13 @@ h2 {
     font-size: 13px;
     max-width: 360px;
   }
-  .learning-download {
+  .learning-intro-actions {
     margin-top: 18px;
+    gap: 8px;
+  }
+  .learning-download {
+    /* The spacing lives on the wrapper now that there are two links. */
+    margin-top: 0;
     margin-bottom: 0;
     padding: 11px 14px;
   }
