@@ -249,17 +249,12 @@ export const deepCurricula = [
     index: "03",
     platform: "Performance Marketing",
     short: "Performance",
-    title: "Performance Marketing",
+    title: "Introduction to Performance Marketing",
     subtitle: "Complete Curriculum",
     level: "Beginner to Advanced",
     provider: "Digital Marketing Academy",
     objective:
-      "Teach students to buy measurable outcomes — clicks, calls, leads and sales — with Meta Ads and Google Ads, and to build the creative with ChatGPT, on Indian budgets and Indian buyer behaviour.",
-    /* Module numbers come straight from the syllabus (03–07) so the earlier
-       modules can be slotted in later without renumbering anything here.
-       Module 03 was split into three: the fundamentals stay here, while the
-       Meta and Google setup and ad-creation pointers move into their own
-       platform modules. */
+      "Give students the vocabulary and the commercial logic behind paid performance media — the metrics clients ask about, the platforms Indian businesses actually buy, and how budget, pixels and tags fit together.",
     modules: [
       {
         number: "03",
@@ -273,6 +268,20 @@ export const deepCurricula = [
           "What is a Meta tag",
         ],
       },
+    ],
+  },
+  {
+    id: "meta-ads",
+    index: "04",
+    platform: "Meta Ads",
+    short: "Meta Ads",
+    title: "Meta Ads",
+    subtitle: "Complete Curriculum",
+    level: "Beginner to Advanced",
+    provider: "Digital Marketing Academy",
+    objective:
+      "Take a student from an empty Ads Manager to a live campaign — account setup and connections, the four Meta ad types, the difference between ad set and creative, and ChatGPT drafting the copy along the way.",
+    modules: [
       {
         number: "04",
         title: "Meta Ads",
@@ -282,8 +291,25 @@ export const deepCurricula = [
           "What types of ads can be made on Meta",
           "Making ads on Meta: the four ad types",
           "Ad type, ad set and ad creative in Meta",
+          "Using ChatGPT to draft Meta copy, headlines and creative briefs",
+          "Prompting for India: audience, city, language, offer and the main objection",
+          "Guardrails: no client data in prompts, no false claims, human review before publishing",
         ],
       },
+    ],
+  },
+  {
+    id: "google-ads",
+    index: "05",
+    platform: "Google Ads",
+    short: "Google Ads",
+    title: "Google Ads",
+    subtitle: "Complete Curriculum",
+    level: "Beginner to Advanced",
+    provider: "Digital Marketing Academy",
+    objective:
+      "Set up a Google Ads account and understand every ad type Google sells — from Search and Shopping to Performance Max and Demand Gen — plus what sits inside each one and when an Indian client needs it.",
+    modules: [
       {
         number: "05",
         title: "Google Ads",
@@ -294,24 +320,29 @@ export const deepCurricula = [
           "The six Google ad types and what sits inside each — Search, Display, Video, Shopping, Performance Max and Demand Gen",
         ],
       },
+    ],
+  },
+  {
+    id: "indian-clients",
+    index: "06",
+    platform: "Indian Clients",
+    short: "Indian Clients",
+    title: "What Works for Actual Indian Clients",
+    subtitle: "Complete Curriculum",
+    level: "Beginner to Advanced",
+    provider: "Digital Marketing Academy",
+    objective:
+      "Close the gap between theory and a paying client: what actually decides whether a campaign works in the Indian market, why the creative carries it, and the practical steps to landing the first client.",
+    modules: [
       {
         number: "06",
-        title: "ChatGPT & AI for Ads",
-        pointers: [
-          "How to set up an ad workflow in ChatGPT — copy, headlines and creative briefs",
-          "Prompting for India: audience, city, language, offer and the main objection",
-          "Guardrails: no client data in prompts, no false claims, human review before publishing",
-        ],
-      },
-      {
-        number: "07",
         title: "What Works for Actual Indian Clients",
         pointers: [
           "Why creative is king",
           "Why AI will not replace performance marketers any time soon",
           "How to get your first Indian client",
         ],
-      }
+      },
     ],
   },
 ];

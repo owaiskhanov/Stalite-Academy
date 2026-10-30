@@ -233,6 +233,18 @@
   --accent: #0f6b62;
   --accent-soft: #e6f5f3;
 }
+.cid-card[data-platform="meta-ads"] {
+  --accent: #4338ca;
+  --accent-soft: #ecebfe;
+}
+.cid-card[data-platform="google-ads"] {
+  --accent: #137333;
+  --accent-soft: #e7f4ea;
+}
+.cid-card[data-platform="indian-clients"] {
+  --accent: #8a4b00;
+  --accent-soft: #fdf1e3;
+}
 .cid-card-head {
   display: block;
 }
@@ -426,6 +438,10 @@
 .cid-module-panel {
   padding: 2px 0 24px 42px;
 }
+/* Single-module tracks drop the row number, so the panel starts at the edge. */
+.cid-modules-single .cid-module-panel {
+  padding-left: 2px;
+}
 .cid-module-panel ul {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -465,6 +481,15 @@
 }
 .cid-card[data-platform="performance"] .cid-card-cta:hover {
   color: #0b544d;
+}
+.cid-card[data-platform="meta-ads"] .cid-card-cta:hover {
+  color: #2f28a0;
+}
+.cid-card[data-platform="google-ads"] .cid-card-cta:hover {
+  color: #0c5224;
+}
+.cid-card[data-platform="indian-clients"] .cid-card-cta:hover {
+  color: #643700;
 }
 
 /* --- responsive ----------------------------------------------------------- */

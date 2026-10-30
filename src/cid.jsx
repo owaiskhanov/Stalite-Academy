@@ -31,6 +31,10 @@ function CurriculumCard({ curriculum }) {
   const allOpen = open.size === curriculum.modules.length;
   const headingId = `cid-${curriculum.id}-title`;
   const total = pointerCount(curriculum);
+  /* Tracks 03–06 are single-module tracks: the module IS the track, so the
+     row drops the number and the repeated title, and there is nothing for an
+     expand-all control to do. */
+  const single = curriculum.modules.length === 1;
 
   function toggle(index) {
     setOpen((current) => {
@@ -79,23 +83,27 @@ function CurriculumCard({ curriculum }) {
       </header>
 
       <div className="cid-modules-head">
-        <span className="eyebrow">MODULE BY MODULE</span>
-        <button
-          type="button"
-          className="cid-expand-all"
-          onClick={() =>
-            setOpen(
-              allOpen
-                ? new Set()
-                : new Set(curriculum.modules.map((_, index) => index)),
-            )
-          }
-        >
-          {allOpen ? "Collapse all" : "Expand all details"}
-        </button>
+        <span className="eyebrow">
+          {single ? "WHAT THIS TRACK COVERS" : "MODULE BY MODULE"}
+        </span>
+        {!single && (
+          <button
+            type="button"
+            className="cid-expand-all"
+            onClick={() =>
+              setOpen(
+                allOpen
+                  ? new Set()
+                  : new Set(curriculum.modules.map((_, index) => index)),
+              )
+            }
+          >
+            {allOpen ? "Collapse all" : "Expand all details"}
+          </button>
+        )}
       </div>
 
-      <ol className="cid-modules">
+      <ol className={`cid-modules ${single ? "cid-modules-single" : ""}`}>
         {curriculum.modules.map((module, index) => {
           const isOpen = open.has(index);
           const panelId = `cid-${curriculum.id}-panel-${index}`;
@@ -114,14 +122,24 @@ function CurriculumCard({ curriculum }) {
                   aria-controls={panelId}
                   onClick={() => toggle(index)}
                 >
-                  <span className="cid-module-num" aria-hidden="true">
-                    {module.number ?? pad(index + 1)}
-                  </span>
-                  <span className="cid-module-copy">
-                    <span className="cid-module-title">{module.title}</span>
-                    <span className="cid-module-count">
-                      {module.pointers.length} pointers
+                  {!single && (
+                    <span className="cid-module-num" aria-hidden="true">
+                      {module.number ?? pad(index + 1)}
                     </span>
+                  )}
+                  <span className="cid-module-copy">
+                    <span className="cid-module-title">
+                      {single
+                        ? isOpen
+                          ? "Hide pointers"
+                          : `View all ${module.pointers.length} pointers`
+                        : module.title}
+                    </span>
+                    {!single && (
+                      <span className="cid-module-count">
+                        {module.pointers.length} pointers
+                      </span>
+                    )}
                   </span>
                   <span className="cid-module-sign" aria-hidden="true">
                     <Plus size={17} />
@@ -188,10 +206,11 @@ function CidPage() {
               <span className="serif">curriculum</span> covers.
             </h1>
             <p className="cid-hero-copy">
-              Three tracks — Facebook, Instagram and performance marketing with
-              Meta Ads, Google Ads and ChatGPT-assisted creative — laid out
-              module by module. Open any card to read the complete pointer list
-              for that module, from account setup through to the final project.
+              Six tracks — Facebook, Instagram, performance marketing
+              fundamentals, Meta Ads, Google Ads and what works for Indian
+              clients — laid out module by module. Open any card to read the
+              complete pointer list, from account setup through to the final
+              project.
             </p>
             <div className="cid-hero-stats">
               <span>
