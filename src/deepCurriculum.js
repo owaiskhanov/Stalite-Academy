@@ -255,8 +255,11 @@ export const deepCurricula = [
     provider: "Digital Marketing Academy",
     objective:
       "Teach students to buy measurable outcomes — clicks, calls, leads and sales — with Meta Ads and Google Ads, and to build the creative with ChatGPT, on Indian budgets and Indian buyer behaviour.",
-    /* Module numbers come straight from the syllabus (03–06) so the earlier
-       modules can be slotted in later without renumbering anything here. */
+    /* Module numbers come straight from the syllabus (03–07) so the earlier
+       modules can be slotted in later without renumbering anything here.
+       Module 03 was split into three: the fundamentals stay here, while the
+       Meta and Google setup and ad-creation pointers move into their own
+       platform modules. */
     modules: [
       {
         number: "03",
@@ -266,41 +269,49 @@ export const deepCurricula = [
           "Which platforms work for Indian clients",
           "What CTR, CAC, CPM and CPC mean — and the rest of the metric names",
           "What is budgeting, and how much a first test needs",
-          "What types of ads can be made on Meta",
-          "What types of ads can be made on Google",
           "What is a pixel",
           "What is a Meta tag",
         ],
       },
       {
         number: "04",
-        title: "Ad Setups",
+        title: "Meta Ads",
         pointers: [
           "How to set up Meta Ads Manager",
           "How to connect the Page, Instagram and WhatsApp to Meta Ads Manager",
-          "How to set up a Google Ads account",
-          "How to set up an ad workflow in ChatGPT — copy, headlines and creative briefs",
+          "What types of ads can be made on Meta",
+          "Making ads on Meta: the four ad types",
+          "Ad type, ad set and ad creative in Meta",
         ],
       },
       {
         number: "05",
-        title: "Creating Ads",
+        title: "Google Ads",
         pointers: [
-          "Making ads on Meta: the four ad types",
-          "Ad type, ad set and ad creative in Meta",
+          "How to set up a Google Ads account",
+          "What types of ads can be made on Google",
           "Making ads on Google: the three ad types, in depth",
           "The six Google ad types and what sits inside each — Search, Display, Video, Shopping, Performance Max and Demand Gen",
         ],
       },
       {
         number: "06",
+        title: "ChatGPT & AI for Ads",
+        pointers: [
+          "How to set up an ad workflow in ChatGPT — copy, headlines and creative briefs",
+          "Prompting for India: audience, city, language, offer and the main objection",
+          "Guardrails: no client data in prompts, no false claims, human review before publishing",
+        ],
+      },
+      {
+        number: "07",
         title: "What Works for Actual Indian Clients",
         pointers: [
           "Why creative is king",
           "Why AI will not replace performance marketers any time soon",
           "How to get your first Indian client",
         ],
-      },
+      }
     ],
   },
 ];
