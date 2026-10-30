@@ -25,7 +25,7 @@ Deploy the generated `dist` directory as a static website.
 | Route | Source | What it is |
 | --- | --- | --- |
 | `/` | `index.html` → `src/main.jsx` | The landing page: hero, course-at-a-glance, three modules, curriculum band, FAQs. |
-| `/cid` | `cid.html` → `src/cid.jsx` | "Curriculum in depth": the full Facebook Marketing and Instagram Marketing syllabi as two cards, ten expandable modules each. |
+| `/cid` | `cid.html` → `src/cid.jsx` | "Curriculum in depth": three complete syllabi as cards — Facebook Marketing, Instagram Marketing and Performance Marketing (Meta Ads, Google Ads, ChatGPT-assisted creative) — ten expandable modules each. |
 
 `/cid` is a second Vite entry (`build.rollupOptions.input` in `vite.config.js`)
 rather than a client-side route, so it ships its own title, description,

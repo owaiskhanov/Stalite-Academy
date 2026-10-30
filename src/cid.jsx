@@ -188,9 +188,10 @@ function CidPage() {
               <span className="serif">curriculum</span> covers.
             </h1>
             <p className="cid-hero-copy">
-              Two platform tracks — Facebook and Instagram — laid out module by
-              module. Open any card to read the complete pointer list for that
-              module, from account setup through to the final project.
+              Three tracks — Facebook, Instagram and performance marketing with
+              Meta Ads, Google Ads and ChatGPT-assisted creative — laid out
+              module by module. Open any card to read the complete pointer list
+              for that module, from account setup through to the final project.
             </p>
             <div className="cid-hero-stats">
               <span>
@@ -209,7 +210,9 @@ function CidPage() {
               {deepCurricula.map((curriculum) => (
                 <a key={curriculum.id} href={`#${curriculum.id}`}>
                   <span className="cid-jump-index">{curriculum.index}</span>
-                  <span className="cid-jump-name">{curriculum.platform}</span>
+                  <span className="cid-jump-name">
+                    {curriculum.short ?? curriculum.platform}
+                  </span>
                   <span className="cid-jump-count">
                     {curriculum.modules.length} modules
                   </span>

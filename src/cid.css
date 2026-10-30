@@ -146,7 +146,8 @@
 /* --- jump links ----------------------------------------------------------- */
 .cid-jump {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  /* Three tracks, two up on tablets, one per row on phones. */
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
   gap: 12px;
   margin-top: 30px;
   max-width: 740px;
@@ -227,6 +228,10 @@
 .cid-card[data-platform="instagram"] {
   --accent: #9d2b63;
   --accent-soft: #fdeef4;
+}
+.cid-card[data-platform="performance"] {
+  --accent: #0f6b62;
+  --accent-soft: #e6f5f3;
 }
 .cid-card-head {
   display: block;
@@ -457,6 +462,9 @@
 }
 .cid-card[data-platform="instagram"] .cid-card-cta:hover {
   color: #7a1f4c;
+}
+.cid-card[data-platform="performance"] .cid-card-cta:hover {
+  color: #0b544d;
 }
 
 /* --- responsive ----------------------------------------------------------- */
