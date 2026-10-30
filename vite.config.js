@@ -6,7 +6,7 @@ const root = fileURLToPath(new URL(".", import.meta.url));
 /**
  * Vercel serves `cid.html` at `/cid` because vercel.json sets
  * `cleanUrls: true`. The dev and preview servers have no such option, so this
- * mirrors the same rewrite locally — /cid resolves instead of falling back to
+ * mirrors the same rewrite locally, so /cid resolves instead of falling back to
  * the landing page.
  */
 function cleanUrls() {

@@ -206,9 +206,9 @@ function CidPage() {
               <span className="serif">curriculum</span> covers.
             </h1>
             <p className="cid-hero-copy">
-              Six tracks — Facebook, Instagram, performance marketing
+              Six tracks: Facebook, Instagram, performance marketing
               fundamentals, Meta Ads, Google Ads and what works for Indian
-              clients — laid out module by module. Open any card to read the
+              clients, laid out module by module. Open any card to read the
               complete pointer list, from account setup through to the final
               project.
             </p>

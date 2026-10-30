@@ -26,7 +26,7 @@ import {
 /**
  * The three modules of the programme, shaped for CourseCard.
  * Titles and descriptions mirror src/curriculum.js. Ratings are sample
- * figures — swap them for real data before launch.
+ * figures. Swap them for real data before launch.
  */
 const courses = [
   {

@@ -2,7 +2,7 @@
  * Full platform syllabi for the /cid "Curriculum in depth" page.
  *
  * Each entry is one standalone curriculum: a level, an objective and ten
- * modules. Every module lists the exact pointers taught in that module — this
+ * modules. Every module lists the exact pointers taught in that module; this
  * file is the single source of truth for /cid, so copy changes happen here and
  * nowhere else.
  */
@@ -254,7 +254,7 @@ export const deepCurricula = [
     level: "Beginner to Advanced",
     provider: "Digital Marketing Academy",
     objective:
-      "Give students the vocabulary and the commercial logic behind paid performance media — the metrics clients ask about, the platforms Indian businesses actually buy, and how budget, pixels and tags fit together.",
+      "Give students the vocabulary and the commercial logic behind paid performance media: the metrics clients ask about, the platforms Indian businesses actually buy, and how budget, pixels and tags fit together.",
     modules: [
       {
         number: "03",
@@ -262,7 +262,7 @@ export const deepCurricula = [
         pointers: [
           "What is performance marketing",
           "Which platforms work for Indian clients",
-          "What CTR, CAC, CPM and CPC mean — and the rest of the metric names",
+          "What CTR, CAC, CPM and CPC mean, and the rest of the metric names",
           "What is budgeting, and how much a first test needs",
           "What is a pixel",
           "What is a Meta tag",
@@ -280,7 +280,7 @@ export const deepCurricula = [
     level: "Beginner to Advanced",
     provider: "Digital Marketing Academy",
     objective:
-      "Take a student from an empty Ads Manager to a live campaign — account setup and connections, the four Meta ad types, the difference between ad set and creative, and ChatGPT drafting the copy along the way.",
+      "Take a student from an empty Ads Manager to a live campaign: account setup and connections, the four Meta ad types, the difference between ad set and creative, and ChatGPT drafting the copy along the way.",
     modules: [
       {
         number: "04",
@@ -308,7 +308,7 @@ export const deepCurricula = [
     level: "Beginner to Advanced",
     provider: "Digital Marketing Academy",
     objective:
-      "Set up a Google Ads account and understand every ad type Google sells — from Search and Shopping to Performance Max and Demand Gen — plus what sits inside each one and when an Indian client needs it.",
+      "Set up a Google Ads account and understand every ad type Google sells, from Search and Shopping to Performance Max and Demand Gen, plus what sits inside each one and when an Indian client needs it.",
     modules: [
       {
         number: "05",
@@ -317,7 +317,7 @@ export const deepCurricula = [
           "How to set up a Google Ads account",
           "What types of ads can be made on Google",
           "Making ads on Google: the three ad types, in depth",
-          "The six Google ad types and what sits inside each — Search, Display, Video, Shopping, Performance Max and Demand Gen",
+          "The six Google ad types and what sits inside each: Search, Display, Video, Shopping, Performance Max and Demand Gen",
         ],
       },
     ],

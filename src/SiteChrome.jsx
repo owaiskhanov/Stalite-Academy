@@ -62,8 +62,8 @@ export function Brand({ footer = false, href = "#course" }) {
 }
 
 /**
- * Navigation, in order. "Curriculum in depth" sits first — ahead of the
- * landing-page links — and points at /cid.
+ * Navigation, in order. "Curriculum in depth" sits first, ahead of the
+ * landing-page links, and points at /cid.
  */
 const navItems = (page) => [
   { name: "Curriculum in depth", href: "/cid", route: "cid" },

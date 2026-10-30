@@ -251,7 +251,7 @@ def build(header, sections, contact):
     story.append(Spacer(1, 7 * mm))
     story.append(Paragraph("Digital Marketing &amp; AI", styles["title"]))
     story.append(
-        Paragraph("Basics curriculum — a weekend programme by Stalite Media.", styles["subtitle"])
+        Paragraph("Basics curriculum: a weekend programme by Stalite Media.", styles["subtitle"])
     )
     story.append(Spacer(1, 6 * mm))
 
@@ -324,7 +324,7 @@ def build(header, sections, contact):
         rightMargin=MARGIN,
         topMargin=20 * mm,
         bottomMargin=20 * mm,
-        title="Stalite Academy — Digital Marketing & AI Syllabus",
+        title="Stalite Academy: Digital Marketing & AI Syllabus",
         author="Stalite Media",
     )
     frame = Frame(
@@ -339,10 +339,10 @@ def main():
         sys.exit(f"Syllabus source not found: {SOURCE}")
     header, sections, contact = parse_syllabus(SOURCE.read_text(encoding="utf-8"))
     if not sections:
-        sys.exit("Parsed no sections — has the source format changed?")
+        sys.exit("Parsed no sections. Has the source format changed?")
     build(header, sections, contact)
     topics = sum(len(m["topics"]) for s in sections for m in s["modules"])
-    print(f"Wrote {OUTPUT.relative_to(ROOT)} — {len(sections)} levels, {topics} topics")
+    print(f"Wrote {OUTPUT.relative_to(ROOT)}: {len(sections)} levels, {topics} topics")
 
 
 if __name__ == "__main__":
