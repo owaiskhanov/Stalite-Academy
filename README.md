@@ -20,6 +20,27 @@ npm run preview
 
 Deploy the generated `dist` directory as a static website.
 
+## Pages
+
+| Route | Source | What it is |
+| --- | --- | --- |
+| `/` | `index.html` → `src/main.jsx` | The landing page: hero, course-at-a-glance, three modules, curriculum band, FAQs. |
+| `/cid` | `cid.html` → `src/cid.jsx` | "Curriculum in depth": six tracks as cards, starting with Facebook Marketing and Instagram Marketing (ten expandable modules each), then Introduction to Performance Marketing (03), Meta Ads (04), Google Ads (05) and What Works for Actual Indian Clients (06), one module each. |
+
+`/cid` is a second Vite entry (`build.rollupOptions.input` in `vite.config.js`)
+rather than a client-side route, so it ships its own title, description,
+canonical URL and structured data. Vercel serves it from `cid.html` because
+`vercel.json` sets `cleanUrls: true`; a small dev/preview middleware in
+`vite.config.js` mirrors that rewrite locally. `cid.css` holds everything
+specific to the page, and the header ("solid" variant), footer and WhatsApp
+links are shared from `src/SiteChrome.jsx`.
+
+The syllabus content lives in `src/deepCurriculum.js`. Edit module titles and
+pointers there; counts on the page (modules, pointers, per-module totals) are
+derived, so they stay in sync automatically. Modules carry an optional
+`number` (the performance tracks use 03–06 from the syllabus); without it the
+card numbers modules from 01.
+
 ## Content and interactions
 
 - Presents the Basics curriculum, with three modules, 12 lectures and 150 minutes per lecture.
@@ -42,7 +63,7 @@ The curriculum band (`.curriculum-band`, `src/Curriculum.jsx`) picks up the
 hero's sky treatment. Its `data-bg` attribute selects a treatment defined in
 `src/styles.css`, with the `paper-grain.svg` tile layered on top.
 
-**`.curriculum-band` — `?curriculum=`**
+**`.curriculum-band` and `?curriculum=`**
 
 | `data-bg` | Treatment | Assets |
 | --- | --- | --- |

@@ -1,15 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import {
   ArrowUpRight,
   ArrowRight,
-  Menu,
-  X,
   CalendarDays,
   Clock3,
-  MapPin,
-  Mail,
-  Phone,
 } from "lucide-react";
 import "@fontsource/inter/latin-400.css";
 import "@fontsource/inter/latin-500.css";
@@ -21,20 +16,17 @@ import ToolMarquee from "./ToolMarquee";
 import FAQs from "./FAQs";
 import Curriculum from "./Curriculum";
 import CourseCard from "./CourseCard";
+import {
+  SiteHeader,
+  SiteFooter,
+  whatsapp,
+  whatsappForCourse,
+} from "./SiteChrome";
 
-const whatsapp =
-  "https://wa.me/919860685430?text=" +
-  encodeURIComponent("Hi Stalite Media, I'd like to discuss growing my brand.");
-/** Same enquiry, pre-filled with the specific course the visitor clicked. */
-const whatsappForCourse = (title) =>
-  "https://wa.me/919860685430?text=" +
-  encodeURIComponent(
-    `Hi Stalite Media, I'd like to discuss growing my brand. I'm interested in the ${title} course.`,
-  );
 /**
  * The three modules of the programme, shaped for CourseCard.
  * Titles and descriptions mirror src/curriculum.js. Ratings are sample
- * figures — swap them for real data before launch.
+ * figures. Swap them for real data before launch.
  */
 const courses = [
   {
@@ -85,38 +77,6 @@ const courses = [
   },
 ];
 
-function Brand({ footer = false }) {
-  const [failed, setFailed] = useState(false);
-  return (
-    <a
-      className={`brand ${footer ? "brand-footer" : ""}`}
-      href="#course"
-      aria-label="Stalite Academy home"
-    >
-      {failed ? (
-        <span className="brand-fallback">
-          stalite<span>.</span>
-        </span>
-      ) : (
-        /* Crop frame: in the footer this clips the transparent padding
-           baked into logo.png so the mark sits flush to the lockup edges;
-           the header bypasses the crop in CSS (see .brand-media / .nav). */
-        <span className="brand-media">
-          <img
-            className="brand-image"
-            src="https://www.stalite.in/logo.png"
-            alt="Stalite Media"
-            width="132"
-            height="42"
-            onError={() => setFailed(true)}
-          />
-        </span>
-      )}
-      <span className="brand-academy">ACADEMY</span>
-    </a>
-  );
-}
-
 /** Curriculum background treatments, selectable with ?curriculum=<key>. */
 /* The curriculum band is much taller, so it gets a horizon treatment that keeps
    the sky behind the heading and lets the white cards sit on plain white. */
@@ -151,10 +111,8 @@ function BgChooser({ groups }) {
 }
 
 function App() {
-  const [menu, setMenu] = useState(false);
   const [curriculumBg, setCurriculumBg] = useState("sky");
   const [bgChooser, setBgChooser] = useState(false);
-  const menuToggle = useRef(null);
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const curriculum = params.get("curriculum");
@@ -162,16 +120,6 @@ function App() {
     if (curriculumOptions.some(({ key }) => key === curriculum))
       setCurriculumBg(curriculum);
   }, []);
-  useEffect(() => {
-    function dismiss(e) {
-      if (e.key === "Escape" && menu) {
-        setMenu(false);
-        menuToggle.current?.focus();
-      }
-    }
-    document.addEventListener("keydown", dismiss);
-    return () => document.removeEventListener("keydown", dismiss);
-  }, [menu]);
   return (
     <>
       <a className="skip-link" href="#main-content">
@@ -189,44 +137,7 @@ function App() {
           ]}
         />
       )}
-      <header className="header">
-        <div className="container nav">
-          <Brand />
-          <nav
-            id="main-navigation"
-            className={`nav-links ${menu ? "mobile-open" : ""}`}
-            aria-label="Main navigation"
-          >
-            {[
-              ["The course", "#course"],
-              ["Curriculum", "#curriculum"],
-              ["FAQs", "#faqs"],
-            ].map(([name, href]) => (
-              <a href={href} key={href} onClick={() => setMenu(false)}>
-                {name}
-              </a>
-            ))}
-          </nav>
-          <a
-            href={whatsapp}
-            target="_blank"
-            rel="noreferrer"
-            className="button button-small nav-cta"
-          >
-            Enquire now <ArrowUpRight size={15} />
-          </a>
-          <button
-            ref={menuToggle}
-            className="mobile-toggle"
-            aria-label={menu ? "Close menu" : "Open menu"}
-            aria-expanded={menu}
-            aria-controls="main-navigation"
-            onClick={() => setMenu(!menu)}
-          >
-            {menu ? <X size={22} /> : <Menu size={22} />}
-          </button>
-        </div>
-      </header>
+      <SiteHeader page="home" />
       <main id="main-content">
         <section
           className="hero-section"
@@ -326,68 +237,7 @@ function App() {
           </a>
         </section>
       </main>
-      <footer className="footer">
-        <div className="container footer-main">
-          <div className="footer-brand">
-            <Brand footer />
-            <p>
-              Digital marketing & AI, by Stalite Media. A weekend
-              course built by the agency that runs the campaigns.
-            </p>
-            <a
-              className="text-link footer-agency"
-              href="https://www.stalite.in/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Visit Stalite Media <ArrowUpRight size={14} />
-            </a>
-          </div>
-          <nav className="footer-col" aria-label="Footer">
-            <span className="eyebrow">EXPLORE</span>
-            <a href="#course">The course</a>
-            <a href="#courses">The modules</a>
-            <a href="#curriculum">Curriculum</a>
-            <a href="#faqs">FAQs</a>
-          </nav>
-          <div className="footer-col">
-            <span className="eyebrow">THE PROGRAMME</span>
-            <span>Weekend course</span>
-            <span>12 lectures · 30 hours</span>
-            <span>Basics</span>
-            <a href="#program">Course at a glance</a>
-          </div>
-          <div className="footer-col footer-contact">
-            <span className="eyebrow">GET IN TOUCH</span>
-            <a href="tel:+919860685430">
-              <Phone size={14} /> +91 98606 85430
-            </a>
-            <a href="mailto:stalitemedia@gmail.com">
-              <Mail size={14} /> stalitemedia@gmail.com
-            </a>
-            <a
-              href="https://www.google.com/maps/search/?api=1&query=Stalite+Media+Office+No.+305+Reliable+Business+Centre+Oshiwara+Andheri+West+Mumbai+Maharashtra+400102"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <MapPin size={15} />
-              <span>
-                Office No. 305, Reliable Business Centre,
-                <br />
-                Oshiwara, Andheri West, Mumbai,
-                <br />
-                Maharashtra 400102
-              </span>
-            </a>
-          </div>
-        </div>
-        <div className="footer-bottom">
-          <div className="container footer-bottom-row">
-            <span>© {new Date().getFullYear()} Stalite Academy.</span>
-            <span>Learn. Build. Grow.</span>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter page="home" />
     </>
   );
 }

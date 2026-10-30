@@ -7,7 +7,7 @@
   --ink: #172e40;
   --blue: #0787c9;
   /* Every text colour below is tuned so that all combinations used on this
-     page clear the 4.5:1 WCAG AA ratio — including the pastel course-card
+     page clear the 4.5:1 WCAG AA ratio, including the pastel course-card
      gradients (#ece7fd is the hardest surface) and the tinted panels. Keep
      new copy on these tokens rather than one-off greys. */
   --muted: #4a6072; /* body copy and descriptions */
@@ -163,7 +163,7 @@ h2 {
   background: #e4f4ff;
 }
 /* Header "Enquire now": plain transparent like the mobile hero CTA, since
-   the header floats over the hero photo at every width — a 99% transparent
+   the header floats over the hero photo at every width, a 99% transparent
    white tint (0.01 alpha) with a hairline light border, keeping its existing
    size and shape. No backdrop blur: the photo shows through sharply, and
    the liquid sheen below is what catches the light. */
@@ -188,7 +188,7 @@ h2 {
    and the mobile hero CTA). Two layers sit behind the label: a static
    specular highlight, brightest along the top like light on a liquid
    surface, and a soft sheen that slowly flows across, rests, then returns.
-   Only highlights move — the 99% transparent fill itself stays clear, with
+   Only highlights move: the 99% transparent fill itself stays clear, with
    no backdrop blur. Switched off under prefers-reduced-motion by the global
    rule in that block below. */
 .nav-cta,
@@ -275,7 +275,7 @@ h2 {
 }
 .header {
   height: var(--header-h);
-  /* Transparent and scrolls away with the page — no sticky positioning. */
+  /* Transparent and scrolls away with the page, no sticky positioning. */
   background: transparent;
   border-bottom: 1px solid rgba(228, 237, 242, 0.55);
   position: relative;
@@ -297,7 +297,7 @@ h2 {
   /* logo.png has transparent padding baked in on every side. In the footer
      the mark is zoomed by this factor inside the .brand-media crop frame so
      the padding falls outside the frame and the visible logo sits flush to
-     the lockup edges — no empty space on either side. The header logo is
+     the lockup edges, leaving no empty space on either side. The header logo is
      deliberately left uncropped: it resets this to 1 in the .nav rules
      below. Raise/lower to crop the footer mark more/less. */
   --logo-crop-zoom: 1.2;
@@ -345,7 +345,7 @@ h2 {
    the text fallback. The footer reuses this lockup on a white background,
    so it intentionally keeps the original dark, cropped logo there. */
 .nav .brand {
-  /* Header logo is shown in full — no crop zoom, and the frame does not
+  /* Header logo is shown in full: no crop zoom, and the frame does not
      clip, so the whole mark (and its soft shadow) renders untouched. */
   --logo-crop-zoom: 1;
 }
@@ -386,7 +386,7 @@ h2 {
   padding: 8px;
 }
 /* Full-bleed Supabase hero photograph. No wash and no white panel behind the
-   copy — the photo carries the whole viewport, with the grain layered above. */
+   copy, and the photo carries the whole viewport with the grain layered above. */
 .hero-section {
   position: relative;
   isolation: isolate;
@@ -719,10 +719,10 @@ h2 {
    like the hero), and a wash that keeps the three benefit columns readable.
    Four treatments ship as `data-bg` variants so one can be chosen:
 
-     sky       — the generated sky wash photo, softened  (default)
-     gradient  — the same palette in pure CSS, no image request
-     network   — thin linked outlines hinting at the three modules
-     sky-soft  — the sky photo, dialled back almost to white
+     sky       - the generated sky wash photo, softened  (default)
+     gradient  - the same palette in pure CSS, no image request
+     network   - thin linked outlines hinting at the three modules
+     sky-soft  - the sky photo, dialled back almost to white
 
    Preview them at /?bg=sky|gradient|network|sky-soft.
 --------------------------------------------------------------------------- */
@@ -759,7 +759,7 @@ h2 {
   padding-block: 54px;
 }
 
-/* A — hero sky, softened. White fades at the top and bottom edges let the band
+/* A: hero sky, softened. White fades at the top and bottom edges let the band
    dissolve into the white sections above and below it, so it reads as the same
    weather as the hero rather than as a pasted-on panel. Opacities are tuned so
    the band stays a hair under 97% luminance: the ink copy keeps its full
@@ -783,9 +783,9 @@ h2 {
     cover;
 }
 
-/* B — the same sky as a mesh gradient: the palette of the hero photo rebuilt
+/* B: the same sky as a mesh gradient: the palette of the hero photo rebuilt
    in CSS. No image request, no layout shift, and it scales to any height.
-   Order matters — the list paints top to bottom, so the white sun hotspot
+   Order matters: the list paints top to bottom, so the white sun hotspot
    sits over the two blue glows, which sit over the vertical fade. */
 .why-section[data-bg="gradient"]::after {
   background-image:
@@ -816,7 +816,7 @@ h2 {
     linear-gradient(160deg, #f4faff 0%, #e6f4fd 52%, #d6ebf8 100%);
 }
 
-/* C — three linked outlines, a quiet nod to social, search and build. */
+/* C: three linked outlines, a quiet nod to social, search and build. */
 .why-section[data-bg="network"]::after {
   background-image:
     linear-gradient(
@@ -830,7 +830,7 @@ h2 {
     url("/backgrounds/network-wash.jpg");
 }
 
-/* D — the sky photo dialled right back: texture you only notice after the copy
+/* D: the sky photo dialled right back: texture you only notice after the copy
    has been read. */
 .why-section[data-bg="sky-soft"]::after {
   background-image:
@@ -876,7 +876,7 @@ h2 {
   font-size: 11px;
   color: var(--muted);
 }
-/* Switcher shown only for ?bg=options — used to compare treatments while
+/* Switcher shown only for ?bg=options, used to compare treatments while
    choosing, never part of the shipped page. */
 .bg-chooser {
   position: fixed;
@@ -1448,7 +1448,7 @@ h2 {
     justify-content: center;
     margin-top: 28px;
   }
-  /* Mobile hero CTA: transparent pill floating over the hero photo — a 99%
+  /* Mobile hero CTA: transparent pill floating over the hero photo, a 99%
      transparent white tint (0.01 alpha) with a hairline light border and a
      soft lift; the shared liquid sheen above does the rest. No backdrop
      blur: the photo shows through sharply. */
@@ -1848,10 +1848,10 @@ h2 {
    taller and filled with white cards, so the treatments are tuned to keep the
    card surfaces crisp. Four ship as `data-bg` variants:
 
-     sky       — the hero sky photograph, softened            (default)
-     horizon   — sky behind the heading only, cards on white
-     gradient  — the same palette in pure CSS, no image request
-     sky-soft  — the sky photo dialled back almost to white
+     sky       - the hero sky photograph, softened            (default)
+     horizon   - sky behind the heading only, cards on white
+     gradient  - the same palette in pure CSS, no image request
+     sky-soft  - the sky photo dialled back almost to white
 
    Preview them at /?bg=options, or pin one with /?curriculum=<key>.
 --------------------------------------------------------------------------- */
@@ -1886,7 +1886,7 @@ h2 {
   z-index: 2;
 }
 
-/* A — the hero sky across the whole band. The mid-band white is a little
+/* A: the hero sky across the whole band. The mid-band white is a little
    stronger than on the why band so the white cards still read as cards. */
 .curriculum-band[data-bg="sky"]::after {
   background-image:
@@ -1905,7 +1905,7 @@ h2 {
     center 28%;
 }
 
-/* B — the sky sits behind the heading only and dissolves into white before the
+/* B: the sky sits behind the heading only and dissolves into white before the
    level cards start, so the dense curriculum sits on plain paper. */
 .curriculum-band[data-bg="horizon"]::after {
   background-image:
@@ -1926,7 +1926,7 @@ h2 {
     100% 760px;
 }
 
-/* C — the palette of the hero photo rebuilt as a CSS mesh gradient. */
+/* C: the palette of the hero photo rebuilt as a CSS mesh gradient. */
 .curriculum-band[data-bg="gradient"]::after {
   background-image:
     radial-gradient(
@@ -1956,7 +1956,7 @@ h2 {
     linear-gradient(164deg, #f4faff 0%, #e8f5fd 54%, #dbedf9 100%);
 }
 
-/* D — the sky photo dialled right back: the faintest of weather. */
+/* D: the sky photo dialled right back: the faintest of weather. */
 .curriculum-band[data-bg="sky-soft"]::after {
   background-image:
     linear-gradient(
@@ -1993,6 +1993,14 @@ h2 {
   font-size: 14px;
   line-height: 1.8;
   margin-top: 10px;
+}
+/* Two links share the intro's right edge: the /cid deep-dive and the PDF. */
+.learning-intro-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  flex-shrink: 0;
 }
 .learning-download {
   display: inline-flex;
@@ -2322,8 +2330,13 @@ h2 {
     font-size: 13px;
     max-width: 360px;
   }
-  .learning-download {
+  .learning-intro-actions {
     margin-top: 18px;
+    gap: 8px;
+  }
+  .learning-download {
+    /* The spacing lives on the wrapper now that there are two links. */
+    margin-top: 0;
     margin-bottom: 0;
     padding: 11px 14px;
   }
