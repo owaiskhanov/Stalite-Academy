@@ -11,6 +11,44 @@ npm run dev
 
 The development server binds to `0.0.0.0:5173` for Arena preview access.
 
+## Hero images
+
+The hero photographs are compressed into `public/hero/` and served from this
+origin. Generate (or regenerate) them with:
+
+```sh
+npm run compress:hero
+```
+
+The script downloads the two originals from Supabase Storage, caches them in
+`.hero-source/` (git-ignored), and writes:
+
+| File | Size | Used by |
+| --- | --- | --- |
+| `hero-desktop.webp` / `.avif` | 1920w | viewports ≥ 1024px |
+| `hero-tablet.webp` / `.avif` | 1280w | 601–1023px |
+| `hero-mobile.webp` / `.avif` | 900w | ≤ 600px |
+| `og-cover.jpg` | 1200×630 | optional social share card |
+
+`src/HeroPhoto.jsx` renders this set through `<picture>`, so each visitor
+downloads one image at the right size and format (AVIF where supported, WebP
+otherwise) instead of two multi-megabyte PNGs. Commit only the generated files;
+the source PNGs never enter git history.
+
+To change a photo, replace it in Supabase and run `npm run compress:hero --
+--refresh`, or skip the download entirely with local files:
+
+```sh
+HERO_DESKTOP=~/Desktop/hero.png HERO_MOBILE=~/Desktop/hero-mobile.png npm run compress:hero
+```
+
+If `public/hero/` is ever missing, `HeroPhoto` falls back to the uncompressed
+Supabase originals so the hero never renders blank. `og:image`, `twitter:image`
+and the Course schema image still point at the Supabase PNGs; after generating
+`og-cover.jpg` those three URLs can be switched to
+`https://stalite-academy.vercel.app/hero/og-cover.jpg` with `og:image:width`
+1200 and `og:image:height` 630.
+
 ## Production
 
 ```sh

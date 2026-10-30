@@ -21,6 +21,7 @@ import ToolMarquee from "./ToolMarquee";
 import FAQs from "./FAQs";
 import Curriculum from "./Curriculum";
 import CourseCard from "./CourseCard";
+import HeroPhoto from "./HeroPhoto";
 
 const whatsapp =
   "https://wa.me/919860685430?text=" +
@@ -233,6 +234,7 @@ function App() {
           id="course"
           aria-labelledby="course-heading"
         >
+          <HeroPhoto />
           <div className="hero container">
             <div className="hero-copy">
               <div className="eyebrow">
