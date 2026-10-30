@@ -115,7 +115,7 @@ function CurriculumCard({ curriculum }) {
                   onClick={() => toggle(index)}
                 >
                   <span className="cid-module-num" aria-hidden="true">
-                    {pad(index + 1)}
+                    {module.number ?? pad(index + 1)}
                   </span>
                   <span className="cid-module-copy">
                     <span className="cid-module-title">{module.title}</span>

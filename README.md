@@ -25,7 +25,7 @@ Deploy the generated `dist` directory as a static website.
 | Route | Source | What it is |
 | --- | --- | --- |
 | `/` | `index.html` → `src/main.jsx` | The landing page: hero, course-at-a-glance, three modules, curriculum band, FAQs. |
-| `/cid` | `cid.html` → `src/cid.jsx` | "Curriculum in depth": three complete syllabi as cards — Facebook Marketing, Instagram Marketing and Performance Marketing (Meta Ads, Google Ads, ChatGPT-assisted creative) — ten expandable modules each. |
+| `/cid` | `cid.html` → `src/cid.jsx` | "Curriculum in depth": three syllabi as cards — Facebook Marketing and Instagram Marketing (ten expandable modules each) and Performance Marketing (modules 03–06: fundamentals, ad setups, creating ads, what works for Indian clients). |
 
 `/cid` is a second Vite entry (`build.rollupOptions.input` in `vite.config.js`)
 rather than a client-side route, so it ships its own title, description,
@@ -37,7 +37,9 @@ links are shared from `src/SiteChrome.jsx`.
 
 The syllabus content lives in `src/deepCurriculum.js` — edit module titles and
 pointers there; counts on the page (modules, pointers, per-module totals) are
-derived, so they stay in sync automatically.
+derived, so they stay in sync automatically. Modules carry an optional
+`number` (the Performance track uses 03–06 from the syllabus); without it the
+card numbers modules from 01.
 
 ## Content and interactions
 
